@@ -1,0 +1,2311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sweet Treat | Menu</title>
+
+<link href="sweet/LVsnn3r.png" rel="shortcut icon" type="image/x-icon" />
+<link href="https://fonts.googleapis.com" rel="preconnect" />
+<link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous" />
+<!-- Webflow shared CSS — provides all u-text-style-*, u-container, footer/nav Webflow classes -->
+<link href="https://cdn.prod.website-files.com/684433cbdb896cfecac10c42/css/momoney-989864.webflow.shared.c67100866.min.css" rel="stylesheet" type="text/css" crossorigin="anonymous" />
+<!-- Montserrat + Bebas Neue -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&family=Bebas+Neue&display=swap" rel="stylesheet">
+<!-- WebFont loader -->
+<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
+<script type="text/javascript">WebFont.load({google:{families:["Montserrat:100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic"]}});</script>
+<!-- Lenis smooth scroll -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.2.3/dist/lenis.css">
+
+<style>
+/* ── EXACT THEME TOKENS from index.html body style attribute ── */
+:root {
+  --bg:               #a78aff;
+  --bg-dark:          #190f0a;
+  --accent:           #1ce585;
+  --text:             #ffffff;
+  --link-text:        #f1f0ec;
+  --btn-bg:           #f1f0ec;
+  --btn-text:         #190f0a;
+  --btn-bg-hover:     #190f0a;
+  --btn-text-hover:   #f1f0ec;
+  --sticker:          #f580db;
+  --border:           color-mix(in srgb,#1ce585 20%,transparent);
+  --elastic:          linear(0,0.5737 7.6%,0.8382 11.87%,0.9463 14.19%,1.0292 16.54%,1.0886 18.97%,1.1258 21.53%,1.137 22.97%,1.1424 24.48%,1.1423 26.1%,1.1366 27.86%,1.1165 31.01%,1.0507 38.62%,1.0219 42.57%,0.9995 46.99%,0.9872 51.63%,0.9842 58.77%,1.0011 81.26%,1);
+  --color-ease:       cubic-bezier(.216,.62,.356,1);
+}
+
+*,*::before,*::after { margin:0; padding:0; box-sizing:border-box; }
+html { background:#a78aff; scroll-behavior:smooth; }
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: #a78aff;
+  color: #fff;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* noise grain */
+body::before {
+  content:''; position:fixed; inset:0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events:none; z-index:1000; opacity:.45;
+}
+
+/* blobs */
+.bg-blobs { position:fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden; }
+.blob { position:absolute; border-radius:50%; filter:blur(90px); opacity:.18; animation:blobDrift 18s ease-in-out infinite; }
+.blob1 { width:520px; height:520px; background:#7c5ce8; top:-120px; left:-80px; }
+.blob2 { width:380px; height:380px; background:#f580db; top:45%; right:-60px; animation-delay:-7s; }
+.blob3 { width:280px; height:280px; background:#1ce585; bottom:-40px; left:35%; animation-delay:-13s; opacity:.1; }
+@keyframes blobDrift {
+  0%,100%{transform:translate(0,0) scale(1);}
+  33%{transform:translate(25px,-35px) scale(1.06);}
+  66%{transform:translate(-18px,22px) scale(.94);}
+}
+
+/* background grid glow that follows cursor (similar feel to index.html grids) */
+.bg-grid{
+  position:fixed; inset:0; pointer-events:none; z-index:1;
+  background-image:
+    linear-gradient(to right, rgba(25,15,10,.11) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(25,15,10,.11) 1px, transparent 1px);
+  background-size:40px 40px;
+  mix-blend-mode:soft-light;
+}
+.bg-grid::after{
+  content:''; position:absolute; inset:0;
+  background:radial-gradient(circle at var(--cursor-x,50%) var(--cursor-y,40%),
+    rgba(255,255,255,.25), transparent 55%);
+  opacity:.95;
+}
+
+/* scroll progress */
+.scroll-line { position:fixed; top:0; left:0; height:3px; background:linear-gradient(90deg,var(--accent),var(--sticker)); z-index:9999; width:0%; box-shadow:0 0 8px rgba(28,229,133,.5); }
+
+/* Standard Browser Cursors */
+
+
+/* ════════════════════════════════════════
+   NAVBAR — exact CSS from index.html nav_css embed block
+════════════════════════════════════════ */
+
+/* Nav Switch */
+@container (width <= 56em) {
+    .nav_desktop { display: none; }
+    .nav_mobile { display: block; }
+}
+
+.nav_wrap {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    transition: transform 1s ease, padding 1s ease;
+    transform: translateY(0%) rotate(0.001deg);
+}
+.logo_tagline_svg { transition: opacity 1s ease; }
+
+[data-scrolling-started="true"] .nav_wrap {
+    padding-top: 1.5rem; padding-bottom: 1.5rem;
+    padding-left: 0rem; padding-right: 0rem;
+}
+@media (max-width: 479px) {
+    [data-scrolling-started="true"] .nav_wrap {
+        padding-top: 1rem; padding-bottom: 1rem;
+        padding-left: 0rem; padding-right: 0rem;
+    }
+}
+[data-scrolling-started="true"] .logo_tagline_svg { opacity: 0; }
+[data-scrolling-started="true"][data-scrolling-direction="down"] .nav_wrap {
+    transform: translateY(-100%) rotate(0.001deg);
+}
+
+/* Desktop layout — logo LEFT flex item | nav_link_list ABSOLUTE CENTRE | btn_list RIGHT */
+.nav_desktop_contain {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    width: 100% !important;
+    position: relative !important;
+}
+.nav_link_list {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    position: absolute !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    list-style: none !important;
+    gap: 2rem !important;
+    order: 2 !important;
+}
+.nav_logo_link {
+    display: flex !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+    width: auto !important;
+    text-align: left !important;
+    z-index: 10 !important;
+}
+.nav_logo_link img {
+    display: block !important;
+    margin: 0 !important;
+    max-height: 90px !important;
+    width: auto !important;
+    object-fit: contain !important;
+}
+.nav_logo_wrap {
+    display: flex !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+    width: auto !important;
+    order: 1 !important;
+    margin-right: auto !important;
+}
+.nav_btn_list {
+    display: flex !important;
+    justify-content: flex-end !important;
+    align-items: center !important;
+    margin: 0 !important;
+    margin-left: auto !important;
+    padding: 0 !important;
+    list-style: none !important;
+    gap: 1rem !important;
+    order: 3 !important;
+}
+
+/* Responsive logo sizing */
+@media (max-width: 991px) {
+    .nav_logo_link img { max-height: 80px !important; }
+    .nav_link_list { gap: 1.5rem !important; }
+}
+@media (max-width: 767px) {
+    .nav_desktop { display: none !important; }
+    .nav_mobile  { display: flex !important; }
+}
+@media (max-width: 479px) {
+    .nav_logo_link img { max-height: 60px !important; }
+    .nav_link_list { gap: 0.5rem !important; }
+}
+
+/* Mobile navigation */
+.nav_mobile_contain {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    width: 100% !important;
+    padding: 1rem 0 !important;
+}
+.mobile_menu_btn {
+    display: flex !important; flex-direction: column !important;
+    justify-content: center !important; align-items: center !important;
+    width: 40px !important; height: 40px !important; padding: 8px !important;
+    border: none !important; background: transparent !important;
+    cursor: pointer !important; z-index: 1000 !important;
+    transition: all 0.3s ease !important;
+}
+.mobile_menu_btn_line {
+    width: 24px !important; height: 2px !important;
+    background-color: #333 !important; margin: 2px 0 !important;
+    transition: all 0.3s ease !important; border-radius: 2px !important;
+}
+.mobile_menu_btn:hover .mobile_menu_btn_line { background-color: #000 !important; }
+.mobile_menu_btn:active { transform: scale(0.95) !important; }
+
+/* Mobile logo centering */
+@media (max-width: 767px) {
+    .nav_mobile_contain { position: relative !important; }
+    .nav_logo_wrap {
+        position: absolute !important; left: 50% !important; top: 50% !important;
+        transform: translate(-50%, -50%) !important; width: auto !important;
+    }
+    .nav_logo_link img { max-height: 70px !important; width: auto !important; }
+}
+@media (max-width: 479px) {
+    .nav_logo_link img { max-height: 60px !important; }
+    .mobile_menu_btn { width: 35px !important; height: 35px !important; }
+    .mobile_menu_btn_line { width: 20px !important; height: 2px !important; }
+}
+
+/* nav_base — frosted bg fades in on scroll */
+.nav_base { transition: opacity 1s ease; opacity: 0; }
+[data-scrolling-started="true"] .nav_base { opacity: 1; }
+
+/* Menu button hovers */
+.menu_btn, .cart_icon_wrap, .mobile_menu_btn, .main_link {
+    --elastic-ease-out: linear( 0, 0.5737 7.6%, 0.8382 11.87%, 0.9463 14.19%, 1.0292 16.54%, 1.0886 18.97%, 1.1258 21.53%, 1.137 22.97%, 1.1424 24.48%, 1.1423 26.1%, 1.1366 27.86%, 1.1165 31.01%, 1.0507 38.62%, 1.0219 42.57%, 0.9995 46.99%, 0.9872 51.63%, 0.9842 58.77%, 1.0011 81.26%, 1);
+    --color-ease: cubic-bezier(.216, .62, .356, 1);
+    transition: transform 0.65s var(--elastic-ease-out), background-color 0.4s var(--color-ease), gap 0.65s var(--elastic-ease-out);
+    -webkit-tap-highlight-color: transparent;
+}
+.menu_btn:active, .mobile_menu_btn:active, .cart_icon_wrap:active { transform: scale(0.955, 0.954); }
+.main_link, .secondary_link { transition: opacity 0.3s; }
+.main_link_icon {
+    width: 0em; transform: scale(0) rotate(45deg);
+    transition: width 0.8s var(--elastic-ease-out), transform 0.8s var(--elastic-ease-out), padding-right 0.8s ease;
+}
+.secondary_link_line_fill { transform: scaleX(0); transition: transform 0.3s ease; }
+.nav_component { transition: transform 1s ease, padding 1s ease; transform: translateY(0%) rotate(0.001deg); }
+
+@media (hover: hover) and (pointer: fine) {
+    .menu_btn:hover, .menu_btn:focus-visible {
+        gap: 0.325rem; background-color: var(--_theme---button--background);
+    }
+    .menu_btn:is(:hover, :focus-visible) .menu_btn_dot { background-color: var(--_theme---button--text); }
+    .mobile_menu_btn:hover, .mobile_menu_btn:focus-visible {
+        gap: 0.25rem; background-color: var(--_theme---button--background);
+    }
+    .mobile_menu_btn:is(:hover, :focus-visible) .mobile_menu_btn_line { background-color: var(--_theme---button--text); }
+    [data-menu-link-list]:has(> :hover) > :not(:hover) { opacity: 0.3; }
+    .main_link:is(:hover, :focus-visible) .main_link_icon { width: 0.6em; padding-right: 0.25rem; transform: scale(1) rotate(0deg); }
+    .secondary_link:is(:hover, :focus-visible) .secondary_link_line_fill { transform: scaleX(1); }
+}
+
+/* Mobile fullscreen menu */
+.nav_menu_wrap {
+    display: none; position: fixed; inset: 0; z-index: 300;
+    flex-direction: column; align-items: center; justify-content: center;
+}
+.nav_menu_wrap[style*="display: flex"], .nav_menu_wrap[data-open] { display: flex; }
+.nav_menu_overlay { position: absolute; inset: 0; }
+.nav_menu_base {
+    position: absolute; inset: 20px;
+    border-radius: 28px; z-index: 1;
+}
+.menu_btn_close {
+    position: absolute; top: 26px; right: 26px; z-index: 3;
+    width: 44px; height: 44px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; border: none; background: transparent;
+}
+.menu_content {
+    position: relative; z-index: 2;
+    text-align: center; padding: 40px;
+    display: flex; flex-direction: column; align-items: center;
+}
+.main_link_list { list-style: none; display: flex; flex-direction: column; gap: 4px; width: 100%; }
+.main_link {
+    display: flex; align-items: center; gap: 10px; padding: 8px 0;
+    transition: gap .65s var(--elastic-ease-out); cursor: pointer; justify-content: center;
+}
+.main_link:hover { gap: 16px; }
+.main_link_text {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.6rem; letter-spacing: 1px; line-height: 1; transition: color .3s;
+}
+@media (hover: hover) and (pointer: fine) {
+    .main_link:is(:hover, :focus-visible) .main_link_icon { width: 0.6em; padding-right: 0.25rem; transform: scale(1) rotate(0deg); }
+}
+
+/* ════════════════════════════════════════
+   HERO — "OUR MENU" in Bebas Neue
+════════════════════════════════════════ */
+.hero {
+  position:relative; z-index:5;
+  text-align:center;
+  padding:150px 40px 70px;
+}
+.hero-eyebrow {
+  font-size:.65rem; font-weight:700; letter-spacing:4px; text-transform:uppercase;
+  color:var(--bg-dark); opacity:.6; margin-bottom:14px;
+  animation:fadeUp .7s ease both;
+}
+/* Bebas Neue — same class structure used in index.html for hero headings */
+.hero-title {
+  font-family:'Bebas Neue', sans-serif;
+  font-size:clamp(5rem,13vw,13rem);
+  line-height:.88; letter-spacing:2px;
+  color:#ffffff;
+  animation:fadeUp .7s .1s ease both;
+}
+.hero-title .accent { color:#fff; }
+.hero-divider {
+  display:flex; align-items:center; justify-content:center; gap:16px;
+  margin:24px auto;
+  animation:fadeUp .7s .22s ease both;
+}
+.hero-divider::before,.hero-divider::after {
+  content:''; height:1px; width:60px; background:rgba(25,15,10,.2);
+}
+.hero-sub {
+  font-size:.88rem; font-weight:400; line-height:1.7;
+  color:var(--bg-dark); opacity:.65;
+  max-width:400px; margin:0 auto;
+  animation:fadeUp .7s .34s ease both;
+}
+@keyframes fadeUp {
+  from{opacity:0;transform:translateY(26px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+/* ════════════════════════════════════════
+   LAYOUT
+════════════════════════════════════════ */
+.menu-layout {
+  position:relative; z-index:5;
+  max-width:1400px; margin:0 auto;
+  padding:10px 40px 80px;
+  display:grid;
+  grid-template-columns:275px 1fr;
+  gap:40px;
+  align-items:start;
+}
+
+/* SIDEBAR */
+.menu-nav { position:sticky; top:110px; display:flex; flex-direction:column; gap:10px; }
+.menu-nav-label {
+  font-size:.58rem; font-weight:700; letter-spacing:4px; text-transform:uppercase;
+  color:var(--bg-dark); opacity:.45; margin-bottom:4px;
+}
+.nav-item {
+  display:flex; align-items:center; gap:12px;
+  padding:13px 17px; border-radius:18px;
+  border:1.5px solid rgba(25,15,10,.1);
+  background:rgba(255,255,255,.2);
+  cursor:pointer; text-decoration:none;
+  transition:all .35s cubic-bezier(.34,1.56,.64,1);
+  backdrop-filter:blur(12px);
+  position:relative; overflow:hidden;
+}
+.nav-item::before {
+  content:''; position:absolute; inset:0;
+  background:var(--bg-dark); opacity:0;
+  transition:opacity .3s; border-radius:inherit;
+}
+.nav-item:hover::before,.nav-item.active::before { opacity:1; }
+.nav-item:hover,.nav-item.active { border-color:var(--bg-dark); transform:translateX(6px); box-shadow:0 8px 28px rgba(25,15,10,.18); }
+.nav-item:hover *,.nav-item.active * { color:#fff!important; opacity:1!important; }
+.nav-icon { width:40px; height:40px; border-radius:11px; background:rgba(25,15,10,.08); display:flex; align-items:center; justify-content:center; font-size:1.2rem; flex-shrink:0; transition:transform .35s var(--elastic); position:relative; z-index:1; }
+.nav-item:hover .nav-icon,.nav-item.active .nav-icon { background:rgba(255,255,255,.12); transform:rotate(-8deg) scale(1.08); }
+.nav-text { position:relative; z-index:1; }
+.nav-text h4 { font-size:.82rem; font-weight:700; color:var(--bg-dark); }
+.nav-text p { font-size:.68rem; color:var(--bg-dark); opacity:.5; margin-top:2px; }
+.nav-badge { margin-left:auto; background:var(--bg-dark); color:#fff; font-size:.58rem; font-weight:700; padding:3px 8px; border-radius:100px; position:relative; z-index:1; }
+.nav-badge.soon { background:transparent; border:1.5px solid rgba(25,15,10,.18); color:var(--bg-dark); opacity:.45; }
+
+/* CONTENT */
+.menu-content { display:flex; flex-direction:column; gap:62px; }
+.menu-section { opacity:0; transform:translateY(34px); transition:all .65s ease; }
+.menu-section.visible { opacity:1; transform:translateY(0); }
+
+.section-header {
+  display:flex; align-items:flex-end; justify-content:space-between;
+  margin-bottom:26px; padding-bottom:18px;
+  border-bottom:1.5px solid rgba(25,15,10,.1);
+  position:relative;
+}
+.section-header::after {
+  content:''; position:absolute; bottom:-1.5px; left:0;
+  height:3px; width:48px; background:var(--bg-dark); border-radius:3px;
+}
+.section-num {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:5rem; color:var(--bg-dark); opacity:.1; line-height:1; margin-right:12px;
+}
+.section-title-group { flex:1; }
+.section-title {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(2.4rem,4vw,3.8rem);
+  color:var(--bg-dark); letter-spacing:1px; line-height:1;
+}
+.section-desc { font-size:.8rem; color:var(--bg-dark); opacity:.55; margin-top:6px; font-weight:400; line-height:1.5; max-width:380px; }
+.section-count { font-size:.62rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--bg-dark); opacity:.4; }
+
+/* GRID */
+.items-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(245px,1fr));
+  gap:18px;
+}
+
+/* ITEM CARD */
+.item-card {
+  position:relative; border-radius:22px; overflow:hidden;
+  background:rgba(255,255,255,.22);
+  border:1.5px solid rgba(255,255,255,.42);
+  cursor:pointer;
+  transition:all .5s cubic-bezier(.34,1.56,.64,1);
+  animation:cardReveal .6s both;
+  transform-origin:center bottom;
+  backdrop-filter:blur(10px);
+}
+.item-card:nth-child(1){animation-delay:.08s;} .item-card:nth-child(2){animation-delay:.16s;}
+.item-card:nth-child(3){animation-delay:.24s;} .item-card:nth-child(4){animation-delay:.32s;}
+.item-card:nth-child(5){animation-delay:.4s;}
+@keyframes cardReveal {
+  from{opacity:0;transform:translateY(28px) scale(.95);}
+  to{opacity:1;transform:translateY(0) scale(1);}
+}
+.item-card::before {
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,.14),transparent 60%);
+  opacity:0; transition:opacity .4s; z-index:1;
+}
+.item-card:hover {
+  transform:translateY(-12px) scale(1.03);
+  border-color:rgba(255,255,255,.75);
+  background:rgba(255,255,255,.32);
+  box-shadow:0 28px 48px rgba(25,15,10,.16),0 0 0 1.5px rgba(255,255,255,.5),0 0 38px rgba(255,255,255,.1);
+}
+.item-card:hover::before { opacity:1; }
+
+.card-glow-ring {
+  position:absolute; inset:-2px; border-radius:24px;
+  background:conic-gradient(from 0deg,var(--accent),var(--sticker),#fff,var(--accent));
+  opacity:0; z-index:-1;
+  transition:opacity .4s;
+  animation:ringRot 3s linear infinite;
+}
+@keyframes ringRot { from{transform:rotate(0deg);} to{transform:rotate(360deg);} }
+.item-card:hover .card-glow-ring { opacity:.5; }
+
+.card-image { position:relative; height:192px; overflow:hidden; }
+.card-image img { width:100%; height:100%; object-fit:cover; transition:transform .6s cubic-bezier(.25,.46,.45,.94); }
+.item-card:hover .card-image img { transform:scale(1.12) rotate(.8deg); }
+.card-image-overlay { position:absolute; inset:0; background:linear-gradient(0deg,rgba(167,138,255,.65) 0%,transparent 55%); }
+.card-placeholder { width:100%; height:100%; display:flex; align-items:center; justify-content:center; font-size:3.5rem; background:linear-gradient(135deg,rgba(255,255,255,.15),rgba(255,255,255,.05)); }
+
+.card-body { padding:17px; position:relative; z-index:2; }
+.card-tag { display:inline-block; background:rgba(25,15,10,.09); border:1px solid rgba(25,15,10,.1); border-radius:100px; padding:3px 10px; font-size:.58rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--bg-dark); margin-bottom:8px; }
+.card-name { font-family:'Bebas Neue',sans-serif; font-size:1.35rem; color:var(--bg-dark); line-height:1.15; margin-bottom:6px; letter-spacing:.5px; }
+.card-desc { font-size:.74rem; line-height:1.6; color:var(--bg-dark); opacity:.6; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+
+.card-hover-strip {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:9px 17px 13px;
+  border-top:1px solid rgba(25,15,10,.09);
+  position:relative; z-index:2;
+  transform:translateY(8px); opacity:0; transition:all .4s ease;
+}
+.item-card:hover .card-hover-strip { transform:translateY(0); opacity:1; }
+.hover-cta { font-size:.68rem; font-weight:700; letter-spacing:.3px; color:var(--bg-dark); display:flex; align-items:center; gap:5px; text-transform:uppercase; }
+.hover-cta svg { transition:transform .3s; }
+.item-card:hover .hover-cta svg { transform:translateX(4px); }
+.hover-stars { font-size:.63rem; color:#c9922a; }
+
+/* EXPANDED PREVIEW */
+.expanded-preview {
+  position:fixed; right:34px; top:50%;
+  transform:translateY(-50%) scale(.88);
+  width:315px;
+  background:rgba(255,255,255,.96);
+  border:1.5px solid rgba(255,255,255,.8);
+  border-radius:26px; overflow:hidden;
+  opacity:0; pointer-events:none; z-index:500;
+  transition:all .4s cubic-bezier(.34,1.4,.64,1);
+  box-shadow:0 40px 68px rgba(25,15,10,.2),0 0 0 1px rgba(255,255,255,.5);
+}
+.expanded-preview.active { opacity:1; transform:translateY(-50%) scale(1); pointer-events:auto; }
+.exp-image { height:206px; overflow:hidden; position:relative; }
+.exp-image img { width:100%; height:100%; object-fit:cover; position:absolute; inset:0; animation:expImg .45s ease both; }
+@keyframes expImg { from{transform:scale(1.1);opacity:0;} to{transform:scale(1);opacity:1;} }
+.exp-image-overlay { position:absolute; inset:0; background:linear-gradient(0deg,rgba(255,255,255,.85) 0%,transparent 55%); }
+.exp-placeholder { width:100%; height:100%; display:flex; align-items:center; justify-content:center; font-size:5rem; background:linear-gradient(135deg,rgba(167,138,255,.18),rgba(167,138,255,.05)); }
+.exp-cat-badge { position:absolute; top:13px; left:13px; background:var(--bg-dark); color:#fff; font-size:.58rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:4px 11px; border-radius:100px; }
+.exp-body { padding:19px; }
+.exp-title { font-family:'Bebas Neue',sans-serif; font-size:1.6rem; color:var(--bg-dark); letter-spacing:.5px; line-height:1.1; margin-bottom:7px; }
+.exp-desc { font-size:.78rem; line-height:1.65; color:var(--bg-dark); opacity:.6; margin-bottom:16px; }
+.exp-footer { display:flex; align-items:center; justify-content:space-between; padding-top:13px; border-top:1px solid rgba(25,15,10,.09); }
+.exp-stars { font-size:.78rem; color:#c9922a; }
+.exp-btn { background:var(--bg-dark); color:#fff; border:none; border-radius:100px; padding:9px 19px; font-size:.7rem; font-weight:700; letter-spacing:.5px; text-transform:uppercase; cursor:pointer; transition:all .3s; box-shadow:0 4px 14px rgba(25,15,10,.2); font-family:'Montserrat',sans-serif; }
+.exp-btn:hover { transform:scale(1.05); box-shadow:0 7px 22px rgba(25,15,10,.28); }
+
+/* COMING SOON */
+.coming-soon-card { border-radius:22px; border:2px dashed rgba(25,15,10,.18); background:rgba(255,255,255,.12); padding:48px 40px; text-align:center; position:relative; overflow:hidden; backdrop-filter:blur(10px); }
+.coming-soon-card::before { content:''; position:absolute; inset:0; background:radial-gradient(circle at 50% 0%,rgba(25,15,10,.05),transparent 70%); }
+.cs-icon { font-size:2.8rem; margin-bottom:13px; display:block; animation:floatIco 3s ease-in-out infinite; }
+@keyframes floatIco { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-10px);} }
+.cs-title { font-family:'Bebas Neue',sans-serif; font-size:2rem; color:var(--bg-dark); margin-bottom:7px; letter-spacing:1px; }
+.cs-desc { font-size:.8rem; color:var(--bg-dark); opacity:.55; max-width:300px; margin:0 auto 20px; line-height:1.6; }
+.cs-badge { display:inline-block; border:1.5px solid rgba(25,15,10,.25); color:var(--bg-dark); font-size:.62rem; font-weight:700; letter-spacing:3px; text-transform:uppercase; padding:7px 18px; border-radius:100px; opacity:.65; animation:pulseB 2s ease-in-out infinite; }
+@keyframes pulseB { 0%,100%{box-shadow:0 0 0 0 rgba(25,15,10,.12);} 50%{box-shadow:0 0 0 6px transparent;} }
+
+/* ════════════════════════════════════════
+   FOOTER CANVAS — Matter.js coin physics
+════════════════════════════════════════ */
+.canvas-matter { width:100%; position:relative; overflow:hidden; }
+.canvas-matter__target { width:100%; height:400px; }
+
+/* ════════════════════════════════════════
+   RESPONSIVE
+════════════════════════════════════════ */
+@media(max-width:1100px){ .expanded-preview{right:18px;width:288px;} }
+@media(max-width:900px){
+  .menu-layout{grid-template-columns:1fr;padding:10px 20px 60px;gap:22px;}
+  .menu-nav{position:static;flex-direction:row;flex-wrap:wrap;gap:8px;}
+  .nav-item{flex:1;min-width:130px;transform:none!important;}
+  .expanded-preview{position:fixed;bottom:0;left:0;right:0;top:auto;transform:translateY(105%) scale(1)!important;width:100%;border-radius:26px 26px 0 0;}
+  .expanded-preview.active{transform:translateY(0) scale(1)!important;}
+  .hero{padding:120px 20px 50px;}
+}
+@media(max-width:767px){
+  .nav_desktop { display:none !important; }
+  .nav_mobile { display:flex !important; }
+}
+@media(max-width:600px){
+  .items-grid{grid-template-columns:1fr 1fr;gap:11px;}
+  .card-image{height:145px;}
+}
+@media(max-width:400px){ .items-grid{grid-template-columns:1fr;} .menu-nav{flex-direction:column;} }
+</style>
+<style>
+    /* Footer top spacing */
+    .footer_wrap .g_section_space[data-wf--global-section-space--section-space="small"] {
+        height: 40px;
+        min-height: 40px;
+    }
+
+    /* Generic: any nav link (not #) gets clickable, button hidden */
+    .g_clickable_wrap a:not([href="#"]) {
+        display: block !important;
+        pointer-events: auto !important;
+        cursor: pointer !important;
+        z-index: 1 !important;
+    }
+    .g_clickable_wrap a:not([href="#"]) ~ button {
+        display: none !important;
+    }
+
+    /* Ensure main nav links are always clickable (override Webflow button overlay) */
+    .g_clickable_wrap a[href="menu.html"],
+    .g_clickable_wrap a[href="contact.html"],
+    .g_clickable_wrap a[href="recipe.html"],
+    .g_clickable_wrap a[href="/"],
+    .g_clickable_wrap a[href="index.html"],
+    .g_clickable_wrap a[href="ct.html"] {
+        display: block !important;
+        pointer-events: auto !important;
+        cursor: pointer !important;
+        z-index: 1 !important;
+    }
+
+    .g_clickable_wrap a[href="menu.html"] ~ button,
+    .g_clickable_wrap a[href="contact.html"] ~ button,
+    .g_clickable_wrap a[href="recipe.html"] ~ button,
+    .g_clickable_wrap a[href="/"] ~ button,
+    .g_clickable_wrap a[href="index.html"] ~ button,
+    .g_clickable_wrap a[href="ct.html"] ~ button {
+        display: none !important;
+    }
+</style>
+<script src="https://cdn.prod.website-files.com/gsap/3.14.2/gsap.min.js"></script>
+<script src="https://cdn.prod.website-files.com/gsap/3.14.2/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js" defer></script>
+<style id="responsive-hardening-all-pages">
+  html, body { max-width:100%; overflow-x:clip; }
+  img, svg, video, canvas, iframe { max-width:100%; height:auto; }
+  .u-container, .w-container { width:min(100%,1200px); }
+  .nav_logo_link img { height:auto !important; max-height:clamp(52px,8vw,90px) !important; }
+  .nav_mobile_contain { min-height:64px; }
+  .hero-title, .hero-sub, .exp-title, .exp-desc, .footer_link_main_text, .footer_link_secondary_text, .footer_link_tertiary_text {
+    overflow-wrap:anywhere; word-break:break-word; hyphens:auto;
+  }
+  @media (max-width: 991px) {
+    .u-container, .w-container { padding-left:1rem !important; padding-right:1rem !important; }
+    .menu-layout { grid-template-columns:1fr !important; padding:8px 14px 52px !important; gap:16px !important; }
+    .menu-nav { position:static !important; flex-direction:row !important; flex-wrap:wrap !important; gap:6px !important; }
+    .expanded-preview { max-height:min(70vh,520px); overflow:auto; }
+  }
+  @media (max-width: 767px) {
+    .bg-grid { background-size:28px 28px; }
+    .items-grid { grid-template-columns:repeat(2,minmax(0,1fr)) !important; gap:10px !important; }
+    .footer_layout { display:flex !important; flex-direction:column !important; gap:1.25rem !important; }
+    .footer_link_main_wrap, .footer_link_secondary_wrap, .newsletter_wrap { width:100% !important; max-width:100% !important; }
+    .footer_link_main_list, .footer_link_secondary_list { display:flex !important; flex-direction:column !important; gap:0.35rem !important; }
+    .social_link_list { display:flex !important; flex-wrap:wrap !important; gap:0.6rem !important; }
+    .canvas-matter__target { height:clamp(240px,48vw,400px) !important; }
+  }
+  @media (max-width: 479px) {
+    .nav_mobile_contain { min-height:60px; }
+    .nav_logo_link img { max-height:52px !important; }
+    .items-grid { grid-template-columns:1fr !important; }
+    .menu-nav { flex-direction:column !important; }
+    .hero { padding:104px 14px 38px !important; }
+    .hero-title { font-size:clamp(2rem,10vw,3rem) !important; }
+  }
+</style>
+</head>
+
+<body data-scrolling-started="false" data-scrolling-direction="up" style="--_theme---button--divider:#00592b;--_theme---selection--text:#1ce585;--_theme---selection--background:#401011;--_theme---logo:#1ce585;--_theme---link-text:#f1f0ec;--_theme---button--background:#f1f0ec;--_theme---button--text-hover:#f1f0ec;--_theme---button--background-hover:#190f0a;--_theme---sticker:#f580db;--_theme---link-background:color-mix(in srgb, #1ce585 10%, transparent);--_theme---button--text:#190f0a;--_theme---border:color-mix(in srgb, #1ce585 20%, transparent);--_theme---text:#ffffff;--_theme---background:#a78aff;">
+
+<div class="bg-blobs">
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+</div>
+<div class="bg-grid"></div>
+<div class="scroll-line" id="scrollLine"></div>
+
+<!-- ══════════════════════════════════════
+     NAV COMPONENT — exact copy from index.html
+     Layout: [Menu SAMPLE Recipe ...] [LOGO] [Contact Us]
+══════════════════════════════════════ -->
+<div class="nav_component">
+
+  <!-- Scroll direction detector (exact from index.html) -->
+  <div class="scroll_direction_js u-embed-js w-embed w-script"><script>
+    (function(){
+      let lastST=0;const threshold=10,thresholdTop=50;
+      window.addEventListener('scroll',()=>{
+        const now=window.scrollY;
+        if(Math.abs(lastST-now)>=threshold){
+          const dir=now>lastST?'down':'up';
+          document.querySelectorAll('[data-scrolling-direction]').forEach(el=>el.setAttribute('data-scrolling-direction',dir));
+          const started=now>thresholdTop;
+          document.querySelectorAll('[data-scrolling-started]').forEach(el=>el.setAttribute('data-scrolling-started',started?'true':'false'));
+          lastST=now;
+        }
+      });
+    })();
+  </script></div>
+
+  <!-- GSAP menu open/close animation (exact from index.html) -->
+  <div class="u-embed-js w-embed w-script"><script>
+    document.addEventListener("DOMContentLoaded",function(){
+      document.querySelectorAll(".nav_component").forEach(function(element){
+        if(element.dataset.scriptInitialized)return;
+        element.dataset.scriptInitialized="true";
+        if(typeof gsap==='undefined'){return;}
+        const openButtons=element.querySelectorAll('[data-menu-btn]');
+        const closeIcons=element.querySelectorAll('[data-menu-close]');
+        const closeTriggers=element.querySelectorAll('[data-menu-close],[data-menu-overlay]');
+        const menu=element.querySelector('[data-menu-wrap]');
+        const overlay=element.querySelector('[data-menu-overlay]');
+        const base=element.querySelector('[data-menu-base]');
+        const links=element.querySelectorAll('[data-menu-link-list]');
+        if(!menu||!overlay||!base||openButtons.length===0)return;
+        let isActive=false,tl;
+        const mm=gsap.matchMedia();
+        mm.add("(prefers-reduced-motion: no-preference)",()=>{
+          tl=gsap.timeline({paused:true});
+          tl.set(menu,{display:"flex"});
+          tl.from(overlay,{autoAlpha:0,duration:0.4,ease:"none"})
+            .from(base,{scaleX:0,duration:0.8,ease:"elastic.out(0.75,0.6)"},"<50%")
+            .from(closeIcons,{scale:0,rotate:-270,duration:0.8,ease:"elastic.out(0.75,0.6)"},"<+25%")
+            .from(links,{autoAlpha:0,yPercent:20,duration:0.8,stagger:0.05,ease:"elastic.out(0.75,0.6)"},"<+25%");
+        });
+        mm.add("(prefers-reduced-motion: reduce)",()=>{
+          tl=gsap.timeline({paused:true});
+          tl.set(menu,{display:"flex"});
+          tl.from(overlay,{autoAlpha:0,duration:0.4,ease:"none"})
+            .from(base,{autoAlpha:0,duration:0.4,ease:"none"},"<50%")
+            .from(closeIcons,{autoAlpha:0,duration:0.4,ease:"none"},"<")
+            .from(links,{autoAlpha:0,duration:0.4,ease:"none"},"<");
+        });
+        openButtons.forEach(btn=>btn.addEventListener("click",()=>{
+          if(!tl)return;
+          if(!isActive){if(typeof lenis!=='undefined')lenis.stop();tl.timeScale(1).play();}
+          else{tl.timeScale(1.5).reverse();}
+          isActive=!isActive;
+        }));
+        closeTriggers.forEach(btn=>btn.addEventListener("click",()=>{
+          if(!tl||!isActive)return;
+          tl.timeScale(1.5).reverse();isActive=false;
+        }));
+        const setLenisResume=()=>{if(typeof lenis!=='undefined')lenis.start();};
+        (function waitForTl(){if(tl){tl.eventCallback("onReverseComplete",setLenisResume);}else{requestAnimationFrame(waitForTl);}})();
+        document.addEventListener("keydown",e=>{if(!tl)return;if(e.key==="Escape"&&isActive){tl.timeScale(1.5).reverse();isActive=false;}});
+      });
+    });
+  </script></div>
+
+  <!-- Nav header fallback: ensure all nav links/buttons redirect on Netlify -->
+  <script>
+    document.addEventListener("DOMContentLoaded",function(){
+      var navTargets=[
+        {href:"contact.html",url:"contact.html"},
+        {href:"menu.html",url:"menu.html"},
+        {href:"recipe.html",url:"recipe.html"},
+        {href:"ct.html",url:"ct.html"},
+        {href:"index.html",url:"index.html"},
+        {href:"/",url:"index.html"}
+      ];
+      navTargets.forEach(function(t){
+        document.querySelectorAll('a[href="'+t.href+'"]').forEach(function(link){
+          link.addEventListener("click",function(e){ e.preventDefault(); window.location.href=t.url; });
+        });
+        document.querySelectorAll(".g_clickable_btn").forEach(function(btn){
+          var wrap=btn.closest(".g_clickable_wrap");
+          if(wrap&&wrap.querySelector('a[href="'+t.href+'"]')){
+            btn.addEventListener("click",function(e){ e.preventDefault(); e.stopPropagation(); window.location.href=t.url; });
+          }
+        });
+      });
+    });
+  </script>
+
+  <!-- Nav CSS (exact from index.html nav_css block) -->
+  <div class="nav_css u-embed-css w-embed"><style>
+    @container (width <= 56em){.nav_desktop{display:none;}.nav_mobile{display:block;}}
+    .nav_wrap{transition:transform 1s ease,padding 1s ease;transform:translateY(0%) rotate(0.001deg);}
+    .logo_tagline_svg{transition:opacity 1s ease;}
+    [data-scrolling-started="true"] .nav_wrap{padding-top:1.5rem;padding-bottom:1.5rem;padding-left:0;padding-right:0;}
+    @media(max-width:479px){[data-scrolling-started="true"] .nav_wrap{padding-top:1rem;padding-bottom:1rem;}}
+    [data-scrolling-started="true"] .logo_tagline_svg{opacity:0;}
+    [data-scrolling-started="true"][data-scrolling-direction="down"] .nav_wrap{transform:translateY(-100%) rotate(0.001deg);}
+    /* Desktop layout: LEFT nav_link_list | CENTER logo (absolute) | RIGHT nav_btn_list */
+    .nav_desktop_contain{display:flex!important;justify-content:space-between!important;align-items:center!important;width:100%!important;position:relative!important;}
+    .nav_link_list{display:flex!important;justify-content:center!important;align-items:center!important;position:absolute!important;left:50%!important;transform:translateX(-50%)!important;margin:0!important;padding:0!important;list-style:none!important;gap:2rem!important;order:2!important;}
+    .nav_logo_link{display:flex!important;justify-content:flex-start!important;align-items:center!important;width:auto!important;text-align:left!important;z-index:10!important;}
+    .nav_logo_link img{display:block!important;margin:0!important;max-height:90px!important;width:auto!important;object-fit:contain!important;}
+    .nav_logo_wrap{display:flex!important;justify-content:flex-start!important;align-items:center!important;width:auto!important;order:1!important;margin-right:auto!important;}
+    .nav_btn_list{display:flex!important;justify-content:flex-end!important;align-items:center!important;list-style:none!important;padding:0!important;margin:0!important;margin-left:auto!important;gap:0.5rem!important;order:3!important;}
+    /* Mobile nav */
+    .nav_mobile_contain{display:flex!important;align-items:center!important;justify-content:space-between!important;width:100%!important;position:relative!important;}
+    .mobile_menu_btn{display:flex!important;flex-direction:column!important;justify-content:center!important;align-items:center!important;width:40px!important;height:40px!important;padding:8px!important;border:none!important;background:transparent!important;cursor:pointer!important;z-index:1000!important;transition:all 0.3s ease!important;}
+    .mobile_menu_btn_line{width:24px!important;height:2px!important;background-color:var(--_theme---button--background,#f1f0ec)!important;margin:2px 0!important;transition:all 0.3s ease!important;border-radius:2px!important;}
+    @media(max-width:767px){
+      .nav_mobile_contain{position:relative!important;}
+      .nav_logo_wrap{position:absolute!important;left:50%!important;top:50%!important;transform:translate(-50%,-50%)!important;width:auto!important;}
+      .nav_logo_link img{max-height:70px!important;width:auto!important;}
+    }
+    @media(max-width:479px){
+      .nav_logo_link img{max-height:60px!important;}
+      .mobile_menu_btn{width:35px!important;height:35px!important;}
+      .mobile_menu_btn_line{width:20px!important;height:2px!important;}
+    }
+    /* Sticker image styles */
+    .sticker-image{width:100%!important;height:auto!important;display:block!important;object-fit:contain!important;}
+    /* Frosted bg fades in on scroll */
+    .nav_base{transition:opacity 1s ease;opacity:0;}
+    [data-scrolling-started="true"] .nav_base{opacity:1;}
+    /* Menu button hovers */
+    .menu_btn,.cart_icon_wrap,.mobile_menu_btn,.main_link{
+      --elastic-ease-out:linear(0,0.5737 7.6%,0.8382 11.87%,0.9463 14.19%,1.0292 16.54%,1.0886 18.97%,1.1258 21.53%,1.137 22.97%,1.1424 24.48%,1.1423 26.1%,1.1366 27.86%,1.1165 31.01%,1.0507 38.62%,1.0219 42.57%,0.9995 46.99%,0.9872 51.63%,0.9842 58.77%,1.0011 81.26%,1);
+      --color-ease:cubic-bezier(.216,.62,.356,1);
+      transition:transform 0.65s var(--elastic-ease-out),background-color 0.4s var(--color-ease),gap 0.65s var(--elastic-ease-out);
+      -webkit-tap-highlight-color:transparent;
+    }
+    .menu_btn:active,.mobile_menu_btn:active,.cart_icon_wrap:active{transform:scale(0.955,0.954);}
+    .main_link,.secondary_link{transition:opacity 0.3s;}
+    .main_link_icon{width:0em;transform:scale(0) rotate(45deg);transition:width 0.8s var(--elastic-ease-out),transform 0.8s var(--elastic-ease-out),padding-right 0.8s ease;}
+    .secondary_link_line_fill{transform:scaleX(0);transition:transform 0.3s ease;}
+    .nav_component{transition:transform 1s ease,padding 1s ease;transform:translateY(0%) rotate(0.001deg);}
+    @media(hover:hover) and (pointer:fine){
+            [data-menu-link-list]:has(>:hover)>:not(:hover){opacity:0.3;}
+      .main_link:is(:hover,:focus-visible) .main_link_icon{width:0.6em;padding-right:0.25rem;transform:scale(1) rotate(0deg);}
+      .secondary_link:is(:hover,:focus-visible) .secondary_link_line_fill{transform:scaleX(1);}
+    }
+  </style></div>
+
+  <!-- Nav wrap: desktop + mobile bars -->
+  <div data-transition-hero="" class="nav_wrap">
+
+    <!-- DESKTOP NAV: [Menu SAMPLE Recipe ...] [LOGO center absolute] [Contact Us] -->
+    <nav class="nav_desktop">
+      <div class="nav_desktop_contain u-container">
+
+        <!-- LEFT: nav link list -->
+        <ul role="list" class="nav_link_list">
+          <!-- Menu -->
+          <li class="nav_link">
+                <a href="menu.html" style="text-decoration: none; display: block;" aria-current="page">
+                <div data-goal="" data-game-start="true" data-wf--btn-secondary--variant="nav-link" class="btn_secondary_wrap">
+              <div class="u-embed-css w-embed">
+                                        <style>
+                                            .btn_secondary_wrap {
+                                                --elastic-ease-out: linear( 0, 0.5737 7.6%, 0.8382 11.87%, 0.9463 14.19%, 1.0292 16.54%, 1.0886 18.97%, 1.1258 21.53%, 1.137 22.97%, 1.1424 24.48%, 1.1423 26.1%, 1.1366 27.86%, 1.1165 31.01%, 1.0507 38.62%, 1.0219 42.57%, 0.9995 46.99%, 0.9872 51.63%, 0.9842 58.77%, 1.0011 81.26%, 1);
+                                                --smooth-ease: cubic-bezier(.32, .72, 0, 1);
+                                                --color-ease: cubic-bezier(.216, .62, .356, 1);
+                                                transition: transform .45s var(--elastic-ease-out);
+                                                -webkit-tap-highlight-color: transparent;
+                                            }
+
+                                            .btn_secondary_wrap:active {
+                                                transform: scaleX(0.955) scaleY(0.954);
+                                            }
+
+                                            .btn_secondary_bg {
+                                                transition: background-color .2s var(--color-ease);
+                                            }
+
+                                            .btn_secondary_front {
+                                                transition: translate .85s var(--elastic-ease-out), rotate .75s var(--elastic-ease-out), opacity .15s ease-out;
+                                            }
+
+                                            .btn_secondary_text {
+                                                transition: translate .75s var(--elastic-ease-out);
+                                            }
+
+                                            .btn_secondary_back {
+                                                transition: translate .85s var(--elastic-ease-out), rotate .75s var(--elastic-ease-out), opacity .15s ease-out;
+                                                opacity: 0;
+                                            }
+
+                                            @media (hover: hover) and (pointer: fine) {
+                                                .btn_secondary_wrap:is(:hover, :focus-visible) .btn_secondary_front {
+                                                    translate: 0 -2rem -6rem;
+                                                    rotate: 1 0 0 85deg;
+                                                    opacity: 0;
+                                                }
+                                                .btn_secondary_wrap:is(:hover, :focus-visible) .btn_secondary_text {
+                                                    translate: 0 -.75rem 0;
+                                                    transition-delay: 0s;
+                                                }
+                                                .btn_secondary_wrap:is(:hover, :focus-visible) .btn_secondary_back {
+                                                    transition: translate .85s var(--elastic-ease-out), rotate .75s var(--elastic-ease-out), opacity .075s ease-in;
+                                                    rotate: 0;
+                                                    translate: 0;
+                                                    opacity: 1;
+                                                }
+                                            }
+
+                                            @media (hover: none) or (pointer: coarse) {
+                                                .btn_secondary_wrap:active .btn_secondary_bg {
+                                                    background-color: var(--_theme---button--background);
+                                                    transition-duration: 0s;
+                                                }
+                                            }
+                                        </style>
+                                    </div>
+              <span class="btn_secondary_inner"><span data-text="Color-Flip" class="btn_secondary_back w-variant-7d34d3c8-1212-2354-834d-01f611ce35ce"><span aria-hidden="true" class="btn_secondary_back_text u-text-style-h5 w-variant-7d34d3c8-1212-2354-834d-01f611ce35ce">Menu</span></span><span class="btn_secondary_front w-variant-7d34d3c8-1212-2354-834d-01f611ce35ce"><span class="btn_secondary_bg w-variant-7d34d3c8-1212-2354-834d-01f611ce35ce"></span><span aria-hidden="true" class="btn_secondary_front_text u-text-style-h5 w-variant-7d34d3c8-1212-2354-834d-01f611ce35ce">Menu</span></span></span>
+            </div>
+            </a>
+          </li>
+          <li class="nav_link">
+                                <div data-goal="" data-game-start="true" data-wf--btn-secondary--variant="nav-link" class="btn_secondary_wrap">
+                                    <div class="u-embed-css w-embed">
+                                        <style>
+                                            .btn_secondary_wrap {
+                                                --elastic-ease-out: linear( 0, 0.5737 7.6%, 0.8382 11.87%, 0.9463 14.19%, 1.0292 16.54%, 1.0886 18.97%, 1.1258 21.53%, 1.137 22.97%, 1.1424 24.48%, 1.1423 26.1%, 1.1366 27.86%, 1.1165 31.01%, 1.0507 38.62%, 1.0219 42.57%, 0.9995 46.99%, 0.9872 51.63%, 0.9842 58.77%, 1.0011 81.26%, 1);
+                                                --smooth-ease: cubic-bezier(.32, .72, 0, 1);
+                                                --color-ease: cubic-bezier(.216, .62, .356, 1);
+                                                transition: transform .45s var(--elastic-ease-out);
+                                                -webkit-tap-highlight-color: transparent;
+                                            }
+
+                                            .btn_secondary_wrap:active {
+                                                transform: scaleX(0.955) scaleY(0.954);
+                                            }
+
+                                            .btn_secondary_bg {
+                                                transition: background-color .2s var(--color-ease);
+                                            }
+
+                                            .btn_secondary_front {
+                                                transition: translate .85s var(--elastic-ease-out), rotate .75s var(--elastic-ease-out), opacity .15s ease-out;
+                                            }
+
+                                            .btn_secondary_text {
+                                                transition: translate .75s var(--elastic-ease-out);
+                                            }
+
+                                            .btn_secondary_back {
+                                                transition: translate .85s var(--elastic-ease-out), rotate .75s var(--elastic-ease-out), opacity .15s ease-out;
+                                                opacity: 0;
+                                            }
+
+                                            @media (hover: hover) and (pointer: fine) {
+                                                .btn_secondary_wrap:is(:hover, :focus-visible) .btn_secondary_front {
+                                                    translate: 0 -2rem -6rem;
+                                                    rotate: 1 0 0 85deg;
+                                                    opacity: 0;
+                                                }
+                                                .btn_secondary_wrap:is(:hover, :focus-visible) .btn_secondary_text {
+                                                    translate: 0 -.75rem 0;
+                                                    transition-delay: 0s;
+                                                }
+                                                .btn_secondary_wrap:is(:hover, :focus-visible) .btn_secondary_back {
+                                                    transition: translate .85s var(--elastic-ease-out), rotate .75s var(--elastic-ease-out), opacity .075s ease-in;
+                                                    /* bring it into place without arrow */
+                                                    rotate: 0;
+                                                    translate: 0;
+                                                    opacity: 1;
+                                                }
+                                            }
+
+                                            @media (hover: none) or (pointer: coarse) {
+                                                .btn_secondary_wrap:active .btn_secondary_bg {
+                                                    background-color: var(--_theme---button--background);
+                                                    transition-duration: 0s;
+                                                }
+                                            }
+                                        </style>
+                                    </div><span class="btn_secondary_inner"><span data-text="Color-Flip" class="btn_secondary_back w-variant-7d34d3c8-1212-2354-834d-01f611ce35ce"><span aria-hidden="true" class="btn_secondary_back_text u-text-style-h5 w-variant-7d34d3c8-1212-2354-834d-01f611ce35ce">SAMPLE</span></span>
+                                    <span class="btn_secondary_front w-variant-7d34d3c8-1212-2354-834d-01f611ce35ce"><span class="btn_secondary_bg w-variant-7d34d3c8-1212-2354-834d-01f611ce35ce"></span><span aria-hidden="true" class="btn_secondary_front_text u-text-style-h5 w-variant-7d34d3c8-1212-2354-834d-01f611ce35ce">SAMPLE</span></span>
+                                    </span>
+                                    <div class="g_clickable_wrap"><a class="g_clickable_link w-inline-block" href="contact.html" target="" data-wf-ao-click-engagement-tracking="true" data-gtm="play_game"><span class="g_clickable_text u-sr-only">SAMPLE</span></a>
+                                        <link rel="prefetch" href="contact.html" /><button type="button" tracking="play" class="g_clickable_btn"><span class="g_clickable_text u-sr-only">SAMPLE</span></button></div>
+                                </div>
+                            </li>
+          <li class="nav_link">
+                                <div data-goal="" data-game-start="true" data-wf--btn-secondary--variant="nav-link" class="btn_secondary_wrap">
+                                    <div class="u-embed-css w-embed">
+                                        <style>
+                                            .btn_secondary_wrap {
+                                                --elastic-ease-out: linear( 0, 0.5737 7.6%, 0.8382 11.87%, 0.9463 14.19%, 1.0292 16.54%, 1.0886 18.97%, 1.1258 21.53%, 1.137 22.97%, 1.1424 24.48%, 1.1423 26.1%, 1.1366 27.86%, 1.1165 31.01%, 1.0507 38.62%, 1.0219 42.57%, 0.9995 46.99%, 0.9872 51.63%, 0.9842 58.77%, 1.0011 81.26%, 1);
+                                                --smooth-ease: cubic-bezier(.32, .72, 0, 1);
+                                                --color-ease: cubic-bezier(.216, .62, .356, 1);
+                                                transition: transform .45s var(--elastic-ease-out);
+                                                -webkit-tap-highlight-color: transparent;
+                                            }
+
+                                            .btn_secondary_wrap:active {
+                                                transform: scaleX(0.955) scaleY(0.954);
+                                            }
+
+                                            .btn_secondary_bg {
+                                                transition: background-color .2s var(--color-ease);
+                                            }
+
+                                            .btn_secondary_front {
+                                                transition: translate .85s var(--elastic-ease-out), rotate .75s var(--elastic-ease-out), opacity .15s ease-out;
+                                            }
+
+                                            .btn_secondary_text {
+                                                transition: translate .75s var(--elastic-ease-out);
+                                            }
+
+                                            .btn_secondary_back {
+                                                transition: translate .85s var(--elastic-ease-out), rotate .75s var(--elastic-ease-out), opacity .15s ease-out;
+                                                opacity: 0;
+                                            }
+
+                                            @media (hover: hover) and (pointer: fine) {
+                                                .btn_secondary_wrap:is(:hover, :focus-visible) .btn_secondary_front {
+                                                    translate: 0 -2rem -6rem;
+                                                    rotate: 1 0 0 85deg;
+                                                    opacity: 0;
+                                                }
+                                                .btn_secondary_wrap:is(:hover, :focus-visible) .btn_secondary_text {
+                                                    translate: 0 -.75rem 0;
+                                                    transition-delay: 0s;
+                                                }
+                                                .btn_secondary_wrap:is(:hover, :focus-visible) .btn_secondary_back {
+                                                    transition: translate .85s var(--elastic-ease-out), rotate .75s var(--elastic-ease-out), opacity .075s ease-in;
+                                                    rotate: 0;
+                                                    translate: 0;
+                                                    opacity: 1;
+                                                }
+                                            }
+
+                                            @media (hover: none) or (pointer: coarse) {
+                                                .btn_secondary_wrap:active .btn_secondary_bg {
+                                                    background-color: var(--_theme---button--background);
+                                                    transition-duration: 0s;
+                                                }
+                                            }
+                                        </style>
+                                    </div><span class="btn_secondary_inner"><span data-text="Color-Flip" class="btn_secondary_back w-variant-7d34d3c8-1212-2354-834d-01f611ce35ce"><span aria-hidden="true" class="btn_secondary_back_text u-text-style-h5 w-variant-7d34d3c8-1212-2354-834d-01f611ce35ce">Recipe</span></span>
+                                    <span class="btn_secondary_front w-variant-7d34d3c8-1212-2354-834d-01f611ce35ce"><span class="btn_secondary_bg w-variant-7d34d3c8-1212-2354-834d-01f611ce35ce"></span><span aria-hidden="true" class="btn_secondary_front_text u-text-style-h5 w-variant-7d34d3c8-1212-2354-834d-01f611ce35ce">Recipe</span></span>
+                                    </span>
+                                    <div class="g_clickable_wrap"><a class="g_clickable_link w-inline-block" href="recipe.html" target="" data-wf-ao-click-engagement-tracking="true" data-gtm="play_game"><span class="g_clickable_text u-sr-only">Recipe</span></a>
+                                        <link rel="prefetch" href="recipe.html" /><button type="button" tracking="play" class="g_clickable_btn"><span class="g_clickable_text u-sr-only">Recipe</span></button></div>
+                                </div>
+                            </li>
+          <!-- ... dots button (opens fullscreen menu) -->
+          <li class="nav_link"><button data-menu-btn="" class="menu_btn"><div class="menu_btn_dot"></div><div class="menu_btn_dot"></div><div class="menu_btn_dot"></div></button></li>
+        </ul>
+
+        <div class="nav_logo_wrap">
+            <div class="nav_logo_link"><img src="sweet/LVsnn3r.png" alt="Sweet Treat Logo" style="height:clamp(52px,8vw,90px);text-align:center;width:auto;object-fit:contain;" />
+                <div class="g_clickable_wrap"><a class="g_clickable_link w-inline-block w--current" href="/" target="" aria-current="page"><span class="g_clickable_text u-sr-only">homepage</span></a><link rel="prefetch" href="/" /><button type="button" tracking="play" class="g_clickable_btn"><span class="g_clickable_text u-sr-only">homepage</span></button></div>
+            </div>
+        </div>
+
+        <!-- RIGHT: Contact Us (btn_main_wrap — the big pill CTA) -->
+        <ul data-goal="book-tickets" role="list" class="nav_btn_list">
+          <li class="nav_btn is-book-ticket">
+            <div class="btn_main_wrap">
+              <div class="u-embed-css w-embed"><style>.btn_main_wrap{--elastic-ease-out:linear(0,0.5737 7.6%,0.8382 11.87%,0.9463 14.19%,1.0292 16.54%,1.0886 18.97%,1.1258 21.53%,1.137 22.97%,1.1424 24.48%,1.1423 26.1%,1.1366 27.86%,1.1165 31.01%,1.0507 38.62%,1.0219 42.57%,0.9995 46.99%,0.9872 51.63%,0.9842 58.77%,1.0011 81.26%,1);--smooth-ease:cubic-bezier(.32,.72,0,1);--color-ease:cubic-bezier(.216,.62,.356,1);transition:transform .45s var(--elastic-ease-out);-webkit-tap-highlight-color:transparent;}.btn_main_wrap:active{transform:scaleX(0.955) scaleY(0.954);}.btn_main_bg{transition:background-color .2s var(--color-ease);}.btn_main_front{transition:translate .85s var(--elastic-ease-out),rotate .75s var(--elastic-ease-out),opacity .15s ease-out;}.btn_main_text{transition:translate .75s var(--elastic-ease-out);}.btn_main_back{transition:translate .85s var(--elastic-ease-out),rotate .75s var(--elastic-ease-out),opacity .15s ease-out;opacity:0;}.btn_main_inner,.btn_main_icon_wrap{transition:transform .75s var(--elastic-ease-out),opacity .15s ease-out;}.btn_main_divider{opacity:1;transition:opacity .15s ease-out;}@media(hover:hover) and (pointer:fine){.btn_main_wrap:is(:hover,:focus-visible) .btn_main_inner{transform:translateX(-0.25rem) translateY(-0.125rem) rotate(-2.5deg);}.btn_main_wrap:is(:hover,:focus-visible) .btn_main_icon_wrap{transform:translateX(0.25rem) translateY(0.125rem) rotate(2.5deg);}.btn_main_wrap:is(:hover,:focus-visible) .btn_main_divider{opacity:0;}.btn_main_wrap:is(:hover,:focus-visible) .btn_main_front{translate:0 -2rem -6rem;rotate:1 0 0 85deg;opacity:0;}.btn_main_wrap:is(:hover,:focus-visible) .btn_main_text{translate:0 -.75rem 0;transition-delay:0s;}.btn_main_wrap:is(:hover,:focus-visible) .btn_main_back{transition:translate .85s var(--elastic-ease-out),rotate .75s var(--elastic-ease-out),opacity .075s ease-in;rotate:0;translate:0;opacity:1;}}@media(hover:none) or (pointer:coarse){.btn_main_wrap:active .btn_main_bg{background-color:var(--_theme---button--background);transition-duration:0s;}}</style></div>
+              <div class="g_clickable_wrap"><a class="g_clickable_link w-inline-block" href="ct.html"><span class="g_clickable_text u-sr-only">Contact Us</span></a><button type="button" class="g_clickable_btn"><span class="g_clickable_text u-sr-only">Contact Us</span></button></div>
+              <span class="btn_main_inner"><span data-text="Color-Flip" class="btn_main_back"><span aria-hidden="true" class="btn_main_back_text u-text-style-h5">Contact Us</span></span><span class="btn_main_front"><span class="btn_main_bg"></span><span aria-hidden="true" class="btn_main_front_text u-text-style-h5">Contact Us</span><div class="btn_main_divider"></div></span></span>
+              <span class="btn_main_icon_wrap">
+                <span data-text="Color-Flip" class="btn_main_back"><div class="btn_main_icon_inner"><div class="btn_main_icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 14 14" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M0.947008 1.74299C1.21101 1.63399 1.50801 1.77799 1.69501 1.99399C1.8294 2.14941 1.99635 2.27334 2.18401 2.35699C2.40711 2.45673 2.65236 2.4966 2.89558 2.47266C3.13879 2.44872 3.37156 2.3618 3.57093 2.22047C3.77031 2.07914 3.9294 1.88828 4.03253 1.66672C4.13565 1.44516 4.17924 1.20054 4.15901 0.956993C4.13701 0.682993 4.23401 0.382993 4.48401 0.265993L4.89401 0.0729931C5.12453 -0.0229509 5.38356 -0.0242809 5.61506 0.0692907C5.84655 0.162862 6.0319 0.343812 6.13101 0.572993L6.61401 1.69099L3.37101 9.17299L3.02501 9.95999L0.0690075 3.11999C-0.0198639 2.89847 -0.0220889 2.6516 0.0627751 2.42851C0.147639 2.20542 0.313373 2.02245 0.527008 1.91599L0.947008 1.74299ZM12.269 3.74699C12.454 3.52899 12.752 3.38599 13.016 3.49399L13.459 3.67699C13.6784 3.78589 13.8487 3.97354 13.9358 4.20247C14.0229 4.4314 14.0205 4.68477 13.929 4.91199L10.257 13.412C10.1557 13.6474 9.96556 13.8333 9.72796 13.9294C9.49036 14.0254 9.22446 14.0238 8.98801 13.925L4.55001 12.034C4.31468 11.9328 4.12872 11.743 4.0325 11.5056C3.93627 11.2682 3.93753 11.0025 4.03601 10.766L4.51701 9.67299L7.71001 2.29999C7.81116 2.06466 8.00102 1.87871 8.23841 1.78248C8.47579 1.68625 8.74155 1.68752 8.97801 1.78599L9.41201 1.98899C9.66201 2.10599 9.75901 2.40599 9.73401 2.68099C9.71553 2.88975 9.74252 3.10003 9.81313 3.29736C9.88374 3.49468 9.99628 3.67435 10.143 3.82399C10.2835 3.96649 10.4521 4.07823 10.6381 4.15211C10.8241 4.22599 11.0234 4.2604 11.2234 4.25316C11.4234 4.24592 11.6197 4.19719 11.7999 4.11005C11.9801 4.02292 12.1402 3.89928 12.27 3.74699" fill="currentColor"></path></svg></div></div></span>
+                <span class="btn_main_front"><span class="btn_main_bg"></span><div class="btn_main_icon_inner"><div class="btn_main_icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 14 14" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M0.947008 1.74299C1.21101 1.63399 1.50801 1.77799 1.69501 1.99399C1.8294 2.14941 1.99635 2.27334 2.18401 2.35699C2.40711 2.45673 2.65236 2.4966 2.89558 2.47266C3.13879 2.44872 3.37156 2.3618 3.57093 2.22047C3.77031 2.07914 3.9294 1.88828 4.03253 1.66672C4.13565 1.44516 4.17924 1.20054 4.15901 0.956993C4.13701 0.682993 4.23401 0.382993 4.48401 0.265993L4.89401 0.0729931C5.12453 -0.0229509 5.38356 -0.0242809 5.61506 0.0692907C5.84655 0.162862 6.0319 0.343812 6.13101 0.572993L6.61401 1.69099L3.37101 9.17299L3.02501 9.95999L0.0690075 3.11999C-0.0198639 2.89847 -0.0220889 2.6516 0.0627751 2.42851C0.147639 2.20542 0.313373 2.02245 0.527008 1.91599L0.947008 1.74299ZM12.269 3.74699C12.454 3.52899 12.752 3.38599 13.016 3.49399L13.459 3.67699C13.6784 3.78589 13.8487 3.97354 13.9358 4.20247C14.0229 4.4314 14.0205 4.68477 13.929 4.91199L10.257 13.412C10.1557 13.6474 9.96556 13.8333 9.72796 13.9294C9.49036 14.0254 9.22446 14.0238 8.98801 13.925L4.55001 12.034C4.31468 11.9328 4.12872 11.743 4.0325 11.5056C3.93627 11.2682 3.93753 11.0025 4.03601 10.766L4.51701 9.67299L7.71001 2.29999C7.81116 2.06466 8.00102 1.87871 8.23841 1.78248C8.47579 1.68625 8.74155 1.68752 8.97801 1.78599L9.41201 1.98899C9.66201 2.10599 9.75901 2.40599 9.73401 2.68099C9.71553 2.88975 9.74252 3.10003 9.81313 3.29736C9.88374 3.49468 9.99628 3.67435 10.143 3.82399C10.2835 3.96649 10.4521 4.07823 10.6381 4.15211C10.8241 4.22599 11.0234 4.2604 11.2234 4.25316C11.4234 4.24592 11.6197 4.19719 11.7999 4.11005C11.9801 4.02292 12.1402 3.89928 12.27 3.74699" fill="currentColor"></path></svg></div></div></span>
+              </span>
+            </div>
+          </li>
+        </ul>
+
+      </div>
+      <div class="nav_base"></div>
+    </nav>
+
+    <!-- MOBILE NAV BAR: [hamburger] [logo center] [Contact Us pill] -->
+    <nav class="nav_mobile">
+      <div class="nav_mobile_contain u-container">
+        <button data-menu-btn="" class="mobile_menu_btn"><div class="mobile_menu_btn_line"></div><div class="mobile_menu_btn_line"></div><div class="mobile_menu_btn_line"></div></button>
+        <div class="nav_logo_wrap">
+          <div class="nav_logo_link">
+            <img src="sweet/LVsnn3r.png" alt="Sweet Treat Logo" style="height:clamp(52px,8vw,90px);width:auto;object-fit:contain;" />
+            <div class="g_clickable_wrap"><a class="g_clickable_link w-inline-block" href="/"><span class="g_clickable_text u-sr-only">homepage</span></a><button type="button" class="g_clickable_btn"><span class="g_clickable_text u-sr-only">homepage</span></button></div>
+          </div>
+        </div>
+        <ul role="list" class="nav_btn_list">
+                        <li class="nav_btn is-tickets">
+                            <div data-goal="" data-game-start="true" data-wf--btn-secondary--variant="small" class="btn_secondary_wrap">
+                                <div class="u-embed-css w-embed"><style>.btn_secondary_wrap{--elastic-ease-out:linear( 0, 0.5737 7.6%, 0.8382 11.87%, 0.9463 14.19%, 1.0292 16.54%, 1.0886 18.97%, 1.1258 21.53%, 1.137 22.97%, 1.1424 24.48%, 1.1423 26.1%, 1.1366 27.86%, 1.1165 31.01%, 1.0507 38.62%, 1.0219 42.57%, 0.9995 46.99%, 0.9872 51.63%, 0.9842 58.77%, 1.0011 81.26%, 1);--smooth-ease:cubic-bezier(.32,.72,0,1);--color-ease:cubic-bezier(.216,.62,.356,1);transition:transform .45s var(--elastic-ease-out);-webkit-tap-highlight-color:transparent;}.btn_secondary_wrap:active{transform:scaleX(0.955) scaleY(0.954);}.btn_secondary_bg{transition:background-color .2s var(--color-ease);}.btn_secondary_front{transition:translate .85s var(--elastic-ease-out),rotate .75s var(--elastic-ease-out),opacity .15s ease-out;}.btn_secondary_text{transition:translate .75s var(--elastic-ease-out);}.btn_secondary_back{transition:translate .85s var(--elastic-ease-out),rotate .75s var(--elastic-ease-out),opacity .15s ease-out;opacity:0;}@media(hover:hover) and (pointer:fine){.btn_secondary_wrap:is(:hover,:focus-visible) .btn_secondary_front{translate:0 -2rem -6rem;rotate:1 0 0 85deg;opacity:0;}.btn_secondary_wrap:is(:hover,:focus-visible) .btn_secondary_text{translate:0 -.75rem 0;transition-delay:0s;}.btn_secondary_wrap:is(:hover,:focus-visible) .btn_secondary_back{transition:translate .85s var(--elastic-ease-out),rotate .75s var(--elastic-ease-out),opacity .075s ease-in;rotate:0;translate:0;opacity:1;}}@media(hover:none) or (pointer:coarse){.btn_secondary_wrap:active .btn_secondary_bg{background-color:var(--_theme---button--background);transition-duration:0s;}}</style></div>
+                                <span class="btn_secondary_inner"><span data-text="Color-Flip" class="btn_secondary_back"><span aria-hidden="true" class="btn_secondary_back_text u-text-style-h5">Home</span></span><span class="btn_secondary_front w-variant-d50181c7-cf85-5262-59e7-708c27826030"><span class="btn_secondary_bg"></span><span aria-hidden="true" class="btn_secondary_front_text u-text-style-h5 w-variant-d50181c7-cf85-5262-59e7-708c27826030">Home</span></span></span>
+                                <div class="g_clickable_wrap"><a class="g_clickable_link w-inline-block" href="/" target=""><span class="g_clickable_text u-sr-only">Home</span></a><button type="button" tracking="play" class="g_clickable_btn"><span class="g_clickable_text u-sr-only">Home</span></button></div>
+                            </div>
+                        </li>
+                    </ul>
+      </div>
+    </nav>
+  </div>
+
+  <!-- FULLSCREEN MENU OVERLAY (triggered by ... dots button — exact from index.html) -->
+  <div data-menu-wrap="" class="nav_menu_wrap">
+    <div data-menu-overlay="" class="nav_menu_overlay"></div>
+    <div data-lenis-prevent="" data-menu-base="" class="nav_menu_base">
+      <button data-menu-close="" class="menu_btn_close"><div class="menu_btn_close_icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 20 20" fill="none"><path d="M2.99939 3.00867L16.9905 16.9998" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path><path d="M3.00891 16.999L17 3.00791" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg></div></button>
+      <div class="menu_content">
+        <ul data-menu-link-list="" role="list" class="main_link_list">
+          <li class="main_link">
+            <div class="main_link_icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 18 18" fill="none"><path d="M15.8867 9.52849C16.5735 9.18188 16.5735 8.2013 15.8867 7.85465L3.70591 1.70624C2.88419 1.29146 2.01917 2.18569 2.46104 2.99317L5.57902 8.69163L2.46105 14.39C2.01918 15.1975 2.88415 16.0917 3.70589 15.6769L15.8867 9.52849Z" fill="currentColor"></path></svg></div>
+            <div aria-hidden="true" class="main_link_text u-text-style-h2">Home</div>
+            <div class="g_clickable_wrap"><a class="g_clickable_link w-inline-block" href="/"><span class="g_clickable_text u-sr-only">Home</span></a><button type="button" class="g_clickable_btn"><span class="g_clickable_text u-sr-only">Home</span></button></div>
+          </li>
+          <li class="main_link">
+            <div class="main_link_icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 18 18" fill="none"><path d="M15.8867 9.52849C16.5735 9.18188 16.5735 8.2013 15.8867 7.85465L3.70591 1.70624C2.88419 1.29146 2.01917 2.18569 2.46104 2.99317L5.57902 8.69163L2.46105 14.39C2.01918 15.1975 2.88415 16.0917 3.70589 15.6769L15.8867 9.52849Z" fill="currentColor"></path></svg></div>
+            <div aria-hidden="true" class="main_link_text u-text-style-h2">Menu</div>
+            <div class="g_clickable_wrap"><a class="g_clickable_link w-inline-block" href="menu.html"><span class="g_clickable_text u-sr-only">Menu</span></a><button type="button" class="g_clickable_btn"><span class="g_clickable_text u-sr-only">Menu</span></button></div>
+          </li>
+          <li class="main_link">
+            <div class="main_link_icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 18 18" fill="none"><path d="M15.8867 9.52849C16.5735 9.18188 16.5735 8.2013 15.8867 7.85465L3.70591 1.70624C2.88419 1.29146 2.01917 2.18569 2.46104 2.99317L5.57902 8.69163L2.46105 14.39C2.01918 15.1975 2.88415 16.0917 3.70589 15.6769L15.8867 9.52849Z" fill="currentColor"></path></svg></div>
+            <div aria-hidden="true" class="main_link_text u-text-style-h2">SAMPLE</div>
+            <div class="g_clickable_wrap"><a class="g_clickable_link w-inline-block" href="contact.html"><span class="g_clickable_text u-sr-only">SAMPLE</span></a><button type="button" class="g_clickable_btn"><span class="g_clickable_text u-sr-only">SAMPLE</span></button></div>
+          </li>
+          <li class="main_link">
+            <div class="main_link_icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 18 18" fill="none"><path d="M15.8867 9.52849C16.5735 9.18188 16.5735 8.2013 15.8867 7.85465L3.70591 1.70624C2.88419 1.29146 2.01917 2.18569 2.46104 2.99317L5.57902 8.69163L2.46105 14.39C2.01918 15.1975 2.88415 16.0917 3.70589 15.6769L15.8867 9.52849Z" fill="currentColor"></path></svg></div>
+            <div aria-hidden="true" class="main_link_text u-text-style-h2">Recipe</div>
+            <div class="g_clickable_wrap"><a class="g_clickable_link w-inline-block" href="recipe.html"><span class="g_clickable_text u-sr-only">Recipe</span></a><button type="button" class="g_clickable_btn"><span class="g_clickable_text u-sr-only">Recipe</span></button></div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /nav_component -->
+
+<!-- ══════════════════════════════════════
+     HERO
+══════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-eyebrow">— Curated with love —</div>
+  <h1 class="hero-title">Our <span class="accent">Menu</span></h1>
+  <div class="hero-divider"><span>✦</span></div>
+  <p class="hero-sub">A symphony of flavors crafted to delight every sense. Hover any dish to discover more.</p>
+</section>
+
+<!-- ══════════════════════════════════════
+     MENU LAYOUT
+══════════════════════════════════════ -->
+<div class="menu-layout">
+
+  <!-- LEFT SIDEBAR -->
+  <nav class="menu-nav">
+    <div class="menu-nav-label">Browse Sections</div>
+    <a class="nav-item active" href="#desserts">
+      <div class="nav-icon">🍰</div>
+      <div class="nav-text"><h4>Desserts</h4><p>5 delights</p></div>
+      <span class="nav-badge">5</span>
+    </a>
+    <a class="nav-item" href="#drinks">
+      <div class="nav-icon">🥤</div>
+      <div class="nav-text"><h4>Drinks</h4><p>5 sips</p></div>
+      <span class="nav-badge">5</span>
+    </a>
+    <a class="nav-item" href="#appetizers">
+      <div class="nav-icon">🍽️</div>
+      <div class="nav-text"><h4>Appetizers</h4><p>Coming soon</p></div>
+      <span class="nav-badge soon">Soon</span>
+    </a>
+    <a class="nav-item" href="#entrees">
+      <div class="nav-icon">🍽️</div>
+      <div class="nav-text"><h4>Entrees</h4><p>Coming soon</p></div>
+      <span class="nav-badge soon">Soon</span>
+    </a>
+  </nav>
+
+  <!-- RIGHT CONTENT -->
+  <div class="menu-content">
+
+    <!-- DESSERTS -->
+    <section class="menu-section" id="desserts">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div class="section-title-group">
+          <h2 class="section-title">Desserts</h2>
+          <p class="section-desc">End your meal on a sweet note with our delightful selection of desserts.</p>
+        </div>
+        <div class="section-count">5 items</div>
+      </div>
+      <div class="items-grid">
+
+        <div class="item-card" data-name="Decadent Chocolate Cake" data-desc="Rich, moist chocolate layers with velvety ganache frosting, topped with fresh berries." data-img="menu/item1.jpg" data-cat="Desserts" data-emoji="🍰">
+          <div class="card-glow-ring"></div>
+          <div class="card-image"><img src="menu/item1.jpg" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="card-placeholder" style="display:none">🍰</div><div class="card-image-overlay"></div></div>
+          <div class="card-body"><div class="card-tag">Signature</div><div class="card-name">Decadent Chocolate Cake</div><div class="card-desc">Rich, moist chocolate layers with velvety ganache frosting, topped with fresh berries.</div></div>
+          <div class="card-hover-strip"><span class="hover-cta">View Details <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span><div class="hover-stars">★★★★★</div></div>
+        </div>
+
+        <div class="item-card" data-name="Molten Chocolate" data-desc="Creamy vanilla bean ice cream topped with warm chocolate fudge, whipped cream, and cherries." data-img="menu/item2.jpg" data-cat="Desserts" data-emoji="🍫">
+          <div class="card-glow-ring"></div>
+          <div class="card-image"><img src="menu/item2.jpg" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="card-placeholder" style="display:none">🍫</div><div class="card-image-overlay"></div></div>
+          <div class="card-body"><div class="card-tag">Fan Favorite</div><div class="card-name">Molten Chocolate</div><div class="card-desc">Creamy vanilla bean ice cream topped with warm chocolate fudge, whipped cream, and cherries.</div></div>
+          <div class="card-hover-strip"><span class="hover-cta">View Details <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span><div class="hover-stars">★★★★★</div></div>
+        </div>
+
+        <div class="item-card" data-name="Golden Pancake Stack" data-desc="Freshly baked assorted cookies including chocolate chip, oatmeal raisin, and butter shortbread." data-img="menu/item3.jpg" data-cat="Desserts" data-emoji="🥞">
+          <div class="card-glow-ring"></div>
+          <div class="card-image"><img src="menu/item3.jpg" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="card-placeholder" style="display:none">🥞</div><div class="card-image-overlay"></div></div>
+          <div class="card-body"><div class="card-tag">New</div><div class="card-name">Golden Pancake Stack</div><div class="card-desc">Freshly baked assorted cookies including chocolate chip, oatmeal raisin, and butter shortbread.</div></div>
+          <div class="card-hover-strip"><span class="hover-cta">View Details <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span><div class="hover-stars">★★★★☆</div></div>
+        </div>
+
+        <div class="item-card" data-name="Matcha Dream Cheesecake" data-desc="Silky smooth vanilla pudding with a hint of nutmeg, topped with fresh whipped cream." data-img="menu/item4.jpg" data-cat="Desserts" data-emoji="🍵">
+          <div class="card-glow-ring"></div>
+          <div class="card-image"><img src="menu/item4.jpg" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="card-placeholder" style="display:none">🍵</div><div class="card-image-overlay"></div></div>
+          <div class="card-body"><div class="card-tag">Chef's Pick</div><div class="card-name">Matcha Dream Cheesecake</div><div class="card-desc">Silky smooth vanilla pudding with a hint of nutmeg, topped with fresh whipped cream.</div></div>
+          <div class="card-hover-strip"><span class="hover-cta">View Details <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span><div class="hover-stars">★★★★★</div></div>
+        </div>
+
+        <div class="item-card" data-name="Warm Cookie Skillet" data-desc="Flaky puff pastry filled with seasonal fresh fruits and glazed with apricot preserves." data-img="menu/item5.jpg" data-cat="Desserts" data-emoji="🍪">
+          <div class="card-glow-ring"></div>
+          <div class="card-image"><img src="menu/item5.jpg" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="card-placeholder" style="display:none">🍪</div><div class="card-image-overlay"></div></div>
+          <div class="card-body"><div class="card-tag">Seasonal</div><div class="card-name">Warm Cookie Skillet</div><div class="card-desc">Flaky puff pastry filled with seasonal fresh fruits and glazed with apricot preserves.</div></div>
+          <div class="card-hover-strip"><span class="hover-cta">View Details <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span><div class="hover-stars">★★★★☆</div></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- DRINKS -->
+    <section class="menu-section" id="drinks">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div class="section-title-group">
+          <h2 class="section-title">Drinks</h2>
+          <p class="section-desc">Sip, savor, and enjoy our refreshing collection of drinks.</p>
+        </div>
+        <div class="section-count">5 items</div>
+      </div>
+      <div class="items-grid">
+
+        <div class="item-card" data-name="Rainbow Unicorn Slush" data-desc="A magical swirl of tropical flavors blended into a dreamy, colorful frozen delight." data-img="menu/item6.jpg" data-cat="Drinks" data-emoji="🌈">
+          <div class="card-glow-ring"></div>
+          <div class="card-image"><img src="menu/item6.jpg" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="card-placeholder" style="display:none">🌈</div><div class="card-image-overlay"></div></div>
+          <div class="card-body"><div class="card-tag">Signature</div><div class="card-name">Rainbow Unicorn Slush</div><div class="card-desc">A magical swirl of tropical flavors blended into a dreamy, colorful frozen delight.</div></div>
+          <div class="card-hover-strip"><span class="hover-cta">View Details <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span><div class="hover-stars">★★★★★</div></div>
+        </div>
+
+        <div class="item-card" data-name="Cotton Candy Milkshake" data-desc="Fluffy, sweet cotton candy blended with creamy vanilla ice cream into an ethereal shake." data-img="menu/item7.jpg" data-cat="Drinks" data-emoji="🍬">
+          <div class="card-glow-ring"></div>
+          <div class="card-image"><img src="menu/item7.jpg" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="card-placeholder" style="display:none">🍬</div><div class="card-image-overlay"></div></div>
+          <div class="card-body"><div class="card-tag">Fan Favorite</div><div class="card-name">Cotton Candy Milkshake</div><div class="card-desc">Fluffy, sweet cotton candy blended with creamy vanilla ice cream into an ethereal shake.</div></div>
+          <div class="card-hover-strip"><span class="hover-cta">View Details <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span><div class="hover-stars">★★★★★</div></div>
+        </div>
+
+        <div class="item-card" data-name="Tiramisu Matcha Latte" data-desc="A harmonious fusion of earthy matcha and espresso-soaked ladyfinger notes in a silky latte." data-img="menu/item8.jpg" data-cat="Drinks" data-emoji="☕">
+          <div class="card-glow-ring"></div>
+          <div class="card-image"><img src="menu/item8.jpg" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="card-placeholder" style="display:none">☕</div><div class="card-image-overlay"></div></div>
+          <div class="card-body"><div class="card-tag">New</div><div class="card-name">Tiramisu Matcha Latte</div><div class="card-desc">A harmonious fusion of earthy matcha and espresso-soaked ladyfinger notes in a silky latte.</div></div>
+          <div class="card-hover-strip"><span class="hover-cta">View Details <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span><div class="hover-stars">★★★★☆</div></div>
+        </div>
+
+        <div class="item-card" data-name="Berry Lemonade" data-desc="Freshly squeezed lemonade infused with a vibrant medley of seasonal mixed berries." data-img="menu/item9.jpg" data-cat="Drinks" data-emoji="🍋">
+          <div class="card-glow-ring"></div>
+          <div class="card-image"><img src="menu/item9.jpg" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="card-placeholder" style="display:none">🍋</div><div class="card-image-overlay"></div></div>
+          <div class="card-body"><div class="card-tag">Refreshing</div><div class="card-name">Berry Lemonade</div><div class="card-desc">Freshly squeezed lemonade infused with a vibrant medley of seasonal mixed berries.</div></div>
+          <div class="card-hover-strip"><span class="hover-cta">View Details <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span><div class="hover-stars">★★★★★</div></div>
+        </div>
+
+                <div class="item-card" data-name="Strawberry Milk Tea" data-desc="Strawberry Magic in Every Cup Sweet, Smooth, and Simply Irresistible!" data-img="menu/item10.jpg" data-cat="Drinks" data-emoji="🍋">
+          <div class="card-glow-ring"></div>
+          <div class="card-image"><img src="menu/item10.jpg" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="card-placeholder" style="display:none">🍋</div><div class="card-image-overlay"></div></div>
+          <div class="card-body"><div class="card-tag">Strawberry</div><div class="card-name">Milk Tea</div><div class="card-desc">Strawberry Magic in Every Cup Sweet, Smooth, and Simply Irresistible!</div></div>
+          <div class="card-hover-strip"><span class="hover-cta">View Details <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span><div class="hover-stars">★★★★★</div></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- APPETIZERS -->
+    <section class="menu-section" id="appetizers">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div class="section-title-group"><h2 class="section-title">Appetizers</h2><p class="section-desc">Small bites with big personality.</p></div>
+      </div>
+      <div class="coming-soon-card">
+        <span class="cs-icon">🍽️</span>
+        <h3 class="cs-title">Coming Soon</h3>
+        <p class="cs-desc">Our chefs are curating an extraordinary selection of appetizers. Stay tuned for something remarkable.</p>
+        <span class="cs-badge">✦ In Preparation ✦</span>
+      </div>
+    </section>
+
+    <!-- ENTREES -->
+    <section class="menu-section" id="entrees">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div class="section-title-group"><h2 class="section-title">Entrees</h2><p class="section-desc">Main courses crafted to satisfy every craving.</p></div>
+      </div>
+      <div class="coming-soon-card">
+        <span class="cs-icon">🍽️</span>
+        <h3 class="cs-title">Coming Soon</h3>
+        <p class="cs-desc">A world of entrées awaits. Our kitchen is perfecting each dish to exceed every expectation.</p>
+        <span class="cs-badge">✦ In Preparation ✦</span>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<!-- EXPANDED PREVIEW -->
+<div class="expanded-preview" id="expandedPreview">
+  <div class="exp-image" id="expImage">
+    <div class="exp-placeholder" id="expPlaceholder">🍰</div>
+    <div class="exp-image-overlay"></div>
+    <div class="exp-cat-badge" id="expCategory">Desserts</div>
+  </div>
+  <div class="exp-body">
+    <div class="exp-title" id="expTitle">Decadent Chocolate Cake</div>
+    <div class="exp-desc" id="expDesc">Rich, moist chocolate layers with velvety ganache frosting.</div>
+    <div class="exp-footer">
+      <div class="exp-stars">★★★★★</div>
+      <button class="exp-btn">Order Now →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     FOOTER — exact copy from index.html (with coin physics)
+══════════════════════════════════════ -->
+    <footer class="footer_wrap u-theme-dark">
+        <div class="footer_css u-embed-css w-embed">
+            <style>
+                /* Menu Button Hovers */
+
+                .footer_link_main {
+                    --elastic-ease-out: linear( 0, 0.5737 7.6%, 0.8382 11.87%, 0.9463 14.19%, 1.0292 16.54%, 1.0886 18.97%, 1.1258 21.53%, 1.137 22.97%, 1.1424 24.48%, 1.1423 26.1%, 1.1366 27.86%, 1.1165 31.01%, 1.0507 38.62%, 1.0219 42.57%, 0.9995 46.99%, 0.9872 51.63%, 0.9842 58.77%, 1.0011 81.26%, 1);
+                    --color-ease: cubic-bezier(.216, .62, .356, 1);
+                    transition: transform 0.65s var(--elastic-ease-out), background-color 0.4s var(--color-ease), gap 0.65s var(--elastic-ease-out);
+                    -webkit-tap-highlight-color: transparent;
+                }
+
+                .footer_link_main,
+                .footer_link_secondary,
+                .social_link {
+                    transition: opacity 0.3s;
+                }
+
+                .footer_link_main_icon {
+                    width: 0em;
+                    transform: scale(0) rotate(45deg);
+                    transition: width 0.8s var(--elastic-ease-out), transform 0.8s var(--elastic-ease-out), padding-right 0.8s ease;
+                }
+
+                @media (hover: hover) {
+                    [data-footer-link-list]:has(>:hover) > :not(:hover) {
+                        opacity: 0.3;
+                    }
+                }
+
+                @media (hover: hover) and (pointer: fine) {
+                    .footer_link_main:is(:hover, :focus-visible) .footer_link_main_icon {
+                        width: 0.6em;
+                        padding-right: 0.25rem;
+                        transform: scale(1) rotate(0deg);
+                    }
+                }
+
+                @container (width <=48em) {
+                    .footer_link_main_wrap {
+                        width: 100% !important;
+                    }
+                    .newsletter_wrap {
+                        width: 100%;
+                        max-width: none !important;
+                        margin-top: var(--_spacing---space--1rem) !important;
+                        padding-top: var(--_spacing---space--2rem) !important;
+                        border-top-style: solid;
+                        border-top-width: var(--border-width--main);
+                        border-top-color: var(--_theme---border);
+                    }
+                    .newsletter_text.u-text-style-large {
+                        max-width: 56ch !important;
+                    }
+                }
+            </style>
+        </div>
+        <div class="footer_js u-embed-js w-embed w-script">
+            <script>
+                function initFalling2DMatterJS() {
+                    const canvas = document.querySelector("#canvas-target");
+                    // Check if canvas is on page
+                    if (!canvas) {
+                        return;
+                    }
+                    const canvasWidth = canvas.clientWidth + 2;
+                    const canvasHeight = canvas.clientHeight + 2;
+                    const canvasWallDepth = canvasWidth / 4;
+                    const smileyAmount = 15; // Amount of objects added to the canvas
+                    const smileySize = canvasWidth / 9; // Size of objects
+                    const smileySizeTexture = 256; // Size of object texture in pixels
+                    const smileySizeScale = smileySize / smileySizeTexture;
+                    const smileyRestitution = 0.75; // Bounciness
+                    const worldGravity = 2; // Gravity
+                    // Modules
+                    let {
+                        Engine,
+                        Render,
+                        Runner,
+                        Bodies,
+                        Composite,
+                        Mouse,
+                        MouseConstraint
+                    } = Matter;
+                    // Create an engine
+                    let engine = Engine.create();
+                    engine.world.gravity.y = worldGravity;
+
+                    // Create a renderer
+                    currentRender = Render.create({
+                        element: canvas,
+                        engine: engine,
+                        options: {
+                            background: "transparent",
+                            wireframes: false,
+                            width: canvasWidth,
+                            height: canvasHeight,
+                            pixelRatio: 2,
+                            border: "none",
+                        }
+                    });
+                    // Store references globally for cleanup
+                    currentEngine = engine;
+                    // Generate a random number between min (inclusive) and max (exclusive)
+                    function getRandomNumber(min, max) {
+                        return Math.random() * (max - min) + min;
+                    }
+                    let min = smileySize / 2; // min value
+                    let max = canvasWidth - (smileySize / 2); // max value
+                    // Textures
+                    let textureArray = [
+                        'https://cdn.prod.website-files.com/684433cbdb896cfecac10c42/68500b015e489278a1f453e8_6660302437fad51a15047774144cb0eb_Coin-1.svg',
+                        'https://cdn.prod.website-files.com/684433cbdb896cfecac10c42/68500b01d5b32e70dba1c344_c120bb012f9e846b6e19d89c22ece11d_Coin-2.svg',
+                        'https://cdn.prod.website-files.com/684433cbdb896cfecac10c42/68500b012e8d4edeb4ddf056_dff61cf24b235c84e776e3d634c93644_Coin-3.svg',
+                        'https://cdn.prod.website-files.com/684433cbdb896cfecac10c42/68500b0189f1de7b422274fe_e4ed11d1f4c46ea54339301f139ea046_Coin-4.svg',
+                        'https://cdn.prod.website-files.com/684433cbdb896cfecac10c42/68500b01c890b45085fa31f1_69ed5c45f0a9b5eb1d84d9ca06d31ba0_Coin-5.svg',
+                        'https://cdn.prod.website-files.com/684433cbdb896cfecac10c42/68500b01a0e5270554093e49_d6de64f5633563d0c54f3129b0f41f06_Coin-6.svg'
+                    ];
+
+                    // Function to loop trough all textures
+                    let textureIndex = 0;
+
+                    function getNextTexture() {
+                        const texture = textureArray[textureIndex];
+                        textureIndex = (textureIndex + 1) % textureArray.length;
+                        return texture;
+                    }
+                    // Function to get a random texture
+                    function getRandomTexture() {
+                        const randomIndex = Math.floor(Math.random() * textureArray.length);
+                        return textureArray[randomIndex];
+                    }
+                    // Create smiley
+                    const smileyCreate = () => {
+                        let smiley = Bodies.rectangle(getRandomNumber(min, max), smileySize, smileySize,
+                            smileySize, {
+                                chamfer: {
+                                    radius: smileySize / 2
+                                },
+                                restitution: smileyRestitution,
+                                render: {
+                                    sprite: {
+                                        texture: getNextTexture(), // Replace with "getRandomTexture()" to get random textures
+                                        xScale: smileySizeScale,
+                                        yScale: smileySizeScale
+                                    }
+                                }
+                            });
+                        Composite.add(engine.world, smiley);
+                    };
+                    // Create a box with rectangle(x, y, width, height)
+                    let boxTop = Bodies.rectangle(canvasWidth / 2 + (canvasWallDepth * 2), canvasHeight +
+                        canvasWallDepth, canvasWidth + (canvasWallDepth * 4), (canvasWallDepth * 2), {
+                            isStatic: true
+                        });
+                    let boxLeft = Bodies.rectangle((canvasWallDepth * -1), canvasHeight / 2, (canvasWallDepth * 2),
+                        canvasHeight, {
+                            isStatic: true
+                        });
+                    let boxRight = Bodies.rectangle(canvasWidth + canvasWallDepth, canvasHeight / 2, (
+                        canvasWallDepth * 2), canvasHeight, {
+                        isStatic: true
+                    });
+                    let boxBottom = Bodies.rectangle(canvasWidth / 2 + (canvasWallDepth * 2), (canvasWallDepth * -1),
+                        canvasWidth + (canvasWallDepth * 4), (canvasWallDepth * 2), {
+                            isStatic: true
+                        });
+                    // Add all of the bodies to the world
+                    Composite.add(engine.world, [boxTop, boxLeft, boxRight, boxBottom]);
+                    // Run the renderer
+                    Render.run(currentRender);
+                    // Create runner
+                    currentRunner = Runner.create();
+                    // Run the engine
+                    Matter.Runner.run(currentRunner, engine);
+                    // Create mouse
+                    let mouse = Mouse.create(currentRender.canvas);
+                    let mouseConstraint = MouseConstraint.create(engine, {
+                        mouse: mouse,
+                        constraint: {
+                            stiffness: 0.2,
+                            render: {
+                                visible: false
+                            }
+                        }
+                    });
+                    Composite.add(engine.world, mouseConstraint);
+                    // Custom Function: 
+                    // To run the function X amount of times
+                    function repeatedFunction(count, maxCount) {
+                        if (count < maxCount) {
+                            smileyCreate();
+                            setTimeout(() => {
+                                repeatedFunction(count + 1, maxCount);
+                            }, 100); // Delay in milliseconds
+                        }
+                    }
+                    // Return the function to trigger smiley creation
+                    return () => {
+                        repeatedFunction(0, 15);
+                    };
+                }
+
+                // Global variables to track the current setup
+                let currentEngine = null;
+                let currentRender = null;
+                let currentRunner = null;
+                let currentScrollTrigger = null;
+                // Mobile resize detection variables
+                let lastWidth = window.innerWidth;
+                let lastHeight = window.innerHeight;
+                let isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+                // Function to clean up existing Matter.js setup
+                function cleanupMatterJS() {
+                    if (currentEngine) {
+                        // Stop the runner
+                        if (currentRunner) {
+                            Matter.Runner.stop(currentRunner);
+                            currentRunner = null;
+                        }
+
+                        // Stop the render
+                        if (currentRender) {
+                            Matter.Render.stop(currentRender);
+                            // Remove the canvas element
+                            if (currentRender.canvas && currentRender.canvas.parentNode) {
+                                currentRender.canvas.parentNode.removeChild(currentRender.canvas);
+                            }
+                            currentRender = null;
+                        }
+
+                        // Clear the world
+                        Matter.World.clear(currentEngine.world);
+                        Matter.Engine.clear(currentEngine);
+                        currentEngine = null;
+                    }
+
+                    // Kill existing ScrollTrigger
+                    if (currentScrollTrigger) {
+                        currentScrollTrigger.kill();
+                        currentScrollTrigger = null;
+                    }
+                }
+
+                // Function to determine if resize should trigger refresh
+                function shouldRefreshOnResize() {
+                    const currentWidth = window.innerWidth;
+                    const currentHeight = window.innerHeight;
+
+                    if (isMobile) {
+                        // On mobile, only refresh if width changes significantly (orientation change)
+                        // or if height changes by more than 100px (keyboard show/hide)
+                        const widthChanged = Math.abs(currentWidth - lastWidth) > 50;
+                        const significantHeightChange = Math.abs(currentHeight - lastHeight) > 100;
+
+                        // Update stored dimensions
+                        lastWidth = currentWidth;
+                        lastHeight = currentHeight;
+
+                        return widthChanged || significantHeightChange;
+                    } else {
+                        // On desktop, refresh on any significant size change
+                        const widthChanged = Math.abs(currentWidth - lastWidth) > 20;
+                        const heightChanged = Math.abs(currentHeight - lastHeight) > 20;
+
+                        // Update stored dimensions
+                        lastWidth = currentWidth;
+                        lastHeight = currentHeight;
+
+                        return widthChanged || heightChanged;
+                    }
+                }
+
+                // Function to setup Matter.js and ScrollTrigger
+                function setupMatterJSWithScrollTrigger() {
+                    // Always initialize the canvas physics. (Some systems enable "Reduce motion"
+                    // which would otherwise prevent the coins from ever rendering.)
+                    cleanupMatterJS();
+
+                    const triggerSmileys = initFalling2DMatterJS();
+                    if (!triggerSmileys) return;
+
+                    const target = document.querySelector("#canvas-target");
+                    let hasTriggered = false;
+                    const triggerOnce = () => {
+                        if (hasTriggered) return;
+                        hasTriggered = true;
+                        triggerSmileys();
+                    };
+                    const isInViewport = (el) => {
+                        if (!el) return false;
+                        const r = el.getBoundingClientRect();
+                        return r.bottom > 0 && r.top < (window.innerHeight || document.documentElement.clientHeight);
+                    };
+
+                    // Most reliable trigger: IntersectionObserver when footer becomes visible.
+                    if (target && 'IntersectionObserver' in window) {
+                        const io = new IntersectionObserver((entries) => {
+                            for (const entry of entries) {
+                                if (entry.isIntersecting && entry.intersectionRatio > 0) {
+                                    io.disconnect();
+                                    triggerOnce();
+                                    break;
+                                }
+                            }
+                        }, { root: null, threshold: 0.05 });
+                        io.observe(target);
+                    }
+
+                    // If GSAP/ScrollTrigger is available, use it; otherwise fall back to a simple "visible" check.
+                    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+                        gsap.registerPlugin(ScrollTrigger);
+                        currentScrollTrigger = ScrollTrigger.create({
+                            trigger: "#canvas-target",
+                            start: "top 90%",
+                            end: "bottom 10%",
+                            onEnter: () => triggerOnce(),
+                            onEnterBack: () => triggerOnce(),
+                            once: true
+                        });
+
+                        // Safety: if the footer is already visible on load, trigger immediately.
+                        requestAnimationFrame(() => {
+                            if (isInViewport(target)) triggerOnce();
+                        });
+                    } else {
+                        // No GSAP/ScrollTrigger: trigger once the footer becomes visible.
+                        const tryTrigger = () => {
+                            if (!target) return;
+                            if (isInViewport(target)) {
+                                window.removeEventListener('scroll', tryTrigger);
+                                triggerOnce();
+                            }
+                        };
+                        window.addEventListener('scroll', tryTrigger, { passive: true });
+                        tryTrigger();
+                    }
+                }
+
+                // Initialize (robust): wait until libs + canvas are ready.
+                document.addEventListener('DOMContentLoaded', function() {
+                    let tries = 0;
+                    const maxTries = 80; // ~8s
+                    const tick = () => {
+                        tries++;
+                        const target = document.querySelector("#canvas-target");
+                        const ready =
+                            typeof window.Matter !== 'undefined' &&
+                            target &&
+                            target.clientWidth > 0 &&
+                            target.clientHeight > 0;
+
+                        if (ready) {
+                            setupMatterJSWithScrollTrigger();
+                            return;
+                        }
+                        if (tries < maxTries) {
+                            setTimeout(tick, 100);
+                        }
+                    };
+                    tick();
+                });
+
+                // Handle window resize with mobile optimization
+                window.addEventListener('resize', function() {
+                    // Only proceed if this is a significant resize
+                    if (!shouldRefreshOnResize()) {
+                        return;
+                    }
+
+                    // Debounce the resize event to avoid excessive calls
+                    clearTimeout(window.resizeTimeout);
+                    window.resizeTimeout = setTimeout(() => {
+                        setupMatterJSWithScrollTrigger();
+
+                        // Refresh ScrollTrigger to recalculate positions
+                        ScrollTrigger.refresh();
+                    }, isMobile ? 500 : 250); // Longer debounce on mobile
+                });
+            </script>
+        </div>
+        <div class="u-embed-css w-embed">
+            <style>
+                /* Footer clickable elements spacing fix */
+                .g_clickable_wrap {
+                    display: block;
+                    width: 100%;
+                    margin: 0;
+                    padding: 0;
+                }
+                
+                .g_clickable_link {
+                    display: none !important;
+                    pointer-events: none;
+                }
+                
+                .g_clickable_btn {
+                    display: block;
+                    background: none;
+                    border: none;
+                    padding: 0;
+                    margin: 0;
+                    cursor: pointer;
+                    width: 100%;
+                    text-align: left;
+                    font: inherit;
+                    color: inherit;
+                }
+                
+                .g_clickable_btn:hover {
+                    opacity: 0.8;
+                    transition: opacity 0.2s ease;
+                }
+                
+                .g_clickable_btn:focus-visible {
+                    outline: 2px solid currentColor;
+                    outline-offset: 2px;
+                }
+                
+                .footer_link_main_icon {
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 18px;
+                    height: 18px;
+                    margin: 0;
+                    flex-shrink: 0;
+                }
+                
+                .footer_link_main_text {
+                    display: inline-block;
+                    margin: 0;
+                    padding: 0;
+                    margin-bottom: 0;
+                    line-height: 1.2;
+                }
+                
+                .footer_link_secondary_text {
+                    display: block;
+                    margin: 0 0 12px 0;
+                    padding: 0;
+                    line-height: 1.2;
+                }
+                
+                .footer_link_tertiary_text {
+                    display: block;
+                    margin: 4px 0 0 0;
+                    padding: 0;
+                    line-height: 1.2;
+                }
+                
+                .footer_link_main {
+                    margin: 0 0 12px 0;
+                    padding: 0;
+                    list-style: none;
+                }
+                
+                .footer_link_secondary {
+                    margin: 0 0 24px 0;
+                    padding: 0;
+                    list-style: none;
+                }
+                
+                .footer_link_secondary_item {
+                    margin: 0 0 8px 0;
+                    padding: 0;
+                    list-style: none;
+                }
+            </style>
+        </div>
+        <div data-wf--global-section-space--section-space="small" class="g_section_space w-variant-8cc18b30-4618-8767-0111-f6abfe45aaa3"></div>
+        <div class="footer_contain u-container">
+            <div class="footer_layout u-grid-above">
+                <div class="footer_link_main_wrap u-column-custom">
+                    <ul data-footer-link-list="" role="list" class="footer_link_main_list">
+                        <li class="footer_link_main">
+                            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                                <div class="footer_link_main_icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 18 18" fill="none" class="g_svg"><path d="M15.8867 9.52849C16.5735 9.18188 16.5735 8.2013 15.8867 7.85465L3.70591 1.70624C2.88419 1.29146 2.01917 2.18569 2.46104 2.99317L5.57902 8.69163L2.46105 14.39C2.01918 15.1975 2.88415 16.0917 3.70589 15.6769L15.8867 9.52849Z" fill="currentColor"></path></svg></div>
+                                <div aria-hidden="true" class="footer_link_main_text u-text-style-h2">Home</div>
+                            </div>
+                            <div class="g_clickable_wrap"><a class="g_clickable_link w-inline-block" data-wf-component-context="%5B%7B%22componentId%22%3A%22a1e83ec4-385d-065f-e4a6-0fe46485466e%22%2C%22instanceId%22%3A%22a1e83ec4-385d-065f-e4a6-0fe4648546cf%22%7D%2C%7B%22componentId%22%3A%220254e612-9509-0757-3332-f6be61ca6889%22%2C%22instanceId%22%3A%22a1e83ec4-385d-065f-e4a6-0fe464854678%22%7D%5D"
+                                data-wf-element-id="0254e612-9509-0757-3332-f6be61ca688a" data-wf-event-ids="" href="index.html" target="" data-wf-native-id-path="a1e83ec4-385d-065f-e4a6-0fe4648546cf:a1e83ec4-385d-065f-e4a6-0fe464854678:0254e612-9509-0757-3332-f6be61ca688a"
+                                data-wf-ao-click-engagement-tracking="true" data-gtm=""><span class="g_clickable_text u-sr-only">Home</span></a>
+                                <link rel="prefetch" href="index.html" /><button type="button" tracking="play" class="g_clickable_btn"><span class="g_clickable_text u-sr-only">Home</span></button></div>
+                        </li>
+                        <li class="footer_link_main">
+                            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                                <div class="footer_link_main_icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 18 18" fill="none" class="g_svg"><path d="M15.8867 9.52849C16.5735 9.18188 16.5735 8.2013 15.8867 7.85465L3.70591 1.70624C2.88419 1.29146 2.01917 2.18569 2.46104 2.99317L5.57902 8.69163L2.46105 14.39C2.01918 15.1975 2.88415 16.0917 3.70589 15.6769L15.8867 9.52849Z" fill="currentColor"></path></svg></div>
+                                <div aria-hidden="true" class="footer_link_main_text u-text-style-h2">Menu</div>
+                            </div>
+                            <div class="g_clickable_wrap"><a class="g_clickable_link w-inline-block" data-wf-component-context="%5B%7B%22componentId%22%3A%22a1e83ec4-385d-065f-e4a6-0fe46485466e%22%2C%22instanceId%22%3A%22a1e83ec4-385d-065f-e4a6-0fe4648546cf%22%7D%2C%7B%22componentId%22%3A%220254e612-9509-0757-3332-f6be61ca6889%22%2C%22instanceId%22%3A%22a1e83ec4-385d-065f-e4a6-0fe46485467b%22%7D%5D"
+                                data-wf-element-id="0254e612-9509-0757-3332-f6be61ca688a" data-wf-event-ids="" href="menu.html" target="" data-wf-native-id-path="a1e83ec4-385d-065f-e4a6-0fe4648546cf:a1e83ec4-385d-065f-e4a6-0fe46485467b:0254e612-9509-0757-3332-f6be61ca688a"
+                                data-wf-ao-click-engagement-tracking="true" data-gtm=""><span class="g_clickable_text u-sr-only">Menu</span></a>
+                                <link rel="prefetch" href="menu.html" /><button type="button" tracking="play" class="g_clickable_btn"><span class="g_clickable_text u-sr-only">Menu</span></button></div>
+                        </li>
+                        <li class="footer_link_main">
+                            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                                <div class="footer_link_main_icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 18 18" fill="none" class="g_svg"><path d="M15.8867 9.52849C16.5735 9.18188 16.5735 8.2013 15.8867 7.85465L3.70591 1.70624C2.88419 1.29146 2.01917 2.18569 2.46104 2.99317L5.57902 8.69163L2.46105 14.39C2.01918 15.1975 2.88415 16.0917 3.70589 15.6769L15.8867 9.52849Z" fill="currentColor"></path></svg></div>
+                                <div aria-hidden="true" class="footer_link_main_text u-text-style-h2">Sample</div>
+                            </div>
+                            <div class="g_clickable_wrap"><a class="g_clickable_link w-inline-block" data-wf-component-context="%5B%7B%22componentId%22%3A%22a1e83ec4-385d-065f-e4a6-0fe46485466e%22%2C%22instanceId%22%3A%22a1e83ec4-385d-065f-e4a6-0fe4648546cf%22%7D%2C%7B%22componentId%22%3A%220254e612-9509-0757-3332-f6be61ca6889%22%2C%22instanceId%22%3A%22a1e83ec4-385d-065f-e4a6-0fe464854681%22%7D%5D"
+                                data-wf-element-id="0254e612-9509-0757-3332-f6be61ca688a" data-wf-event-ids="" href="contact.html" target="" data-wf-native-id-path="a1e83ec4-385d-065f-e4a6-0fe4648546cf:a1e83ec4-385d-065f-e4a6-0fe464854681:0254e612-9509-0757-3332-f6be61ca688a"
+                                data-wf-ao-click-engagement-tracking="true" data-gtm=""><span class="g_clickable_text u-sr-only">Sample</span></a>
+                                <link rel="prefetch" href="contact.html" /><button type="button" tracking="play" class="g_clickable_btn"><span class="g_clickable_text u-sr-only">Sample</span></button></div>
+                        </li>
+                        <li class="footer_link_main">
+                            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                                <div class="footer_link_main_icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 18 18" fill="none" class="g_svg"><path d="M15.8867 9.52849C16.5735 9.18188 16.5735 8.2013 15.8867 7.85465L3.70591 1.70624C2.88419 1.29146 2.01917 2.18569 2.46104 2.99317L5.57902 8.69163L2.46105 14.39C2.01918 15.1975 2.88415 16.0917 3.70589 15.6769L15.8867 9.52849Z" fill="currentColor"></path></svg></div>
+                                <div aria-hidden="true" class="footer_link_main_text u-text-style-h2">Recipe</div>
+                            </div>
+                            <div class="g_clickable_wrap"><a class="g_clickable_link w-inline-block" data-wf-component-context="%5B%7B%22componentId%22%3A%22a1e83ec4-385d-065f-e4a6-0fe46485466e%22%2C%22instanceId%22%3A%22a1e83ec4-385d-065f-e4a6-0fe4648546cf%22%7D%2C%7B%22componentId%22%3A%220254e612-9509-0757-3332-f6be61ca6889%22%2C%22instanceId%22%3A%22a1e83ec4-385d-065f-e4a6-0fe464854687%22%7D%5D"
+                                data-wf-element-id="0254e612-9509-0757-3332-f6be61ca688a" data-wf-event-ids="" href="recipe.html" target="" data-wf-native-id-path="a1e83ec4-385d-065f-e4a6-0fe4648546cf:a1e83ec4-385d-065f-e4a6-0fe464854687:0254e612-9509-0757-3332-f6be61ca688a" data-wf-ao-click-engagement-tracking="true"
+                                data-gtm=""><span class="g_clickable_text u-sr-only">Recipe</span></a>
+                                <link rel="prefetch" href="recipe.html" /><button type="button" tracking="play" class="g_clickable_btn"><span class="g_clickable_text u-sr-only">Recipe</span></button></div>
+                        </li>
+                    </ul>
+                </div>
+
+        <div
+            class="footer_link_secondary_wrap u-column-custom">
+            <ul data-footer-link-list="" role="list" class="footer_link_secondary_list">
+                <li class="footer_link_secondary">
+                    <div class="footer_link_secondary_text u-text-style-h4">Resources</div>
+                    <ul class="footer_link_secondary_sublist">
+                        <li class="footer_link_secondary_item">
+                            <div class="g_clickable_wrap"><a class="g_clickable_link w-inline-block" href="/" target="" data-wf-ao-click-engagement-tracking="true" data-gtm=""><span class="g_clickable_text u-sr-only">Shipping info</span></a><button type="button" tracking="play" class="g_clickable_btn"><span class="g_clickable_text u-sr-only">Shipping info</span></button></div>
+                            <div aria-hidden="true" class="footer_link_tertiary_text u-text-style-h5">Shipping info</div>
+                        </li>
+                        <li class="footer_link_secondary_item">
+                            <div class="g_clickable_wrap"><a class="g_clickable_link w-inline-block" href="/" target="" data-wf-ao-click-engagement-tracking="true" data-gtm=""><span class="g_clickable_text u-sr-only">Return Policy</span></a><button type="button" tracking="play" class="g_clickable_btn"><span class="g_clickable_text u-sr-only">Return Policy</span></button></div>
+                            <div aria-hidden="true" class="footer_link_tertiary_text u-text-style-h5">Return Policy</div>
+                        </li>
+                        <li class="footer_link_secondary_item">
+                            <div class="g_clickable_wrap"><a class="g_clickable_link w-inline-block" href="/" target="" data-wf-ao-click-engagement-tracking="true" data-gtm=""><span class="g_clickable_text u-sr-only">Gift Card Balance</span></a><button type="button" tracking="play" class="g_clickable_btn"><span class="g_clickable_text u-sr-only">Gift Card Balance</span></button></div>
+                            <div aria-hidden="true" class="footer_link_tertiary_text u-text-style-h5">Gift Card Balance</div>
+                        </li>
+                        <li class="footer_link_secondary_item">
+                            <div class="g_clickable_wrap"><a class="g_clickable_link w-inline-block" href="/" target="" data-wf-ao-click-engagement-tracking="true" data-gtm=""><span class="g_clickable_text u-sr-only">Terms & Conditions</span></a><button type="button" tracking="play" class="g_clickable_btn"><span class="g_clickable_text u-sr-only">Terms & Conditions</span></button></div>
+                            <div aria-hidden="true" class="footer_link_tertiary_text u-text-style-h5">Terms & Conditions</div>
+                        </li>
+                    </ul>
+                </li>
+                <li class="footer_link_secondary">
+                    <div class="footer_link_secondary_text u-text-style-h4">Company</div>
+                    <ul class="footer_link_secondary_sublist">
+                        <li class="footer_link_secondary_item">
+                            <div class="g_clickable_wrap"><a class="g_clickable_link w-inline-block" href="/" target="" data-wf-ao-click-engagement-tracking="true" data-gtm=""><span class="g_clickable_text u-sr-only">About Us</span></a><button type="button" tracking="play" class="g_clickable_btn"><span class="g_clickable_text u-sr-only">About Us</span></button></div>
+                            <div aria-hidden="true" class="footer_link_tertiary_text u-text-style-h5">About Us</div>
+                        </li>
+                        <li class="footer_link_secondary_item">
+                            <div class="g_clickable_wrap"><a class="g_clickable_link w-inline-block" href="ct.html" target="" data-wf-ao-click-engagement-tracking="true" data-gtm=""><span class="g_clickable_text u-sr-only">Contact Us</span></a><button type="button" tracking="play" class="g_clickable_btn"><span class="g_clickable_text u-sr-only">Contact Us</span></button></div>
+                            <div aria-hidden="true" class="footer_link_tertiary_text u-text-style-h5">Contact Us</div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            </div>
+            <div class="newsletter_wrap u-column-custom">
+                <p class="newsletter_text u-text-style-large">Your Email Address</p>
+                <div data-form-validate="" class="form_main_wrap w-form">
+                    <div class="u-embed-css w-embed">
+                        <style>
+                            /* Field: Error */
+
+                            [data-validate].is--error input,
+                            [data-validate].is--error textarea,
+                            [data-validate].is--error select {
+                                border-color: var(--_theme---text);
+                            }
+
+                            [data-validate].is--error .form-field-icon.is--error,
+                            [data-validate].is--error .radiocheck-field-icon.is--error {
+                                opacity: 1;
+                            }
+
+                            /* Field: Success */
+
+                            [data-validate].is--success .form-field-icon.is--success,
+                            [data-validate].is--success .radiocheck-field-icon.is--success {
+                                opacity: 1;
+                            }
+
+                            /* Field: Custom Radio or Checkbox */
+
+                            [data-form-validate] .radiocheck-field input:focus-visible~.radiocheck-custom {
+                                background-color: #D0CFCD;
+                                color: #E2E1DF;
+                            }
+
+                            [data-form-validate] .radiocheck-field input:focus-visible:checked~.radiocheck-custom,
+                            [data-form-validate] .radiocheck-field input:checked~.radiocheck-custom {
+                                background-color: #131313;
+                                color: #EFEEEC;
+                            }
+
+                            [data-form-validate] .radiocheck-field .radiocheck-label.is--small {
+                                margin-top: 0.125em;
+                            }
+
+                            [data-validate].is--error .radiocheck-custom {
+                                border-color: var(--_theme---sticker);
+                            }
+
+                            [data-validate].is--error input:checked~.radiocheck-custom {
+                                border-color: #131313;
+                            }
+
+                            /* Field: Select */
+
+                            [data-form-validate] select:has(option[value=""]:checked) {
+                                color: rgba(19, 19, 19, 0.3);
+                            }
+
+                            .form_main_radio_label:has(input:checked) .form_main_radio_circle_inner {
+                                opacity: 1;
+                            }
+
+                            .form_main_radio_label:focus-within .form_main_radio_circle_wrap {
+                                border-color: currentColor;
+                            }
+
+                            .form_main_checkbox_label:has(input:checked) .form_main_checkbox_box {
+                                background-color: currentColor;
+                            }
+
+                            .form_main_checkbox_label:has(input:checked) .form_main_checkbox_icon {
+                                opacity: 1;
+                            }
+
+                            .form_main_checkbox_label:focus-within .form_main_checkbox_box {
+                                border-color: currentColor;
+                            }
+                        </style>
+                    </div>
+                    <div class="u-embed-js w-embed w-script">
+                        <script>
+                            function initAdvancedFormValidation() {
+                                const forms = document.querySelectorAll('[data-form-validate]');
+                                forms.forEach((formContainer) => {
+                                    const startTime = new Date().getTime();
+                                    const form = formContainer.querySelector('form');
+                                    if (!form) return;
+                                    const validateFields = form.querySelectorAll('[data-validate]');
+                                    const dataSubmit = form.querySelector('[data-submit]');
+                                    if (!dataSubmit) return;
+                                    const realSubmitInput = dataSubmit.querySelector('input[type="submit"]');
+                                    if (!realSubmitInput) return;
+
+                                    function isSpam() {
+                                        const currentTime = new Date().getTime();
+                                        return currentTime - startTime < 5000;
+                                    }
+
+                                    // Convert HH:MM or minutes to minutes
+                                    const toMinutes = (time) => {
+                                        if (!time) return null;
+                                        if (time.includes(':')) {
+                                            const [h, m] = time.split(':').map(Number);
+                                            return h * 60 + m;
+                                        }
+                                        return parseInt(time, 10);
+                                    };
+
+                                    function isValid(fieldGroup) {
+                                        const radioCheckGroup = fieldGroup.querySelector('[data-radiocheck-group]');
+                                        if (radioCheckGroup) {
+                                            const inputs = radioCheckGroup.querySelectorAll('input[type="radio"], input[type="checkbox"]');
+                                            const checkedInputs = radioCheckGroup.querySelectorAll('input:checked');
+                                            const min = parseInt(radioCheckGroup.getAttribute('min')) || 1;
+                                            const max = parseInt(radioCheckGroup.getAttribute('max')) || inputs.length;
+                                            const checkedCount = checkedInputs.length;
+                                            return inputs[0].type === 'radio' ? checkedCount >= 1 : (checkedCount >= min && checkedCount <= max);
+                                        } else {
+                                            const input = fieldGroup.querySelector('input, textarea, select');
+                                            if (!input) return false;
+                                            const value = input.value.trim();
+                                            let valid = true;
+
+                                            if (input.tagName.toLowerCase() === 'select') {
+                                                if (value === '' || value === 'disabled' || value === 'null' || value === 'false') valid = false;
+                                            } else if (input.type === 'email') {
+                                                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                                                valid = emailPattern.test(value);
+                                            } else if (input.type === 'time') {
+                                                if (!value) return false;
+                                                const minAttr = input.getAttribute('min');
+                                                const maxAttr = input.getAttribute('max');
+                                                const valMinutes = toMinutes(value);
+                                                const minMinutes = toMinutes(minAttr);
+                                                const maxMinutes = toMinutes(maxAttr);
+                                                if (minMinutes !== null && valMinutes < minMinutes) valid = false;
+                                                if (maxMinutes !== null && valMinutes > maxMinutes) valid = false;
+                                            } else {
+                                                const min = parseInt(input.getAttribute('min')) || 0;
+                                                const max = parseInt(input.getAttribute('max')) || Infinity;
+                                                if (input.hasAttribute('min') && value.length < min) valid = false;
+                                                if (input.hasAttribute('max') && value.length > max) valid = false;
+                                            }
+                                            return valid;
+                                        }
+                                    }
+
+                                    function updateFieldStatus(fieldGroup) {
+                                        const errorDiv = fieldGroup.querySelector('[data-error-message]');
+                                        const valid = isValid(fieldGroup);
+                                        const radioCheckGroup = fieldGroup.querySelector('[data-radiocheck-group]');
+
+                                        if (radioCheckGroup) {
+                                            const checkedInputs = radioCheckGroup.querySelectorAll('input:checked');
+                                            fieldGroup.classList.toggle('is--filled', checkedInputs.length > 0);
+                                        } else {
+                                            const input = fieldGroup.querySelector('input, textarea, select');
+                                            if (!input) return;
+                                            fieldGroup.classList.toggle('is--filled', !!input.value.trim());
+                                        }
+
+                                        if (valid) {
+                                            fieldGroup.classList.add('is--success');
+                                            fieldGroup.classList.remove('is--error');
+                                            if (errorDiv) errorDiv.style.display = 'none';
+                                        } else {
+                                            fieldGroup.classList.remove('is--success');
+                                            const started = radioCheckGroup ?
+                                                Array.from(radioCheckGroup.querySelectorAll('input')).some(i => i.__validationStarted) :
+                                                fieldGroup.querySelector('input, textarea, select').__validationStarted;
+                                            if (started) {
+                                                fieldGroup.classList.add('is--error');
+                                                if (errorDiv) errorDiv.style.display = 'block';
+                                            } else {
+                                                fieldGroup.classList.remove('is--error');
+                                                if (errorDiv) errorDiv.style.display = 'none';
+                                            }
+                                        }
+                                    }
+
+                                    function validateAndStartLiveValidationForAll() {
+                                        let allValid = true;
+                                        let firstInvalidField = null;
+                                        validateFields.forEach(fieldGroup => {
+                                            const input = fieldGroup.querySelector('input, textarea, time, select');
+                                            const radioCheckGroup = fieldGroup.querySelector('[data-radiocheck-group]');
+                                            if (input) input.__validationStarted = true;
+                                            if (radioCheckGroup) {
+                                                radioCheckGroup.__validationStarted = true;
+                                                radioCheckGroup.querySelectorAll('input').forEach(i => (i.__validationStarted = true));
+                                            }
+                                            updateFieldStatus(fieldGroup);
+                                            if (!isValid(fieldGroup)) {
+                                                allValid = false;
+                                                if (!firstInvalidField) firstInvalidField = input || radioCheckGroup.querySelector('input');
+                                            }
+                                        });
+                                        if (!allValid && firstInvalidField) firstInvalidField.focus();
+                                        return allValid;
+                                    }
+
+                                    validateFields.forEach(fieldGroup => {
+                                        const input = fieldGroup.querySelector('input, textarea, select');
+                                        const radioCheckGroup = fieldGroup.querySelector('[data-radiocheck-group]');
+                                        if (radioCheckGroup) {
+                                            radioCheckGroup.querySelectorAll('input').forEach(input => {
+                                                input.__validationStarted = false;
+                                                input.addEventListener('change', () => {
+                                                    requestAnimationFrame(() => {
+                                                        if (!input.__validationStarted) {
+                                                            const checkedCount = radioCheckGroup.querySelectorAll('input:checked').length;
+                                                            const min = parseInt(radioCheckGroup.getAttribute('min')) || 1;
+                                                            if (checkedCount >= min) input.__validationStarted = true;
+                                                        }
+                                                        if (input.__validationStarted) updateFieldStatus(fieldGroup);
+                                                    });
+                                                });
+                                                input.addEventListener('blur', () => {
+                                                    input.__validationStarted = true;
+                                                    updateFieldStatus(fieldGroup);
+                                                });
+                                            });
+                                        } else if (input) {
+                                            input.__validationStarted = false;
+                                            if (input.tagName.toLowerCase() === 'select') {
+                                                input.addEventListener('change', () => {
+                                                    input.__validationStarted = true;
+                                                    updateFieldStatus(fieldGroup);
+                                                });
+                                            } else {
+                                                input.addEventListener('input', () => {
+                                                    if (!input.__validationStarted && isValid(fieldGroup)) input.__validationStarted = true;
+                                                    if (input.__validationStarted) updateFieldStatus(fieldGroup);
+                                                });
+                                                input.addEventListener('blur', () => {
+                                                    input.__validationStarted = true;
+                                                    updateFieldStatus(fieldGroup);
+                                                });
+                                            }
+                                        }
+                                    });
+
+                                    dataSubmit.addEventListener('click', () => {
+                                        if (validateAndStartLiveValidationForAll()) {
+                                            if (isSpam()) {
+                                                alert('Form submitted too quickly. Please try again.');
+                                                return;
+                                            }
+                                            realSubmitInput.click();
+                                        }
+                                    });
+
+                                    form.addEventListener('keydown', (event) => {
+                                        if (event.key === 'Enter' && event.target.tagName !== 'TEXTAREA') {
+                                            event.preventDefault();
+                                            if (validateAndStartLiveValidationForAll()) {
+                                                if (isSpam()) {
+                                                    alert('Form submitted too quickly. Please try again.');
+                                                    return;
+                                                }
+                                                realSubmitInput.click();
+                                            }
+                                        }
+                                    });
+                                });
+                            }
+
+                            document.addEventListener("DOMContentLoaded", function() {
+                                document.querySelectorAll(".form_main_wrap").forEach((element) => {
+                                    if (element.dataset.scriptInitialized) return;
+                                    element.dataset.scriptInitialized = "true";
+                                    initAdvancedFormValidation();
+                                });
+                            });
+                        </script>
+                    </div>
+                    <form id="wf-form-Newsletter-Subscription" name="wf-form-Newsletter-Subscription" data-name="Newsletter Subscription" action="https://museumofmoney.us9.list-manage.com/subscribe/post?u=ce1f826911cd4c05a37533f17&amp;amp;id=875ea4be49&amp;amp;f_id=00c2c0e1f0&quot; method=&quot;post&quot; id=&quot;mc-embedded-subscribe-form&quot; name=&quot;mc-embedded-subscribe-form"
+                        method="post" class="form_newsletter_layout" data-wf-page-id="684433cedb896cfecac10d21" data-wf-element-id="a1e83ec4-385d-065f-e4a6-0fe4648546a8" data-turnstile-sitekey="0x4AAAAAAAQTptj2So4dx43e"><label data-validate="" class="form_newsletter_field_wrap"><div class="form_newsletter_field_label"><div class="form_main_field_wrap"><div class="form-field-icon is--success"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 24 24" fill="none"><path d="M11.25 14.25L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M15 10.5L11.25 14.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M3 12C3 16.9706 7.02943 21 12 21C16.9706 21 21 16.9706 21 12C21 7.02943 16.9706 3 12 3C7.02943 3 3 7.02943 3 12Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></div><div class="form-field-icon is--error"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 24 24" fill="none" class="form-field-icon-svg-error"><path opacity="0.1" d="M12 3C16.971 3 21 7.029 21 12C21 16.971 16.971 21 12 21C7.029 21 3 16.971 3 12C3 7.029 7.029 3 12 3Z" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M12 3C16.971 3 21 7.029 21 12C21 16.971 16.971 21 12 21C7.029 21 3 16.971 3 12C3 7.029 7.029 3 12 3Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path><path d="M12 12.5V7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M11.996 14.5C11.444 14.5 10.996 14.948 11 15.5C11 16.052 11.448 16.5 12 16.5C12.552 16.5 13 16.052 13 15.5C13 14.948 12.552 14.5 11.996 14.5Z" fill="currentColor"></path></svg></div><input class="form_newsletter_field_input w-input" maxlength="256" name="Email" data-name="Email" placeholder="Email Address" data-cursor="text" type="email" id="newsletter-email" required=""/><div class="w-embed"><input type="hidden" name="ACQ_SOURCE" value="Footer">
+<input type="hidden" name="FORM_PLACE" value="footer_global">
+<input type="hidden" name="PAGE_URL" value="">
+<input type="hidden" name="UTM_SOURCE" value="">
+<input type="hidden" name="UTM_MEDIUM" value="">
+<input type="hidden" name="UTM_CAMP" value="">
+<input type="hidden" name="UTM_CONT" value="">
+<input type="hidden" name="UTM_TERM" value=""></div></div><div data-cursor="pointer" data-submit="" tabindex="0" class="form_main_submit"><div data-submit="" class="btn_secondary_wrap small"><div class="u-embed-css small-2 w-embed"><style>
+.btn_secondary_wrap {
+  --elastic-ease-out: linear(
+    0,
+    0.5737 7.6%,
+    0.8382 11.87%,
+    0.9463 14.19%,
+    1.0292 16.54%,
+    1.0886 18.97%,
+    1.1258 21.53%,
+    1.137 22.97%,
+    1.1424 24.48%,
+    1.1423 26.1%,
+    1.1366 27.86%,
+    1.1165 31.01%,
+    1.0507 38.62%,
+    1.0219 42.57%,
+    0.9995 46.99%,
+    0.9872 51.63%,
+    0.9842 58.77%,
+    1.0011 81.26%,
+    1
+  );
+  --smooth-ease: cubic-bezier(.32, .72, 0, 1);
+  --color-ease: cubic-bezier(.216, .62, .356, 1);
+  
+  transition: transform .45s var(--elastic-ease-out);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn_secondary_wrap:active {
+  transform: scaleX(0.955) scaleY(0.954);
+}
+
+.btn_secondary_bg {
+  transition: background-color .2s var(--color-ease);
+}
+
+.btn_secondary_front {
+  transition: translate .85s var(--elastic-ease-out), rotate .75s var(--elastic-ease-out), opacity .15s ease-out;
+}
+
+.btn_secondary_text {
+  transition: translate .75s var(--elastic-ease-out);
+}
+
+.btn_secondary_back {
+  transition: translate .85s var(--elastic-ease-out), rotate .75s var(--elastic-ease-out), opacity .15s ease-out;
+  opacity: 0;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .btn_secondary_wrap:is(:hover, :focus-visible) .btn_secondary_front {
+    translate: 0 -2rem -6rem;
+    rotate: 1 0 0 85deg;
+    opacity: 0;
+  }
+  
+  .btn_secondary_wrap:is(:hover, :focus-visible) .btn_secondary_text {
+    translate: 0 -.75rem 0;
+    transition-delay: 0s;
+  }
+  
+  .btn_secondary_wrap:is(:hover, :focus-visible) .btn_secondary_back {
+    transition: translate .85s var(--elastic-ease-out), rotate .75s var(--elastic-ease-out), opacity .075s ease-in;
+    /* bring it into place without arrow */
+    rotate: 0;
+    translate: 0;
+    opacity: 1;
+  }
+}
+
+@media (hover: none) or (pointer: coarse) {
+  .btn_secondary_wrap:active .btn_secondary_bg {
+    background-color: var(--_theme---button--background);
+    transition-duration: 0s;
+  }
+}
+</style></div><span class="btn_secondary_inner small-3"><span data-text="Color-Flip" class="btn_secondary_back small-4"><span aria-hidden="true" class="btn_secondary_back_text u-text-style-h5 small-5">Send</span></span><span class="btn_secondary_front small-6"><span class="btn_secondary_bg small-7"></span><span aria-hidden="true" class="btn_secondary_front_text u-text-style-h5 small-8">Send</span></span></span></div><input type="submit" data-wait="Please wait..." data-wf-native-id-path="a1e83ec4-385d-065f-e4a6-0fe4648546cf:ef8cd596-aff1-d508-8cb5-704166a1aa98" data-wf-ao-click-engagement-tracking="true" data-wf-element-id="ef8cd596-aff1-d508-8cb5-704166a1aa98" data-wf-component-context="%5B%7B%22componentId%22%3A%22a1e83ec4-385d-065f-e4a6-0fe46485466e%22%2C%22instanceId%22%3A%22a1e83ec4-385d-065f-e4a6-0fe4648546cf%22%7D%5D" class="form_main_submit_btn w-button" value="PlateUp"/></div></div><div data-error-message="" class="form_field_error u-text-style-small u-weight-semibold">Please enter a valid email</div></label></form>
+                    <div
+                        class="form_main_success_wrap w-form-done">
+                        <div class="form_main_success_text u-text-style-h5">Thank you for subscribing! Stay sweet!</div>
+                </div>
+                <div class="form_main_error_wrap w-form-fail">
+                    <div class="form_main_error_text u-text-style-h5">Oops! Something went wrong while submitting the form.</div>
+                </div>
+            </div>
+            <div class="social_link_wrap">
+                <div class="social_text u-text-style-h5">Follow Us On</div>
+                <ul data-footer-link-list="" role="list" class="social_link_list">
+                    <li class="social_link">
+                        <div class="social_link_icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 24 24" fill="none" class="g_svg"><path d="M9.58404 21.706V15.0561H7.52015V12H9.58404V10.6833C9.58404 7.27944 11.124 5.70333 14.464 5.70333C15.0963 5.70333 16.1879 5.82722 16.6363 5.95111V8.71944C16.4001 8.69556 15.9879 8.68333 15.4801 8.68333C13.8401 8.68333 13.2079 9.30333 13.2079 10.9194V12H16.4763L15.9163 15.0556H13.2124V21.9277C18.1637 21.3279 22 17.112 22 12C22 6.47722 17.5228 2 12 2C6.47722 2 2 6.47722 2 12C2 16.6899 5.22813 20.6253 9.58404 21.706Z" fill="currentColor"></path></svg></div>
+                        <div
+                            class="g_clickable_wrap"><a class="g_clickable_link w-inline-block" data-wf-component-context="%5B%7B%22componentId%22%3A%22a1e83ec4-385d-065f-e4a6-0fe46485466e%22%2C%22instanceId%22%3A%22a1e83ec4-385d-065f-e4a6-0fe4648546cf%22%7D%2C%7B%22componentId%22%3A%220254e612-9509-0757-3332-f6be61ca6889%22%2C%22instanceId%22%3A%22a1e83ec4-385d-065f-e4a6-0fe4648546bb%22%7D%5D"
+                                data-wf-element-id="0254e612-9509-0757-3332-f6be61ca688a" data-wf-event-ids="" href="https://www.facebook.com/" target="_blank" data-wf-native-id-path="a1e83ec4-385d-065f-e4a6-0fe4648546cf:a1e83ec4-385d-065f-e4a6-0fe4648546bb:0254e612-9509-0757-3332-f6be61ca688a"
+                                data-wf-ao-click-engagement-tracking="true" data-gtm=""><span class="g_clickable_text u-sr-only">FB</span></a><button type="button" tracking="play" class="g_clickable_btn"><span class="g_clickable_text u-sr-only">FB</span></button></div>
+            </li>
+            <li class="social_link">
+                <div class="social_link_icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 24 24" fill="none" class="g_svg"><path d="M12 8.505C10.065 8.505 8.505 10.08 8.505 12C8.505 13.92 10.08 15.495 12 15.495C13.92 15.495 15.495 13.92 15.495 12C15.495 10.08 13.92 8.505 12 8.505ZM22.5 12C22.5 10.545 22.5 9.12 22.425 7.665C22.35 5.985 21.96 4.485 20.73 3.27C19.5 2.04 18.015 1.65 16.335 1.575C14.88 1.5 13.455 1.5 12 1.5C10.545 1.5 9.12 1.5 7.665 1.575C5.985 1.65 4.485 2.04 3.27 3.27C2.04 4.5 1.65 5.985 1.575 7.665C1.5 9.12 1.5 10.545 1.5 12C1.5 13.455 1.5 14.88 1.575 16.335C1.65 18.015 2.04 19.515 3.27 20.73C4.5 21.96 5.985 22.35 7.665 22.425C9.12 22.5 10.545 22.5 12 22.5C13.455 22.5 14.88 22.5 16.335 22.425C18.015 22.35 19.515 21.96 20.73 20.73C21.96 19.5 22.35 18.015 22.425 16.335C22.515 14.895 22.5 13.455 22.5 12ZM12 17.385C9.015 17.385 6.615 14.985 6.615 12C6.615 9.015 9.015 6.615 12 6.615C14.985 6.615 17.385 9.015 17.385 12C17.385 14.985 14.985 17.385 12 17.385ZM17.61 7.65C16.92 7.65 16.35 7.095 16.35 6.39C16.35 5.685 16.905 5.13 17.61 5.13C18.315 5.13 18.87 5.685 18.87 6.39C18.8738 6.5543 18.8438 6.71764 18.7819 6.86987C18.7199 7.02211 18.6274 7.16 18.51 7.275C18.395 7.39241 18.2571 7.48495 18.1049 7.54687C17.9526 7.6088 17.7893 7.6388 17.625 7.635L17.61 7.65Z" fill="currentColor"></path></svg></div>
+                <div
+                    class="g_clickable_wrap"><a class="g_clickable_link w-inline-block" data-wf-component-context="%5B%7B%22componentId%22%3A%22a1e83ec4-385d-065f-e4a6-0fe46485466e%22%2C%22instanceId%22%3A%22a1e83ec4-385d-065f-e4a6-0fe4648546cf%22%7D%2C%7B%22componentId%22%3A%220254e612-9509-0757-3332-f6be61ca6889%22%2C%22instanceId%22%3A%22a1e83ec4-385d-065f-e4a6-0fe4648546c0%22%7D%5D"
+                        data-wf-element-id="0254e612-9509-0757-3332-f6be61ca688a" data-wf-event-ids="" href="https://www.instagram.com/" target="_blank" data-wf-native-id-path="a1e83ec4-385d-065f-e4a6-0fe4648546cf:a1e83ec4-385d-065f-e4a6-0fe4648546c0:0254e612-9509-0757-3332-f6be61ca688a"
+                        data-wf-ao-click-engagement-tracking="true" data-gtm=""><span class="g_clickable_text u-sr-only">IG</span></a><button type="button" tracking="play" class="g_clickable_btn"><span class="g_clickable_text u-sr-only">IG</span></button></div>
+            </li>
+            <li class="social_link">
+                <div class="social_link_icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 24 24" fill="currentColor"><path d="M19.6695 4.2322H23.0785L14.8115 15.0722L24 23.9132H16.6115L10.9395 17.0152L4.4895 23.9132H1.0795L9.7305 12.5882L1.25 4.2322H8.9195L14.0805 10.6702L20.4415 4.2322H19.6695ZM17.54 21.4772H19.1745L6.5395 5.852H4.7305L17.54 21.4772Z"/></svg></div>
+                <div
+                    class="g_clickable_wrap"><a class="g_clickable_link w-inline-block" data-wf-component-context="%5B%7B%22componentId%22%3A%22a1e83ec4-385d-065f-e4a6-0fe46485466e%22%2C%22instanceId%22%3A%22a1e83ec4-385d-065f-e4a6-0fe4648546cf%22%7D%2C%7B%22componentId%22%3A%220254e612-9509-0757-3332-f6be61ca6889%22%2C%22instanceId%22%3A%22a1e83ec4-385d-065f-e4a6-0fe4648546c5%22%7D%5D"
+                        data-wf-element-id="0254e612-9509-0757-3332-f6be61ca688a" data-wf-event-ids="" href="https://www.twitter.com/" target="_blank" data-wf-native-id-path="a1e83ec4-385d-065f-e4a6-0fe4648546cf:a1e83ec4-385d-065f-e4a6-0fe4648546c5:0254e612-9509-0757-3332-f6be61ca688a"
+                        data-wf-ao-click-engagement-tracking="true" data-gtm=""><span class="g_clickable_text u-sr-only">X</span></a><button type="button" tracking="play" class="g_clickable_btn"><span class="g_clickable_text u-sr-only">X</span></button></div>
+            </li>
+            </ul>
+            <div class="footer_copyright_wrap">
+                <p class="footer_copyright_text u-text-style-h5">© Sweet Treat. All rights reserved.<br/>Crafted with love for food lovers.</p>
+            </div>
+            </div>
+            </div>
+            </div>
+            </div>
+            </div>
+            <div data-wf--global-section-space--section-space="page-top" class="g_section_space w-variant-e359d2da-de19-6775-b122-3e06f925f39e"></div>
+            <div class="canvas-matter">
+                <div id="canvas-target" class="canvas-matter__target"></div>
+            </div>
+    </footer>
+
+<!-- ══════════════════════════════════════
+     SCRIPTS
+══════════════════════════════════════ -->
+<script src="https://cdn.prod.website-files.com/gsap/3.14.2/Flip.min.js" type="text/javascript"></script>
+<script src="https://cdn.prod.website-files.com/gsap/3.14.2/SplitText.min.js" type="text/javascript"></script>
+<script src="https://cdn.prod.website-files.com/gsap/3.14.2/Draggable.min.js" type="text/javascript"></script>
+<script src="https://cdn.prod.website-files.com/gsap/3.14.2/InertiaPlugin.min.js" type="text/javascript"></script>
+<script src="https://cdn.prod.website-files.com/gsap/3.14.2/Observer.min.js" type="text/javascript"></script>
+<script src="https://cdn.prod.website-files.com/gsap/3.14.2/CustomEase.min.js" type="text/javascript"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.2.3/dist/lenis.min.js"></script>
+<script>const lenis=new Lenis({autoRaf:true});</script>
+
+<script>
+// Scroll progress bar
+window.addEventListener('scroll',()=>{
+  const now=window.scrollY;
+  const el=document.getElementById('scrollLine');
+  if(el)el.style.width=(now/(document.body.scrollHeight-window.innerHeight)*100)+'%';
+  const b1=document.querySelector('.blob1'),b2=document.querySelector('.blob2'),b3=document.querySelector('.blob3');
+  if(b1)b1.style.transform=`translateY(${now*.09}px)`;
+  if(b2)b2.style.transform=`translateY(${-now*.07}px)`;
+  if(b3)b3.style.transform=`translateY(${now*.05}px)`;
+});
+
+// Intersection observer for menu sections
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
+},{threshold:.08});
+document.querySelectorAll('.menu-section').forEach(s=>obs.observe(s));
+
+// Nav active highlight
+const sections=document.querySelectorAll('.menu-section');
+const navItems=document.querySelectorAll('.menu-nav .nav-item');
+window.addEventListener('scroll',()=>{
+  let cur='';
+  sections.forEach(s=>{if(window.scrollY>=s.offsetTop-180)cur=s.id;});
+  navItems.forEach(n=>{n.classList.remove('active');if(n.getAttribute('href')==='#'+cur)n.classList.add('active');});
+});
+
+// Expanded preview
+const preview=document.getElementById('expandedPreview');
+const expTitle=document.getElementById('expTitle');
+const expDesc=document.getElementById('expDesc');
+const expCat=document.getElementById('expCategory');
+const expImg=document.getElementById('expImage');
+const expPH=document.getElementById('expPlaceholder');
+let hideT;
+document.querySelectorAll('.item-card').forEach(card=>{
+  card.addEventListener('mouseenter',()=>{
+    clearTimeout(hideT);
+    expTitle.textContent=card.dataset.name;
+    expDesc.textContent=card.dataset.desc;
+    expCat.textContent=card.dataset.cat;
+    expPH.textContent=card.dataset.emoji;
+    const old=expImg.querySelector('img');if(old)old.remove();
+    expPH.style.display='flex';
+    const i=new Image();
+    i.src=card.dataset.img;i.alt=card.dataset.name;
+    i.style.cssText='width:100%;height:100%;object-fit:cover;position:absolute;inset:0;';
+    i.onload=()=>{expPH.style.display='none';expImg.insertBefore(i,expImg.firstChild);};
+    preview.classList.add('active');
+  });
+  card.addEventListener('mouseleave',()=>{hideT=setTimeout(()=>preview.classList.remove('active'),250);});
+});
+if(preview){preview.addEventListener('mouseenter',()=>clearTimeout(hideT));preview.addEventListener('mouseleave',()=>preview.classList.remove('active'));}
+</script>
+</body>
+</html>

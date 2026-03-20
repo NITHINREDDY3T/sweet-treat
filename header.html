@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sweet Treat | Header</title>
+
+<!-- Same imports as menu.html for consistency -->
+<link href="https://fonts.googleapis.com" rel="preconnect" />
+<link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous" />
+<!-- Montserrat (body/UI) + Bebas Neue (headings/display — exact from menu.html) -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&family=Bebas+Neue&display=swap" rel="stylesheet">
+<!-- Lenis smooth scroll (same as menu.html) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.2.3/dist/lenis.css">
+
+<style>
+/* ── EXACT THEME TOKENS from menu.html body style attribute ── */
+:root {
+  --bg:               #a78aff;
+  --bg-dark:          #190f0a;
+  --accent:           #1ce585;
+  --text:             #ffffff;
+  --link-text:        #f1f0ec;
+  --btn-bg:           #f1f0ec;
+  --btn-text:         #190f0a;
+  --btn-bg-hover:     #190f0a;
+  --btn-text-hover:   #f1f0ec;
+  --sticker:          #f580db;
+  --border:           color-mix(in srgb,#1ce585 20%,transparent);
+  --elastic:          linear(0,0.5737 7.6%,0.8382 11.87%,0.9463 14.19%,1.0292 16.54%,1.0886 18.97%,1.1258 21.53%,1.137 22.97%,1.1424 24.48%,1.1423 26.1%,1.1366 27.86%,1.1165 31.01%,1.0507 38.62%,1.0219 42.57%,0.9995 46.99%,0.9872 51.63%,0.9842 58.77%,1.0011 81.26%,1);
+  --color-ease:       cubic-bezier(.216,.62,.356,1);
+}
+
+*,*::before,*::after { margin:0; padding:0; box-sizing:border-box; }
+html { background:#a78aff; scroll-behavior:smooth; }
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: #a78aff;
+  color: #fff;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* noise grain */
+body::before {
+  content:''; position:fixed; inset:0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events:none; z-index:1000; opacity:.45;
+}
+
+/* blobs */
+.bg-blobs { position:fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden; }
+.blob { position:absolute; border-radius:50%; filter:blur(90px); opacity:.18; animation:blobDrift 18s ease-in-out infinite; }
+.blob1 { width:520px; height:520px; background:#7c5ce8; top:-120px; left:-80px; }
+.blob2 { width:380px; height:380px; background:#f580db; top:45%; right:-60px; animation-delay:-7s; }
+.blob3 { width:280px; height:280px; background:#1ce585; bottom:-40px; left:35%; animation-delay:-13s; opacity:.1; }
+@keyframes blobDrift {
+  0%,100%{transform:translate(0,0) scale(1);}
+  33%{transform:translate(25px,-35px) scale(1.06);}
+  66%{transform:translate(-18px,22px) scale(.94);}
+}
+
+/* background grid glow that follows cursor (similar feel to menu.html grids) */
+.bg-grid{
+  position:fixed; inset:0; pointer-events:none; z-index:1;
+  background-image:
+    linear-gradient(to right, rgba(25,15,10,.11) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(25,15,10,.11) 1px, transparent 1px);
+  background-size:40px 40px;
+  mix-blend-mode:soft-light;
+}
+.bg-grid::after{
+  content:''; position:absolute; inset:0;
+  background:radial-gradient(circle at var(--cursor-x,50%) var(--cursor-y,40%),
+    rgba(255,255,255,.25), transparent 55%);
+  opacity:.95;
+}
+
+/* scroll progress */
+.scroll-line { position:fixed; top:0; left:0; height:3px; background:linear-gradient(90deg,var(--accent),var(--sticker)); z-index:9999; width:0%; box-shadow:0 0 8px rgba(28,229,133,.5); }
+
+/* Standard Browser Cursors */
+
+
+/* ════════════════════════════════════════
+   NAVBAR — exact replica from menu.html
+════════════════════════════════════════ */
+
+/* CSS from menu.html nav_css block */
+.nav_desktop { display:flex; }
+.nav_mobile  { display:none; }
+
+.nav_wrap {
+  position:fixed; top:0; left:0; right:0; z-index:200;
+  transition:transform 1s ease, padding 1s ease;
+  transform: translateY(0%) rotate(0.001deg);
+}
+[data-scrolling-started="true"][data-scrolling-direction="down"] .nav_wrap {
+  transform: translateY(-100%);
+}
+
+/* shrink padding when scrolled */
+.nav_desktop_contain {
+  max-width:1400px; margin:0 auto;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:18px 36px;
+  position:relative;
+}
+
+/* frosted pill bg — fades in when scrolling */
+.nav_base {
+  position:absolute; inset:8px 20px;
+  background:rgba(167,138,255,.88);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  border:1px solid rgba(255,255,255,.2);
+  border-radius:20px;
+  opacity:0;
+  transition:opacity 1s ease;
+  z-index:-1;
+}
+[data-scrolling-started="true"] .nav_base { opacity:1; }
+
+/* LEFT — nav links list */
+.nav_link_list {
+  list-style:none; display:flex; align-items:center; gap:2px;
+}
+/* btn_secondary_wrap style — the flip button from menu.html */
+.btn_secondary_wrap {
+  --elastic-ease-out: linear(0,0.5737 7.6%,0.8382 11.87%,0.9463 14.19%,1.0292 16.54%,1.0886 18.97%,1.1258 21.53%,1.137 22.97%,1.1424 24.48%,1.1423 26.1%,1.1366 27.86%,1.1165 31.01%,1.0507 38.62%,1.0219 42.57%,0.9995 46.99%,0.9872 51.63%,0.9842 58.77%,1.0011 81.26%,1);
+  --smooth-ease: cubic-bezier(.32,.72,0,1);
+  --color-ease: cubic-bezier(.216,.62,.356,1);
+  transition: transform .45s var(--elastic-ease-out);
+  -webkit-tap-highlight-color: transparent;
+  display:inline-block; position:relative;
+  cursor:pointer;
+}
+.btn_secondary_wrap:active { transform:scaleX(.955) scaleY(.954); }
+.btn_secondary_inner {
+  display:inline-flex; align-items:center;
+  padding:9px 18px; border-radius:100px;
+  overflow:hidden; position:relative;
+  perspective:600px;
+}
+.btn_secondary_bg {
+  position:absolute; inset:0; border-radius:100px;
+  background:transparent;
+  transition:background-color .2s var(--color-ease);
+}
+.btn_secondary_front {
+  position:relative; z-index:1;
+  transition: translate .85s var(--elastic-ease-out), rotate .75s var(--elastic-ease-out), opacity .15s ease-out;
+}
+.btn_secondary_back {
+  position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+  z-index:2;
+  transition: translate .85s var(--elastic-ease-out), rotate .75s var(--elastic-ease-out), opacity .15s ease-out;
+  translate:0 2rem -6rem; rotate:1 0 0 -85deg; opacity:0;
+}
+
+/* nav-link variant text */
+.btn_secondary_front_text,
+.btn_secondary_back_text {
+  font-family:'Montserrat',sans-serif;
+  font-size:.72rem; font-weight:700; letter-spacing:.8px; text-transform:uppercase;
+  color:#fff;
+  white-space:nowrap;
+}
+
+@media (hover:hover) and (pointer:fine) {
+  .nav_link .btn_secondary_wrap:is(:hover,:focus-visible) .btn_secondary_front_text,
+  .nav_link .btn_secondary_wrap:is(:hover,:focus-visible) .btn_secondary_back_text {
+    color: #000 !important;
+  }
+}
+
+/* Navigation layout — adjusted: logo left, nav center, CTA right */
+.nav_desktop_contain {
+  display:flex !important; align-items:center !important;
+  width:100% !important; position:relative !important;
+}
+.nav_logo_wrap {
+  display:flex !important; justify-content:flex-start !important; align-items:center !important;
+  width:auto !important; margin-right:2rem;
+  position:static !important; transform:none !important; left:auto !important;
+}
+.nav_logo_link { display:block; text-decoration:none; line-height:0; }
+.nav_logo_link img { height:90px; width:auto; object-fit:contain; display:block; max-height:90px !important; }
+.nav_link_list {
+  display:flex !important; justify-content:center !important; align-items:center !important;
+  margin:0 auto !important; padding:0 !important; list-style:none !important; gap:2rem !important;
+  position:static !important; transform:none !important; left:auto !important;
+}
+.nav_btn_list {
+  display:flex !important; justify-content:flex-end !important; align-items:center !important;
+  margin:0 !important; padding:0 !important; list-style:none !important; gap:1rem !important;
+}
+
+/* RIGHT — CTA button (small variant) */
+.nav_btn_list { list-style:none; display:flex; align-items:center; }
+.nav_btn_list .btn_secondary_wrap .btn_secondary_inner {
+  padding:10px 20px;
+  border:1.5px solid var(--bg-dark);
+  border-radius:100px;
+}
+.nav_btn_list .btn_secondary_wrap:is(:hover,:focus-visible) .btn_secondary_inner {
+  border-color: var(--bg-dark);
+}
+
+/* ─── MOBILE NAV ─── */
+@media(max-width:767px) {
+  .nav_desktop { display:none !important; }
+  .nav_mobile  { display:flex !important; }
+}
+
+.nav_mobile {
+  align-items:center; justify-content:space-between;
+  padding:12px 20px;
+  position:fixed; top:0; left:0; right:0; z-index:200;
+}
+.nav_mobile_contain {
+  width:100%; display:flex; align-items:center; justify-content:space-between; position:relative;
+}
+.mobile_menu_btn {
+  display:flex; flex-direction:column; justify-content:center; align-items:center;
+  gap:5px; width:42px; height:42px; border-radius:12px;
+  background:rgba(25, 10, 25, 0.1); border:none; cursor:pointer;
+  transition:background .25s,transform .45s var(--elastic);
+  -webkit-tap-highlight-color:transparent;
+}
+.mobile_menu_btn:hover { background:var(--bg-dark); }
+.mobile_menu_btn:hover .mobile_menu_btn_line { background:#fff; }
+.mobile_menu_btn:active { transform:scale(.95); }
+.mobile_menu_btn_line { width:22px; height:2px; background:var(--bg-dark); border-radius:2px; transition:all .3s; }
+
+/* centered logo on mobile */
+.nav_logo_wrap_mobile {
+  position:absolute; left:50%; transform:translateX(-50%);
+}
+.nav_logo_wrap_mobile img { height:70px; width:auto; object-fit:contain; }
+
+/* mobile CTA */
+.mobile_cta_btn {
+  display:inline-flex; align-items:center; gap:6px;
+  padding:9px 16px; border-radius:100px;
+  background:var(--btn-bg); color:var(--btn-text);
+  font-size:.65rem; font-weight:700; letter-spacing:.8px; text-transform:uppercase;
+  border:none; cursor:pointer; text-decoration:none;
+  font-family:'Montserrat',sans-serif;
+  transition:background .25s;
+  white-space:nowrap;
+}
+.mobile_cta_btn:hover { background:var(--bg-dark); color:#fff; }
+
+/* mobile slide-in menu */
+.nav_menu_wrap {
+  display:none; position:fixed; inset:0; z-index:300;
+  flex-direction:column; align-items:center; justify-content:center;
+}
+.nav_menu_wrap.open { display:flex; }
+.nav_menu_overlay { position:absolute; inset:0; background:rgba(9, 9, 9, 0.97); backdrop-filter:blur(20px); }
+.nav_menu_base {
+  position:absolute; inset:20px;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255, 255, 255, 0.15);
+  border-radius:28px; z-index:1;
+}
+.menu_btn_close {
+  position:absolute; top:26px; right:26px; z-index:3;
+  width:44px; height:44px; border-radius:50%;
+  background:rgba(25,15,10,.1); border:1px solid rgba(25,15,10,.15);
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer; color:var(--bg-dark);
+  font-size:1.1rem; font-family:monospace;
+  transition:background .25s,transform .4s var(--elastic);
+}
+.menu_btn_close:hover { background:var(--bg-dark); color:#fff; transform:rotate(90deg); }
+.menu_content {
+  position:relative; z-index:2;
+  text-align:center; padding:40px;
+  display:flex; flex-direction:column; align-items:center;
+}
+.menu_content img { height:80px; width:auto; margin-bottom:32px; }
+.main_link_list { list-style:none; display:flex; flex-direction:column; gap:4px; width:100%; }
+.main_link {
+  display:flex; align-items:center; gap:10px; padding:8px 0;
+  --elastic-ease-out: linear(0,0.5737 7.6%,0.8382 11.87%,0.9463 14.19%,1.0292 16.54%,1.0886 18.97%,1.1258 21.53%,1.137 22.97%,1.1424 24.48%,1.1423 26.1%,1.1366 27.86%,1.1165 31.01%,1.0507 38.62%,1.0219 42.57%,0.9995 46.99%,0.9872 51.63%,0.9842 58.77%,1.0011 81.26%,1);
+  transition:gap .65s var(--elastic-ease-out); cursor:pointer;
+  justify-content:center;
+}
+.main_link_anchor { display:flex; align-items:center; gap:10px; padding:8px 0; justify-content:center; width:100%; color:inherit; text-decoration:none; }
+.main_link_anchor:focus-visible { outline:2px solid currentColor; outline-offset:4px; border-radius:10px; }
+.main_link:hover { gap:16px; }
+.main_link_icon {
+  width:0; overflow:hidden;
+  transform:scale(0) rotate(45deg);
+  transition:width .8s var(--elastic),transform .8s var(--elastic),padding-right .8s ease;
+  color:var(--accent); flex-shrink:0;
+}
+.main_link_icon svg { width:16px; height:16px; display:block; }
+.main_link:hover .main_link_icon { width:.9em; padding-right:.25rem; transform:scale(1) rotate(0deg); }
+.main_link_text {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:2.6rem; color:var(--bg-dark);
+  letter-spacing:1px; line-height:1;
+  transition:color .3s;
+}
+.main_link:hover .main_link_text { color:var(--accent); }
+.menu_content_cta { margin-top:28px; }
+
+/* ════════════════════════════════════════
+   RESPONSIVE
+════════════════════════════════════════ */
+@media(max-width:767px){
+  .nav_desktop { display:none !important; }
+  .nav_mobile { display:flex !important; }
+}
+</style>
+</head>
+
+<body data-scrolling-started="false" data-scrolling-direction="up" style="--_theme---button--divider:#00592b;--_theme---selection--text:#1ce585;--_theme---selection--background:#401011;--_theme---logo:#1ce585;--_theme---link-text:#f1f0ec;--_theme---button--background:#f1f0ec;--_theme---button--text-hover:#f1f0ec;--_theme---button--background-hover:#190f0a;--_theme---sticker:#f580db;--_theme---link-background:color-mix(in srgb, #1ce585 10%, transparent);--_theme---button--text:#190f0a;--_theme---border:color-mix(in srgb, #1ce585 20%, transparent);--_theme---text:#ffffff;--_theme---background:#a78aff;">
+
+<div class="bg-blobs">
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+</div>
+<div class="bg-grid"></div>
+<div class="scroll-line" id="scrollLine"></div>
+
+<!-- ══════════════════════════════════════
+     HEADER / NAV — same as menu.html
+══════════════════════════════════════ -->
+<header class="nav_component" role="banner">
+  <div class="nav_wrap" data-transition-hero="">
+    <nav class="nav_desktop">
+      <div class="nav_desktop_contain">
+        <!-- LEFT: logo -->
+        <div class="nav_logo_wrap">
+          <a class="nav_logo_link" href="index.html">
+            <img src="sweet/LVsnn3r.png" alt="Sweet Treat Logo" style="height:90px;width:auto;object-fit:contain;">
+          </a>
+        </div>
+
+        <!-- CENTER: nav links -->
+        <ul role="list" class="nav_link_list">
+          <!-- Menu -->
+          <li class="nav_link">
+            <a href="menu.html" class="btn_secondary_wrap">
+              <span class="btn_secondary_inner">
+                <span class="btn_secondary_back"><span class="btn_secondary_back_text">Menu</span></span>
+                <span class="btn_secondary_front"><span class="btn_secondary_bg"></span><span class="btn_secondary_front_text">Menu</span></span>
+              </span>
+            </a>
+          </li>
+          <!-- SAMPLE → contact page (same behavior as menu) -->
+          <li class="nav_link">
+            <a href="contact.html" class="btn_secondary_wrap">
+              <span class="btn_secondary_inner">
+                <span class="btn_secondary_back"><span class="btn_secondary_back_text">SAMPLE</span></span>
+                <span class="btn_secondary_front"><span class="btn_secondary_bg"></span><span class="btn_secondary_front_text">SAMPLE</span></span>
+              </span>
+            </a>
+          </li>
+          <!-- Recipe → dedicated recipe page -->
+          <li class="nav_link">
+            <a href="recipe.html" class="btn_secondary_wrap">
+              <span class="btn_secondary_inner">
+                <span class="btn_secondary_back"><span class="btn_secondary_back_text">Recipe</span></span>
+                <span class="btn_secondary_front"><span class="btn_secondary_bg"></span><span class="btn_secondary_front_text">Recipe</span></span>
+              </span>
+            </a>
+          </li>
+        </ul>
+
+        <!-- RIGHT: Contact Us CTA -->
+        <ul role="list" class="nav_btn_list">
+          <li>
+            <a href="contact.html" class="btn_secondary_wrap">
+              <span class="btn_secondary_inner">
+                <span class="btn_secondary_back"><span class="btn_secondary_back_text">Contact Us</span></span>
+                <span class="btn_secondary_front"><span class="btn_secondary_bg"></span><span class="btn_secondary_front_text">Contact Us</span></span>
+              </span>
+            </a>
+          </li>
+        </ul>
+
+        <div class="nav_base"></div>
+      </div>
+    </nav>
+
+    <!-- Mobile nav bar -->
+    <nav class="nav_mobile" aria-label="Mobile navigation">
+      <div class="nav_mobile_contain">
+        <button class="mobile_menu_btn" id="mobileMenuBtn" aria-label="Open menu">
+          <div class="mobile_menu_btn_line"></div>
+          <div class="mobile_menu_btn_line"></div>
+          <div class="mobile_menu_btn_line"></div>
+        </button>
+        <div class="nav_logo_wrap_mobile">
+          <img src="sweet/LVsnn3r.png" alt="Sweet Treat Logo">
+        </div>
+        <a href="contact.html" class="mobile_cta_btn">Contact Us</a>
+      </div>
+    </nav>
+  </div>
+
+  <!-- Mobile slide menu -->
+  <div class="nav_menu_wrap" id="mobileMenuWrap">
+    <div class="nav_menu_overlay"></div>
+    <div class="nav_menu_base"></div>
+    <button class="menu_btn_close" id="mobileCloseBtn">✕</button>
+    <div class="menu_content">
+      <img src="sweet/LVsnn3r.png" alt="Sweet Treat Logo">
+      <ul data-menu-link-list="" role="list" class="main_link_list">
+        <li class="main_link">
+          <a href="index.html" class="main_link_anchor">
+            <div class="main_link_icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18" fill="none"><path d="M15.8867 9.52849C16.5735 9.18188 16.5735 8.2013 15.8867 7.85465L3.70591 1.70624C2.88419 1.29146 2.01917 2.18569 2.46104 2.99317L5.57902 8.69163L2.46105 14.39C2.01918 15.1975 2.88415 16.0917 3.70589 15.6769L15.8867 9.52849Z" fill="currentColor"/></svg></div>
+            <div class="main_link_text">Home</div>
+          </a>
+        </li>
+        <li class="main_link">
+          <a href="menu.html" class="main_link_anchor">
+            <div class="main_link_icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18" fill="none"><path d="M15.8867 9.52849C16.5735 9.18188 16.5735 8.2013 15.8867 7.85465L3.70591 1.70624C2.88419 1.29146 2.01917 2.18569 2.46104 2.99317L5.57902 8.69163L2.46105 14.39C2.01918 15.1975 2.88415 16.0917 3.70589 15.6769L15.8867 9.52849Z" fill="currentColor"/></svg></div>
+            <div class="main_link_text">Menu</div>
+          </a>
+        </li>
+        <li class="main_link">
+          <a href="contact.html" class="main_link_anchor">
+            <div class="main_link_icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18" fill="none"><path d="M15.8867 9.52849C16.5735 9.18188 16.5735 8.2013 15.8867 7.85465L3.70591 1.70624C2.88419 1.29146 2.01917 2.18569 2.46104 2.99317L5.57902 8.69163L2.46105 14.39C2.01918 15.1975 2.88415 16.0917 3.70589 15.6769L15.8867 9.52849Z" fill="currentColor"/></svg></div>
+            <div class="main_link_text">SAMPLE</div>
+          </a>
+        </li>
+        <li class="main_link">
+          <a href="recipe.html" class="main_link_anchor">
+            <div class="main_link_icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18" fill="none"><path d="M15.8867 9.52849C16.5735 9.18188 16.5735 8.2013 15.8867 7.85465L3.70591 1.70624C2.88419 1.29146 2.01917 2.18569 2.46104 2.99317L5.57902 8.69163L2.46105 14.39C2.01918 15.1975 2.88415 16.0917 3.70589 15.6769L15.8867 9.52849Z" fill="currentColor"/></svg></div>
+            <div class="main_link_text">Recipe</div>
+          </a>
+        </li>
+        <li class="main_link">
+          <a href="#more" class="main_link_anchor">
+            <div class="main_link_icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18" fill="none"><path d="M9 3.25a1.25 1.25 0 110 2.5 1.25 1.25 0 010-2.5zm0 4.5a1.25 1.25 0 110 2.5 1.25 1.25 0 010-2.5zm0 4.5a1.25 1.25 0 110 2.5 1.25 1.25 0 010-2.5z" fill="currentColor"/></svg></div>
+            <div class="main_link_text">...</div>
+          </a>
+        </li>
+      </ul>
+      <div class="menu_content_cta">
+        <a href="contact.html" class="mobile_cta_btn" style="font-size:.85rem;padding:13px 28px;">Contact Us →</a>
+      </div>
+    </div>
+  </div>
+
+</header><!-- /nav_component -->
+
+<script>
+// Scroll direction / navbar
+let lastST=0;
+window.addEventListener('scroll',()=>{
+  const now=window.scrollY,body=document.body;
+  if(Math.abs(lastST-now)>=10){
+    body.setAttribute('data-scrolling-direction',now>lastST?'down':'up');
+    body.setAttribute('data-scrolling-started',now>50?'true':'false');
+    lastST=now;
+  }
+  document.getElementById('scrollLine').style.width=(now/(document.body.scrollHeight-window.innerHeight)*100)+'%';
+  const b1=document.querySelector('.blob1'),b2=document.querySelector('.blob2'),b3=document.querySelector('.blob3');
+  if(b1)b1.style.transform=`translateY(${now*.09}px)`;
+  if(b2)b2.style.transform=`translateY(${-now*.07}px)`;
+  if(b3)b3.style.transform=`translateY(${now*.05}px)`;
+});
+
+// Mobile menu
+const mBtn=document.getElementById('mobileMenuBtn');
+const mWrap=document.getElementById('mobileMenuWrap');
+const mClose=document.getElementById('mobileCloseBtn');
+if(mBtn)mBtn.addEventListener('click',()=>mWrap.classList.add('open'));
+if(mClose)mClose.addEventListener('click',()=>mWrap.classList.remove('open'));
+if(mWrap)mWrap.addEventListener('click',e=>{
+  if(e.target===mWrap||e.target.classList.contains('nav_menu_overlay'))mWrap.classList.remove('open');
+});
+
+</script>
+</body>
+</html>
