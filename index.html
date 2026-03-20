@@ -449,27 +449,20 @@
                 width: 90vw !important;
                 max-width: 90vw !important;
                 margin: 0 auto !important;
-                display: flex !important;
-                justify-content: center !important;
-                align-items: center !important;
             }
             .scaling_video_small .scaling_video_wrapper {
                 width: 100% !important;
                 max-width: 100% !important;
-                transform: scale(0.2) !important;
-                transform-origin: center !important;
             }
             .scaling_video_small .scaling_video {
                 width: 100% !important;
                 max-width: 100% !important;
-                aspect-ratio: 3/2 !important;
-                overflow: hidden !important;
-                border-radius: clamp(8px, 2vw, 16px) !important;
+                aspect-ratio: 16 / 9 !important;
             }
             .scaling_video_small .scaling_video_video {
                 width: 100% !important;
                 height: 100% !important;
-                object-fit: cover !important;
+                object-fit: contain !important;
                 object-position: center !important;
             }
             .home_hero_wrap > .g_section_space[data-wf--global-section-space--section-space="main"] {
@@ -2629,31 +2622,6 @@
                                 // Initialize immediately (Slater handles DOM ready state)
                                 const cleanup = initFlipOnScroll();
 
-                                // Mobile-only behavior: start video small and grow on scroll
-                                if (window.matchMedia && window.matchMedia("(max-width: 767px)").matches && window.gsap && window.ScrollTrigger) {
-                                    const heroVideoWrapper = document.querySelector(".home_hero_contain .scaling_video_small .scaling_video_wrapper");
-                                    if (heroVideoWrapper) {
-                                        // Set initial scale to 80% smaller (scale 0.2)
-                                        gsap.set(heroVideoWrapper, { 
-                                            scale: 0.2,
-                                            transformOrigin: "center"
-                                        });
-                                        
-                                        // Animate from scale 0.2 to scale 1 (90% width of container)
-                                        gsap.to(heroVideoWrapper, {
-                                            scale: 1,
-                                            scrollTrigger: {
-                                                trigger: heroVideoWrapper,
-                                                start: "top bottom",
-                                                end: "top center",
-                                                scrub: true,
-                                                invalidateOnRefresh: true
-                                            },
-                                            ease: "power1.inOut"
-                                        });
-                                    }
-                                }
-
                                 // Export cleanup function for Slater
                                 if (typeof module !== 'undefined' && module.exports) {
                                     module.exports = {
@@ -2771,9 +2739,9 @@
                             </style>
                         </div>
                         <div class="g_clickable_wrap"><a class="g_clickable_link w-inline-block" data-wf-component-context="%5B%7B%22componentId%22%3A%229b2e969f-ce6e-f3cf-67b3-8b9ca39a7e17%22%2C%22instanceId%22%3A%229b2e969f-ce6e-f3cf-67b3-8b9ca39a7e30%22%7D%2C%7B%22componentId%22%3A%22824b76d0-0ddb-5ed5-8ae6-09771aaa568a%22%2C%22instanceId%22%3A%229b2e969f-ce6e-f3cf-67b3-8b9ca39a7e2c%22%7D%2C%7B%22componentId%22%3A%220254e612-9509-0757-3332-f6be61ca6889%22%2C%22instanceId%22%3A%22e3c8b535-008d-18b4-19d8-a889182de0e1%22%7D%5D"
-                                data-wf-element-id="0254e612-9509-0757-3332-f6be61ca688a" data-wf-event-ids="157071035-157071043" href="ct.html" target="" data-wf-native-id-path="9b2e969f-ce6e-f3cf-67b3-8b9ca39a7e30:9b2e969f-ce6e-f3cf-67b3-8b9ca39a7e2c:e3c8b535-008d-18b4-19d8-a889182de0e1:0254e612-9509-0757-3332-f6be61ca688a"
+                                data-wf-element-id="0254e612-9509-0757-3332-f6be61ca688a" data-wf-event-ids="157071035-157071043" href="/tickets/general-admission" target="" data-wf-native-id-path="9b2e969f-ce6e-f3cf-67b3-8b9ca39a7e30:9b2e969f-ce6e-f3cf-67b3-8b9ca39a7e2c:e3c8b535-008d-18b4-19d8-a889182de0e1:0254e612-9509-0757-3332-f6be61ca688a"
                                 data-wf-ao-click-engagement-tracking="true" data-gtm=""><span class="g_clickable_text u-sr-only">Contact Us</span></a>
-                            <link rel="prefetch" href="ct.html" /><button type="button" tracking="play" class="g_clickable_btn"><span class="g_clickable_text u-sr-only">Visit Us</span></button></div><span class="btn_main_inner"><span data-text="Color-Flip" class="btn_main_back"><span aria-hidden="true" class="btn_main_back_text u-text-style-h5">Contact Us</span></span>
+                            <link rel="prefetch" href="/tickets/general-admission" /><button type="button" tracking="play" class="g_clickable_btn"><span class="g_clickable_text u-sr-only">Visit Us</span></button></div><span class="btn_main_inner"><span data-text="Color-Flip" class="btn_main_back"><span aria-hidden="true" class="btn_main_back_text u-text-style-h5">Contact Us</span></span>
                         <span
                             class="btn_main_front"><span class="btn_main_bg"></span><span aria-hidden="true" class="btn_main_front_text u-text-style-h5">Contact Us</span>
                             <div class="btn_main_divider"></div>
@@ -3116,9 +3084,8 @@
                             display: block;
                             width: 100%;
                             height: auto;
-                            aspect-ratio: 3/2;
-                            object-fit: cover;
-                            object-position: center;
+                            aspect-ratio: 16 / 9;
+                            object-fit: contain;
                         }
                     }
                 </style>
@@ -3979,34 +3946,6 @@ SIGNATURE DISHES</div>
                         visibility: hidden;
                         opacity: 0;
                     }
-
-                    /* Mobile coin animation support */
-                    @media (max-width: 767px) {
-                        .coin {
-                            width: clamp(2.5rem, 8vw, 4rem) !important;
-                            height: auto !important;
-                        }
-                        .confetti {
-                            width: clamp(0.4rem, 3vw, 0.8rem) !important;
-                            height: clamp(0.4rem, 3vw, 0.8rem) !important;
-                        }
-                        /* Ensure game area has proper dimensions on mobile */
-                        [data-game-area] {
-                            touch-action: none;
-                            -webkit-touch-callout: none;
-                            -webkit-user-select: none;
-                            user-select: none;
-                            min-height: 60vh !important;
-                            width: 100% !important;
-                            position: relative !important;
-                        }
-                        [data-game-piggy-wrap] {
-                            touch-action: none;
-                            -webkit-touch-callout: none;
-                            -webkit-user-select: none;
-                            user-select: none;
-                        }
-                    }
                 </style>
             </div>
             <div class="u-embed-js w-embed w-script">
@@ -4044,17 +3983,17 @@ SIGNATURE DISHES</div>
                         }
 
                         const intro = root.querySelector('[data-game-intro]');
-                        const startBtn = intro ? intro.querySelector('[data-game-start]') : null;
+                        const startBtn = intro ? .querySelector('[data-game-start]');
                         const overlay = root.querySelector('[data-game-countdown-wrap]');
-                        const countdown = overlay ? overlay.querySelector('[data-game-countdown]') : null;
+                        const countdown = overlay ? .querySelector('[data-game-countdown]');
                         const hud = root.querySelector('[data-game-hud]');
                         const area = root.querySelector('[data-game-area]');
                         const piggyWrap = root.querySelector('[data-game-piggy-wrap]');
                         const endModal = root.querySelector('[data-game-modal]');
-                        const finalEl = endModal ? endModal.querySelector('[data-game-final-score]') : null;
-                        const retryBtn = endModal ? endModal.querySelector('[data-game-retry]') : null;
-                        const scoreEl = hud ? hud.querySelector('[data-game-score]') : null;
-                        const timeEl = hud ? hud.querySelector('[data-game-time]') : null;
+                        const finalEl = endModal ? .querySelector('[data-game-final-score]');
+                        const retryBtn = endModal ? .querySelector('[data-game-retry]');
+                        const scoreEl = hud ? .querySelector('[data-game-score]');
+                        const timeEl = hud ? .querySelector('[data-game-time]');
 
                         // Check for required elements
                         const requiredElements = [intro, startBtn, overlay, countdown, hud, area, piggyWrap, endModal,
@@ -4238,10 +4177,6 @@ SIGNATURE DISHES</div>
                                 type: 'x',
                                 bounds: area,
                                 inertia: true,
-                                // Mobile touch support
-                                allowNativeTouchScrolling: false,
-                                allowEventDefault: true,
-                                touchAction: 'none',
                                 onPress() {
                                     lastX = this.x;
                                     // Enable audio on first interaction
@@ -4286,18 +4221,15 @@ SIGNATURE DISHES</div>
                             c.alt = `${val} coin`;
                             area.appendChild(c);
 
-                            // Ensure area dimensions are properly calculated
-                            const w = area.clientWidth || area.offsetWidth || window.innerWidth * 0.9;
-                            const h = area.clientHeight || area.offsetHeight || window.innerHeight * 0.6;
+                            const w = area.clientWidth;
+                            const h = area.clientHeight;
 
-                            // Set initial position with mobile-friendly positioning
-                            const coinSize = Math.min(96, w * 0.1); // Adjust coin size for mobile
+                            // Set initial position
                             gsap.set(c, {
-                                x: Math.random() * (w - coinSize),
-                                y: -coinSize, // Start above the visible area
+                                x: Math.random() * (w - 96),
+                                y: 0,
                                 opacity: 1,
-                                rotation: 0,
-                                scale: Math.min(1, w / 400) // Scale down on very small screens
+                                rotation: 0
                             });
 
                             // ✨ UPDATED: Dynamic fall duration based on current difficulty
@@ -4307,7 +4239,7 @@ SIGNATURE DISHES</div>
                             // Animate falling with continuous rotation
                             gsap.to(c, {
                                 duration: adjustedDuration,
-                                y: h + coinSize, // Fall completely past the bottom
+                                y: h + 50,
                                 rotation: 360 + (Math.random() * 360), // 1-2 full rotations
                                 ease: 'none',
                                 onComplete: () => {
