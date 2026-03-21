@@ -1342,7 +1342,9 @@
                     <h3 class="form_heading">Send Us a Message</h3>
                     <p class="form_subheading">Sweet Treat Staff will confirm your inquiry, assist with your request, and follow up with everything you need - all within 3 business days.</p>
 
-                    <form id="contact-form" novalidate>
+                    <form id="contact-form" action="https://formspree.io/f/xzdjqenj" method="POST" novalidate>
+                        <input type="hidden" name="_subject" value="Sweet Treat contact form submission" />
+                        <input type="hidden" name="_next" value="/ct.html?submitted=true" />
                         <div class="cf_row">
                             <div class="cf_field">
                                 <label class="cf_label" for="cf-first">First Name</label>
@@ -2331,7 +2333,7 @@
 
 <script>
     // ─── Contact Form Submit ───
-    document.getElementById('contact-form').addEventListener('submit', function(e) {
+    document.getElementById('contact-form').addEventListener('submit', async function(e) {
         e.preventDefault();
         // Simple validation
         const first   = document.getElementById('cf-first').value.trim();
@@ -2339,10 +2341,51 @@
         const email   = document.getElementById('cf-email').value.trim();
         const inquiry = document.getElementById('cf-inquiry').value;
         const message = document.getElementById('cf-message').value.trim();
-        if (!first || !last || !email || !inquiry || !message) return;
-        // Show success
-        document.getElementById('cf-form-container').style.display = 'none';
-        document.getElementById('cf-success').classList.add('is-visible');
+        if (!first || !last || !email || !inquiry || !message) {
+            return;
+        }
+
+        const form = e.target;
+        const submitButton = form.querySelector('[type="submit"]');
+        if (submitButton) {
+            submitButton.disabled = true;
+            submitButton.classList.add('is-loading');
+        }
+
+        const errorEl = document.querySelector('.form_main_error_wrap');
+        if (errorEl) {
+            errorEl.style.display = 'none';
+        }
+
+        try {
+            const response = await fetch(form.action, {
+                method: 'POST',
+                body: new FormData(form),
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            form.style.display = 'none';
+            document.getElementById('cf-form-container').style.display = 'none';
+            document.getElementById('cf-success').classList.add('is-visible');
+            form.reset();
+
+        } catch (error) {
+            if (errorEl) {
+                errorEl.style.display = 'block';
+            }
+            console.error('Form submission failed', error);
+        } finally {
+            if (submitButton) {
+                submitButton.disabled = false;
+                submitButton.classList.remove('is-loading');
+            }
+        }
     });
 
     // ─── Subtle fade-in on scroll for info cards ───
