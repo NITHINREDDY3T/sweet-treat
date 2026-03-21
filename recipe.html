@@ -127,11 +127,6 @@
         .recipe_order_btn { display: inline-flex; align-items: center; gap: 0.6rem; padding: 1.1rem 2.2rem; border-radius: 12px; border: none; background: var(--_theme---button--background,#f1f0ec); color: var(--_theme---button--text,#190f0a); font-family: "Montserrat", sans-serif; font-size: 0.875rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; cursor: pointer; transition: background 0.25s ease, transform 0.2s ease, color 0.25s ease; }
         .recipe_order_btn:hover { background: var(--_theme---button--background-hover,#190f0a); color: var(--_theme---button--text-hover,#f1f0ec); transform: translateY(-2px); text-decoration: none; }
         .recipe_order_btn svg { width: 16px; height: 16px; fill: currentColor; flex-shrink: 0; }
-        .recipe_deco { position: absolute; pointer-events: none; opacity: 0.07; font-size: 5rem; user-select: none; }
-        .recipe_deco_1 { top:10%;left:5%;animation:float1 6s ease-in-out infinite; }
-        .recipe_deco_2 { top:25%;right:5%;animation:float2 7s ease-in-out infinite; }
-        .recipe_deco_3 { bottom:20%;left:8%;animation:float1 8s ease-in-out infinite 1s; }
-        .recipe_deco_4 { bottom:30%;right:6%;animation:float2 5.5s ease-in-out infinite .5s; }
         @keyframes float1 { 0%,100%{transform:translateY(0) rotate(-5deg)} 50%{transform:translateY(-18px) rotate(5deg)} }
         @keyframes float2 { 0%,100%{transform:translateY(0) rotate(5deg)} 50%{transform:translateY(-14px) rotate(-5deg)} }
     </style>
@@ -248,10 +243,6 @@
             .recipe_unlock_text {
                 font-size: 0.9rem !important;
                 line-height: 1.55 !important;
-            }
-            .recipe_deco {
-                font-size: 3.2rem;
-                opacity: 0.05;
             }
         }
     </style>
@@ -573,20 +564,15 @@
     <!-- MAIN RECIPE CONTENT -->
     <main>
         <section class="recipe_main">
-            <span class="recipe_deco recipe_deco_1">🍰</span>
-            <span class="recipe_deco recipe_deco_2">🧁</span>
-            <span class="recipe_deco recipe_deco_3">🍪</span>
-            <span class="recipe_deco recipe_deco_4">🎂</span>
             <div class="recipe_container">
                 <h1 class="recipe_title"><span>SECRET</span> <span>FORMULA</span></h1>
-                <span class="recipe_emoji">🔐</span>
                 <p class="recipe_subtitle">Enter the Secret Formula to unlock our most beloved recipe. Shhh… it's a sweet secret!</p>
                 <div class="recipe_card" id="recipe-form-wrap">
                     <span class="recipe_label">Enter the Secret Formula…</span>
                     <div class="recipe_input_wrap">
                         <input type="password" class="recipe_input" id="recipe-password" placeholder="Type the secret password…" autocomplete="off" spellcheck="false" />
                     </div>
-                    <button class="recipe_btn" id="recipe-submit-btn">Unlock the Recipe 🔓</button>
+                    <button class="recipe_btn" id="recipe-submit-btn">Unlock the Recipe</button>
                     <p class="recipe_error_msg" id="recipe-error">That's not the right formula! Try again 🤔</p>
                 </div>
                 <div class="recipe_card recipe_unlock_wrap" id="recipe-unlock-wrap">
