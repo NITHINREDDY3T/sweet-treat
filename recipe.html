@@ -579,7 +579,7 @@
                     <span class="recipe_unlock_emoji">🎉</span>
                     <h2 class="recipe_unlock_title">You cracked the code!</h2>
                     <p class="recipe_unlock_text">You've unlocked Sweet Treat's secret formula! Our recipes are crafted with love, the finest ingredients, and a whole lot of sweetness. The real secret? Every treat is made fresh, just for you. Ready to taste the magic?</p>
-                    <a href="/order" class="recipe_order_btn">Place Your Order <svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg"><path d="M15.8867 9.52849C16.5735 9.18188 16.5735 8.2013 15.8867 7.85465L3.70591 1.70624C2.88419 1.29146 2.01917 2.18569 2.46104 2.99317L5.57902 8.69163L2.46105 14.39C2.01918 15.1975 2.88415 16.0917 3.70589 15.6769L15.8867 9.52849Z"/></svg></a>
+                    <a href="https://app.sweettreat.io/node/auth?ref=recipe" class="recipe_order_btn">Place Your Order <svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg"><path d="M15.8867 9.52849C16.5735 9.18188 16.5735 8.2013 15.8867 7.85465L3.70591 1.70624C2.88419 1.29146 2.01917 2.18569 2.46104 2.99317L5.57902 8.69163L2.46105 14.39C2.01918 15.1975 2.88415 16.0917 3.70589 15.6769L15.8867 9.52849Z"/></svg></a>
                 </div>
             </div>
         </section>
@@ -1529,33 +1529,9 @@
             const userInputBase64 = btoa(userInput); // Encode to Base64
             
             if (userInputBase64 === SECRET_BASE64) {
-                // Success: Change button to green and show message
-                input.style.display = 'none';
-                btn.style.background = '#1ce585';
-                btn.style.color = '#190f0a';
-                btn.textContent = '🎉 Congrats! You unlocked it';
-                btn.style.cursor = 'default';
-                btn.disabled = true;
-                btn.style.animation = 'buttonPulse 0.6s ease';
-                
-                // Add animation style if not exists
-                if (!document.getElementById('button-animation-style')) {
-                    const style = document.createElement('style');
-                    style.id = 'button-animation-style';
-                    style.textContent = `
-                        @keyframes buttonPulse {
-                            0% { transform: scale(1); }
-                            50% { transform: scale(1.05); }
-                            100% { transform: scale(1); }
-                        }
-                    `;
-                    document.head.appendChild(style);
-                }
-                
-                // Redirect after 1.5 seconds
-                setTimeout(() => {
-                    window.location.href = 'https://app.sweettreat.io/node/auth?ref=recipe';
-                }, 1500);
+                // Success: Hide form and show unlock content
+                formWrap.style.display = 'none';
+                unlockWrap.classList.add('is-visible');
             } else {
                 // Error: Show error message and shake input
                 errMsg.textContent = 'Wrong password';
