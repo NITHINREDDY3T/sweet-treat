@@ -1516,25 +1516,60 @@
 <!-- Recipe Password Logic -->
 <script>
     (function() {
-        const SECRET = 'crush';
+        // Password stored in Base64 encoding
+        const SECRET_BASE64 = 'Y3J1c2g='; // 'crush' encoded
         const input = document.getElementById('recipe-password');
         const btn = document.getElementById('recipe-submit-btn');
         const errMsg = document.getElementById('recipe-error');
         const formWrap = document.getElementById('recipe-form-wrap');
         const unlockWrap = document.getElementById('recipe-unlock-wrap');
+        
         function attempt() {
-            const val = input.value.trim().toLowerCase();
-            if (val === SECRET) {
-                formWrap.style.display = 'none';
-                unlockWrap.classList.add('is-visible');
+            const userInput = input.value.trim().toLowerCase();
+            const userInputBase64 = btoa(userInput); // Encode to Base64
+            
+            if (userInputBase64 === SECRET_BASE64) {
+                // Success: Change button to green and show message
+                input.style.display = 'none';
+                btn.style.background = '#1ce585';
+                btn.style.color = '#190f0a';
+                btn.textContent = '🎉 Congrats! You unlocked it';
+                btn.style.cursor = 'default';
+                btn.disabled = true;
+                btn.style.animation = 'buttonPulse 0.6s ease';
+                
+                // Add animation style if not exists
+                if (!document.getElementById('button-animation-style')) {
+                    const style = document.createElement('style');
+                    style.id = 'button-animation-style';
+                    style.textContent = `
+                        @keyframes buttonPulse {
+                            0% { transform: scale(1); }
+                            50% { transform: scale(1.05); }
+                            100% { transform: scale(1); }
+                        }
+                    `;
+                    document.head.appendChild(style);
+                }
+                
+                // Redirect after 1.5 seconds
+                setTimeout(() => {
+                    window.location.href = 'https://app.sweettreat.io/node/auth?ref=recipe';
+                }, 1500);
             } else {
+                // Error: Show error message and shake input
+                errMsg.textContent = 'Wrong password';
                 errMsg.classList.add('is-visible');
                 input.classList.add('is-error');
                 input.value = '';
-                setTimeout(() => { input.classList.remove('is-error'); errMsg.classList.remove('is-visible'); }, 2800);
+                setTimeout(() => { 
+                    input.classList.remove('is-error'); 
+                    errMsg.classList.remove('is-visible'); 
+                }, 2800);
                 input.focus();
             }
         }
+        
         btn.addEventListener('click', attempt);
         input.addEventListener('keydown', function(e) { if (e.key === 'Enter') attempt(); });
     })();
