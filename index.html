@@ -4614,7 +4614,7 @@ SIGNATURE DISHES</div>
                         </div>
                         <div data-game-intro="" class="mini-game_intro">
                             <div data-word-reveal="true" data-prevent-flicker="true" class="mini-game_title_wrap u-text-style-h1 u-text-trim-off">
-                                <h2 data-cursor="text" class="mini-game_title u-text-style-h1 u-text-wrap-default">Freshly made, just the way you like it.</h2>
+                                <h2 data-cursor="text" class="mini-game_title u-text-style-h1 u-text-wrap-default">Freshly made just the way you like it.</h2>
                                 <div data-sticker-reveal="" data-sticker-inertia="" class="title_sticker is-mini-game"><img src="s/fig8.png" alt="Restaurant Sticker 8" class="sticker-image" /></div>
                             </div>
                             <p class="mini-game_intro_text u-text-style-main">Join us for a delightful dining experience crafted with care and flavor.</p>
@@ -4822,6 +4822,45 @@ SIGNATURE DISHES</div>
   gap: 28px;
   flex-wrap: wrap;
   justify-content: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Large desktop responsiveness (27-inch and above) */
+@media (min-width: 1920px) {
+  .lt-offer-grid {
+    max-width: 1400px;
+    gap: 40px;
+  }
+  
+  .lt-offer-card {
+    width: 400px;
+    padding: 40px;
+  }
+}
+
+@media (min-width: 2560px) {
+  .lt-offer-grid {
+    max-width: 1600px;
+    gap: 48px;
+  }
+  
+  .lt-offer-card {
+    width: 450px;
+    padding: 48px;
+  }
+  
+  .lt-offer-heading {
+    font-size: 1.5rem;
+  }
+  
+  .lt-offer-value {
+    font-size: 2.2rem;
+  }
+  
+  .lt-offer-code {
+    font-size: 1.2rem;
+  }
 }
 
 /* ── Card base ── */
@@ -4908,21 +4947,40 @@ SIGNATURE DISHES</div>
   max-width: 240px;
   margin-bottom: 8px;
   text-shadow: 0 2px 4px rgba(167, 138, 255, 0.4);
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* ── Big discount value ── */
 .lt-offer-value {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 72px;
   line-height: 1;
-  background: linear-gradient(135deg, #ffffff 0%, #f0e6ff 30%, #e8d5ff 70%, #d4b5ff 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
   letter-spacing: 0.02em;
   margin-bottom: 4px;
   text-shadow: 0 4px 8px rgba(167, 138, 255, 0.5);
   filter: drop-shadow(0 2px 4px rgba(167, 138, 255, 0.3));
+  text-align: center;
+}
+
+.lt-offer-highlight {
+  background: linear-gradient(135deg, #ffffff 0%, #f0e6ff 30%, #e8d5ff 70%, #d4b5ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: block;
+  font-size: 72px;
+  line-height: 1;
+}
+
+.lt-offer-normal {
+  color: #f0e6ff;
+  font-size: 18px;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 400;
+  opacity: 0.9;
+  display: block;
+  margin-top: 2px;
 }
 
 /* ── Dashed divider (tear line) ── */
@@ -4933,18 +4991,35 @@ SIGNATURE DISHES</div>
   margin: 18px 0;
   position: relative;
 }
-.lt-offer-divider::before,
-.lt-offer-divider::after {
+.lt-offer-divider::before {
   content: '';
   position: absolute;
   top: 50%; transform: translateY(-50%);
-  width: 18px; height: 18px;
-  border-radius: 50%;
-  background: #a78aff; /* match your page bg */
-  border: 2px solid rgba(212, 181, 255, 0.5);
+  width: 24px; height: 24px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23d4b5ff' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M14.121 14.121L19 19m-7-7l7-7m-7 7l-2.879 2.879M12 12L9.121 9.121m0 5.758a3 3 0 10-4.243 4.243 3 3 0 004.243-4.243zm0-5.758a3 3 0 10-4.243-4.243 3 3 0 004.243 4.243z'/%3E%3C/svg%3E") center/contain no-repeat;
+  filter: drop-shadow(0 2px 4px rgba(167, 138, 255, 0.3));
+  left: -24px;
 }
-.lt-offer-divider::before { left: -24px; }
-.lt-offer-divider::after  { right: -24px; }
+
+/* ── ONE TIME USE sticker ── */
+.lt-offer-sticker {
+  position: absolute;
+  top: 12px;
+  right: -8px;
+  background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transform: rotate(12deg);
+  box-shadow: 0 2px 8px rgba(255, 107, 107, 0.4);
+  z-index: 10;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
 
 /* ── Code button ── */
 .lt-offer-code-btn {
@@ -4971,6 +5046,12 @@ SIGNATURE DISHES</div>
   letter-spacing: 0.14em;
   color: #e8d5ff;
   text-shadow: 0 1px 2px rgba(167, 138, 255, 0.3);
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+
+.lt-offer-code:hover {
+  color: #ffffff;
 }
 
 /* copy SVG icon via CSS */
@@ -5030,24 +5111,30 @@ crafted to delight and available only for a limited time.</p>
 <div class="lt-offer-grid">
     <article class="lt-offer-card is-mint" data-lt-code="MINTCHOCOLATECHIP">
         <div class="lt-offer-badge">● $5 OFF</div>
-        <div class="lt-offer-icon"></div>
+        <div class="lt-offer-sticker">ONE TIME USE</div>
         <h3 class="lt-offer-heading">Cool down with our mint choco special</h3>
-        <div class="lt-offer-value">$5</div>
+        <div class="lt-offer-value">
+            <span class="lt-offer-highlight">$5 off</span><br>
+            <span class="lt-offer-normal">on orders above $25+</span>
+        </div>
         <div class="lt-offer-divider"></div>
-        <button type="button" class="lt-offer-code-btn" data-cursor="pointer">
-            <span class="lt-offer-code">MINTCHOCOLATECHIP</span>
+        <button type="button" class="lt-offer-code-btn" data-cursor="pointer" onclick="copyOfferCode('MINTCHOCOLATECHIP')">
+            <span class="lt-offer-code" onclick="copyOfferCode('MINTCHOCOLATECHIP', this)">MINTCHOCOLATECHIP</span>
             <span class="lt-offer-copy-icon" aria-hidden="true"></span>
         </button>
         <p class="lt-offer-footnote">Click code to copy</p>
     </article>
     <article class="lt-offer-card is-cookie" data-lt-code="COOKIEDOUGH">
         <div class="lt-offer-badge">● 10% OFF</div>
-        <div class="lt-offer-icon"></div>
+        <div class="lt-offer-sticker">ONE TIME USE</div>
         <h3 class="lt-offer-heading">Sweet savings on your whole order!</h3>
-        <div class="lt-offer-value">10%</div>
+        <div class="lt-offer-value">
+            <span class="lt-offer-highlight">10% off</span><br>
+            <span class="lt-offer-normal">on orders above $25+</span>
+        </div>
         <div class="lt-offer-divider"></div>
-        <button type="button" class="lt-offer-code-btn" data-cursor="pointer">
-            <span class="lt-offer-code">COOKIEDOUGH</span>
+        <button type="button" class="lt-offer-code-btn" data-cursor="pointer" onclick="copyOfferCode('COOKIEDOUGH')">
+            <span class="lt-offer-code" onclick="copyOfferCode('COOKIEDOUGH', this)">COOKIEDOUGH</span>
             <span class="lt-offer-copy-icon" aria-hidden="true"></span>
         </button>
         <p class="lt-offer-footnote">Click code to copy</p>
@@ -6752,6 +6839,52 @@ document.querySelectorAll('.lt-offer-card').forEach(card => {
                 });
             });
         });
+        
+        // Copy offer code to clipboard function
+        function copyOfferCode(code, element) {
+            navigator.clipboard.writeText(code).then(function() {
+                // Show success feedback
+                const targetElement = element || event.currentTarget;
+                const codeElement = targetElement.classList.contains('lt-offer-code') ? 
+                    targetElement : targetElement.querySelector('.lt-offer-code');
+                const button = targetElement.closest('.lt-offer-code-btn') || targetElement;
+                const originalText = codeElement.textContent;
+                
+                // Temporarily change text to show success
+                codeElement.textContent = 'Copied!';
+                button.style.borderColor = '#4ade80';
+                
+                // Reset after 2 seconds
+                setTimeout(() => {
+                    codeElement.textContent = originalText;
+                    button.style.borderColor = '';
+                }, 2000);
+            }).catch(function(err) {
+                console.error('Failed to copy: ', err);
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = code;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                
+                // Show feedback
+                const targetElement = element || event.currentTarget;
+                const codeElement = targetElement.classList.contains('lt-offer-code') ? 
+                    targetElement : targetElement.querySelector('.lt-offer-code');
+                const button = targetElement.closest('.lt-offer-code-btn') || targetElement;
+                const originalText = codeElement.textContent;
+                
+                codeElement.textContent = 'Copied!';
+                button.style.borderColor = '#4ade80';
+                
+                setTimeout(() => {
+                    codeElement.textContent = originalText;
+                    button.style.borderColor = '';
+                }, 2000);
+            });
+        }
     </script>
 </body>
 
