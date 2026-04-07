@@ -16,7 +16,7 @@
     <meta content="summary_large_image" name="twitter:card" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <style>
-        /* Prevent horizontal overflow */
+        /* Performance optimizations */
         * {
             box-sizing: border-box;
         }
@@ -26,35 +26,17 @@
             max-width: 100vw;
         }
         
-        /* Fix all containers */
-        .w-container {
-            max-width: 100% !important;
+        img, iframe {
+            max-width: 100%;
+            height: auto;
         }
         
-        /* Fix all sections */
         section {
             max-width: 100%;
             overflow-x: hidden;
         }
         
-        /* Fix all images */
-        img {
-            max-width: 100%;
-            height: auto;
-        }
-        
-        /* Fix all iframes */
-        iframe {
-            max-width: 100%;
-            overflow-x: hidden;
-        }
-
-        /* Pixel overlay default color */
-        .pixel_overlay {
-            color: #eef19e;
-        }
-
-        /* Footer top spacing */
+        /* Footer spacing */
         .footer_wrap .g_section_space[data-wf--global-section-space--section-space="small"] {
             height: 40px;
             min-height: 40px;
@@ -229,6 +211,17 @@
         html:not(.gsap-not-found) [data-prevent-flicker='true'] {
             visibility: hidden;
         }
+        
+        html:not(.gsap-not-found) [data-prevent-flicker='true'].animation-ready {
+            visibility: visible;
+        }
+        
+        /* Only force initial visibility, not during animation */
+        .ft_exhibits_intro[data-word-reveal='true']:not(.gsap-animation-started),
+        .ft_exhibits_intro[data-word-reveal='true']:not(.gsap-animation-started) * {
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
 
         .line-mask,
         .word-mask,
@@ -238,6 +231,29 @@
         }
     </style>
     <noscript><style>[data-prevent-flicker='true'] { visibility: visible !important; }</style></noscript>
+    
+    <!-- Additional fallback for trivia heading visibility -->
+    <script>
+        // Immediate visibility fix for trivia heading
+        document.addEventListener('DOMContentLoaded', function() {
+            // Make trivia heading visible immediately but allow animations
+            const triviaElements = document.querySelectorAll('[data-word-reveal="true"]');
+            triviaElements.forEach(el => {
+                el.classList.add('animation-ready');
+                // Don't force opacity to 1, let animations control it
+                el.style.visibility = 'visible';
+            });
+        });
+        
+        // Additional backup after 2 seconds even if animation fails
+        setTimeout(() => {
+            document.querySelectorAll('[data-word-reveal="true"]:not(.gsap-animation-started)').forEach(el => {
+                el.classList.add('animation-ready');
+                el.style.visibility = 'visible';
+                el.style.opacity = '1';
+            });
+        }, 2000);
+    </script>
 
     <!-- Lenis CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.2.3/dist/lenis.css">
@@ -2390,6 +2406,60 @@
                         .ft_exhibits_wrap .title_sticker.is-ft-exhibits-1:hover { transform: translateY(-6px) rotate(-4deg) scale(1.03); }
                         .ft_exhibits_wrap .title_sticker.is-ft-exhibits-2:hover { transform: translateY(-6px) rotate(4deg)  scale(1.03); }
                     }
+
+                    /* Mobile spacing for scrolling cards */
+                    @media (max-width: 767px) {
+                        /* Extend the scrolling field for more space */
+                        .ft_exhibits_wrap .ft_exhibit_list_wrap {
+                            padding-left: 40px !important;
+                            padding-right: 40px !important;
+                        }
+                        
+                        .ft_exhibits_wrap .ft_exhibit_item {
+                            margin-right: 80px !important;
+                            flex-shrink: 0 !important;
+                        }
+                        
+                        /* Extra space between first two cards */
+                        .ft_exhibits_wrap .ft_exhibit_item:nth-child(1) {
+                            margin-right: 120px !important;
+                        }
+                        
+                        /* Extra space between last two cards */
+                        .ft_exhibits_wrap .ft_exhibit_item:nth-child(5) {
+                            margin-right: 120px !important;
+                        }
+                        
+                        .ft_exhibits_wrap .ft_exhibit_item:last-child {
+                            margin-right: 0 !important;
+                        }
+                    }
+
+                    @media (max-width: 480px) {
+                        /* Extend the scrolling field for more space */
+                        .ft_exhibits_wrap .ft_exhibit_list_wrap {
+                            padding-left: 30px !important;
+                            padding-right: 30px !important;
+                        }
+                        
+                        .ft_exhibits_wrap .ft_exhibit_item {
+                            margin-right: 70px !important;
+                        }
+                        
+                        /* Extra space between first two cards */
+                        .ft_exhibits_wrap .ft_exhibit_item:nth-child(1) {
+                            margin-right: 100px !important;
+                        }
+                        
+                        /* Extra space between last two cards */
+                        .ft_exhibits_wrap .ft_exhibit_item:nth-child(5) {
+                            margin-right: 100px !important;
+                        }
+                        
+                        .ft_exhibits_wrap .ft_exhibit_item:last-child {
+                            margin-right: 0 !important;
+                        }
+                    }
                 </style>
                 <script>
                     document.addEventListener("DOMContentLoaded", function() {
@@ -2509,7 +2579,7 @@
                             </div>
                             <div class="exhibit_card_text_wrap">
                                 <h3 class="exhibit_card_heading u-text-style-h5">Sweet Treat<br>Destination</h3>
-                                <p class="exhibit_card_text u-text-style-small u-color-faded">Sweet Treat is a delicious dessert destination! Perfect for all sweet lovers.</p>
+                                <p class="exhibit_card_text u-text-style-small u-color-faded">Sweet Treat is a delicious dessert <br>destination! Perfect for all sweet lovers.</p>
                             </div>
                         </div>
                     </div>
@@ -2525,7 +2595,7 @@
                             </div>
                             <div class="exhibit_card_text_wrap">
                                 <h3 class="exhibit_card_heading u-text-style-h5">Virtual Brand<br>Experience</h3>
-                                <p class="exhibit_card_text u-text-style-small u-color-faded">A virtual brand filled with people accustomed to treating their sweet tooth with 5 star rating delicacies.</p>
+                                <p class="exhibit_card_text u-text-style-small u-color-faded">A virtual brand filled with people <br>accustomed to treating their sweet tooth with 5 star rating delicacies.</p>
                             </div>
                         </div>
                     </div>
@@ -2601,40 +2671,7 @@
                     <div data-card-stack-intro="" data-prevent-flicker="true" data-word-reveal="true" class="ft_exhibits_intro u-text-style-h1 u-text-trim-off">
                         <div data-cursor="text" class="ft_exhibits_title u-text-style-h1 u-text-wrap-default">TRIVIA</div>
                         <p class="ft_articles_text u-text-style-h4" style="margin:18px auto 0; max-width:54ch;">A few quick facts about Sweet Treat, the mascots, the inspiration, and the little surprises we like to include.</p>
-                        <div data-sticker-reveal="" data-sticker-inertia="" class="title_sticker is-ft-exhibits-1" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" class="sticker-image" style="width:100%;height:100%;" aria-hidden="true">
-                                <defs>
-                                    <linearGradient id="triviaCandy1" x1="4" y1="4" x2="20" y2="20" gradientUnits="userSpaceOnUse">
-                                        <stop offset="0" stop-color="#ff7ab6"/>
-                                        <stop offset="0.55" stop-color="#a78aff"/>
-                                        <stop offset="1" stop-color="#7dd3fc"/>
-                                    </linearGradient>
-                                </defs>
-                                <!-- Lollipop -->
-                                <path d="M12 4.2a6 6 0 1 0 0 12a6 6 0 0 0 0-12Z" fill="rgba(255,255,255,0.20)" stroke="url(#triviaCandy1)" stroke-width="2"/>
-                                <path d="M9.2 7.8c1-.9 2.5-1.3 4.2-.7" stroke="url(#triviaCandy1)" stroke-width="2" stroke-linecap="round"/>
-                                <path d="M14.1 9.1c.7 1 .6 2.6-.4 3.7" stroke="url(#triviaCandy1)" stroke-width="2" stroke-linecap="round"/>
-                                <path d="M10.8 14.5l-3.4 3.4" stroke="url(#triviaCandy1)" stroke-width="2.2" stroke-linecap="round"/>
-                                <path d="M6.5 19.3l1.1-1.1" stroke="url(#triviaCandy1)" stroke-width="3" stroke-linecap="round"/>
-                            </svg>
-                        </div>
-                        <div data-sticker-reveal="" data-sticker-inertia="" class="title_sticker is-ft-exhibits-2" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" class="sticker-image" style="width:100%;height:100%;" aria-hidden="true">
-                                <defs>
-                                    <linearGradient id="triviaFood2" x1="3" y1="6" x2="21" y2="18" gradientUnits="userSpaceOnUse">
-                                        <stop offset="0" stop-color="#ffd166"/>
-                                        <stop offset="0.55" stop-color="#ff7ab6"/>
-                                        <stop offset="1" stop-color="#86efac"/>
-                                    </linearGradient>
-                                </defs>
-                                <!-- Cupcake -->
-                                <path d="M7.5 10.2c0-2.1 1.9-3.8 4.5-3.8s4.5 1.7 4.5 3.8c0 .9-.3 1.6-.9 2.2H8.4c-.6-.6-.9-1.3-.9-2.2Z" fill="rgba(255,255,255,0.18)" stroke="url(#triviaFood2)" stroke-width="2" stroke-linejoin="round"/>
-                                <path d="M8.2 12.4h7.6l-1 8H9.2l-1-8Z" fill="rgba(255,255,255,0.12)" stroke="url(#triviaFood2)" stroke-width="2" stroke-linejoin="round"/>
-                                <path d="M9.2 16h5.6" stroke="url(#triviaFood2)" stroke-width="2" stroke-linecap="round" opacity="0.95"/>
-                                <path d="M12 5.2c.9 0 1.6.7 1.6 1.6" stroke="url(#triviaFood2)" stroke-width="2" stroke-linecap="round"/>
-                            </svg>
-                        </div>
-                    </div>
+                                            </div>
                     <div data-card-stack-outro="" class="ft_exhibits_outro">
                         <div data-cursor="text" class="ft_exhibits_title u-text-style-h1 u-text-wrap-default">LITTLE DETAILS,<br/>SWEET LORE.</div>
                     </div>
@@ -4683,66 +4720,40 @@
             </div>
     </footer>
 
-                                        </div>
-                    <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=684433cbdb896cfecac10c42" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-                    <script src="https://cdn.prod.website-files.com/684433cbdb896cfecac10c42/js/webflow.schunk.8de1b7588da2aba5.js" type="text/javascript" integrity="sha384-876/McpGIoNbmzRCGU4pJwEXEsPZHqMcoD6GLnM+oUWYa+ZULdHD82mRsdQ9ihcn" crossorigin="anonymous"></script>
-                    <script src="https://cdn.prod.website-files.com/684433cbdb896cfecac10c42/js/webflow.b5aa30e4.1e37fca45277f645.js" type="text/javascript" integrity="sha384-/ozziX9ic8aHbdGoORsPO0XxE0Jo4P91UA466to4PvdVczDlAsJc2GAGKGDfKZvu" crossorigin="anonymous"></script>
-                    <script src="https://cdn.prod.website-files.com/gsap/3.14.2/gsap.min.js" type="text/javascript"></script>
-                    <script src="https://cdn.prod.website-files.com/gsap/3.14.2/Flip.min.js" type="text/javascript"></script>
-                    <script src="https://cdn.prod.website-files.com/gsap/3.14.2/ScrollTrigger.min.js" type="text/javascript"></script>
-                    <script src="https://cdn.prod.website-files.com/gsap/3.14.2/SplitText.min.js" type="text/javascript"></script>
-                    <script src="https://cdn.prod.website-files.com/gsap/3.14.2/Draggable.min.js" type="text/javascript"></script>
-                    <script src="https://cdn.prod.website-files.com/gsap/3.14.2/InertiaPlugin.min.js" type="text/javascript"></script>
-                    <script src="https://cdn.prod.website-files.com/gsap/3.14.2/Observer.min.js" type="text/javascript"></script>
-                    <script src="https://cdn.prod.website-files.com/gsap/3.14.2/Physics2DPlugin.min.js" type="text/javascript"></script>
-                    <script src="https://cdn.prod.website-files.com/gsap/3.14.2/CustomEase.min.js" type="text/javascript"></script>
-                    <script src="https://cdn.prod.website-files.com/gsap/3.14.2/TextPlugin.min.js" type="text/javascript"></script>
-                    <script type="text/javascript">
-                        gsap.registerPlugin(Flip, ScrollTrigger, SplitText, Draggable, InertiaPlugin, Observer, Physics2DPlugin, CustomEase, TextPlugin);
-                    </script>
-                    <script src="https://cdn.jsdelivr.net/npm/lenis@1.2.3/dist/lenis.min.js"></script>
-                    <script src="https://cdn.jsdelivr.net/gh/lumosframework/scripts@v1.1.1/theme-collector.js" defer></script>
-                    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js" defer></script>
-                    <script src="https://cdnjs.cloudflare.com/ajax/libs/flickity/2.3.0/flickity.pkgd.min.js" defer></script>
-<input type="hidden" name="UTM_CONT" value="">
-<input type="hidden" name="UTM_TERM" value=""></div></div></label></form>
-                    <div
-                        class="form_main_success_wrap w-form-done">
-                        <div class="form_main_success_text u-text-style-h5">Thank you for joining. Welcome to the MoMoney Family!</div>
-                </div>
-                <div class="form_main_error_wrap w-form-fail">
-                    <div class="form_main_error_text u-text-style-h5">Oops! Something went wrong while submitting the form.</div>
-                </div>
-            </div>
-
-            </div>
-            </div>
-            </div>
-            <div class="canvas-matter">
-                <div id="canvas-target" class="canvas-matter__target"></div>
-            </div>
-    </footer>
-    </div>
     <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=684433cbdb896cfecac10c42" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <script src="https://cdn.prod.website-files.com/684433cbdb896cfecac10c42/js/webflow.schunk.8de1b7588da2aba5.js" type="text/javascript" integrity="sha384-876/McpGIoNbmzRCGU4pJwEXEsPZHqMcoD6GLnM+oUWYa+ZULdHD82mRsdQ9ihcn" crossorigin="anonymous"></script>
     <script src="https://cdn.prod.website-files.com/684433cbdb896cfecac10c42/js/webflow.b5aa30e4.1e37fca45277f645.js" type="text/javascript" integrity="sha384-/ozziX9ic8aHbdGoORsPO0XxE0Jo4P91UA466to4PvdVczDlAsJc2GAGKGDfKZvu" crossorigin="anonymous"></script>
-    <script src="https://cdn.prod.website-files.com/gsap/3.14.2/gsap.min.js" type="text/javascript"></script>
-    <script src="https://cdn.prod.website-files.com/gsap/3.14.2/Flip.min.js" type="text/javascript"></script>
-    <script src="https://cdn.prod.website-files.com/gsap/3.14.2/ScrollTrigger.min.js" type="text/javascript"></script>
-    <script src="https://cdn.prod.website-files.com/gsap/3.14.2/SplitText.min.js" type="text/javascript"></script>
-    <script src="https://cdn.prod.website-files.com/gsap/3.14.2/Draggable.min.js" type="text/javascript"></script>
-    <script src="https://cdn.prod.website-files.com/gsap/3.14.2/InertiaPlugin.min.js" type="text/javascript"></script>
-    <script src="https://cdn.prod.website-files.com/gsap/3.14.2/Observer.min.js" type="text/javascript"></script>
-    <script src="https://cdn.prod.website-files.com/gsap/3.14.2/Physics2DPlugin.min.js" type="text/javascript"></script>
-    <script src="https://cdn.prod.website-files.com/gsap/3.14.2/CustomEase.min.js" type="text/javascript"></script>
-    <script src="https://cdn.prod.website-files.com/gsap/3.14.2/TextPlugin.min.js" type="text/javascript"></script>
-    <script type="text/javascript">
-        gsap.registerPlugin(Flip, ScrollTrigger, SplitText, Draggable, InertiaPlugin, Observer, Physics2DPlugin, CustomEase, TextPlugin);
-    </script>
+    
+    <!-- GSAP and Plugins -->
+    <script src="https://cdn.prod.website-files.com/gsap/3.14.2/gsap.min.js"></script>
+    <script src="https://cdn.prod.website-files.com/gsap/3.14.2/Flip.min.js"></script>
+    <script src="https://cdn.prod.website-files.com/gsap/3.14.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.prod.website-files.com/gsap/3.14.2/SplitText.min.js"></script>
+    <script src="https://cdn.prod.website-files.com/gsap/3.14.2/Draggable.min.js"></script>
+    <script src="https://cdn.prod.website-files.com/gsap/3.14.2/InertiaPlugin.min.js"></script>
+    <script src="https://cdn.prod.website-files.com/gsap/3.14.2/Observer.min.js"></script>
+    <script src="https://cdn.prod.website-files.com/gsap/3.14.2/Physics2DPlugin.min.js"></script>
+    <script src="https://cdn.prod.website-files.com/gsap/3.14.2/CustomEase.min.js"></script>
+    <script src="https://cdn.prod.website-files.com/gsap/3.14.2/TextPlugin.min.js"></script>
+    
+    <!-- Other Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/lenis@1.2.3/dist/lenis.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/lumosframework/scripts@v1.1.1/theme-collector.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flickity/2.3.0/flickity.pkgd.min.js" defer></script>
+
+    <!-- GSAP Plugin Registration -->
+    <script>
+        gsap.registerPlugin(Flip, ScrollTrigger, SplitText, Draggable, InertiaPlugin, Observer, Physics2DPlugin, CustomEase, TextPlugin);
+    </script>
+
+    </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=684433cbdb896cfecac10c42" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="https://cdn.prod.website-files.com/684433cbdb896cfecac10c42/js/webflow.schunk.8de1b7588da2aba5.js" type="text/javascript" integrity="sha384-876/McpGIoNbmzRCGU4pJwEXEsPZHqMcoD6GLnM+oUWYa+ZULdHD82mRsdQ9ihcn" crossorigin="anonymous"></script>
+    <script src="https://cdn.prod.website-files.com/684433cbdb896cfecac10c42/js/webflow.b5aa30e4.1e37fca45277f645.js" type="text/javascript" integrity="sha384-/ozziX9ic8aHbdGoORsPO0XxE0Jo4P91UA466to4PvdVczDlAsJc2GAGKGDfKZvu" crossorigin="anonymous"></script>
 
     <!-- Lenis -->
     <script>
@@ -4800,22 +4811,29 @@
                 });
         });
     </script>
-
-
     <!-- Split Text -->
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            if (typeof window.gsap === "undefined") document.documentElement.classList.add("gsap-not-found");
-            gsap.registerPlugin(ScrollTrigger, Flip, SplitText);
+            // Only register if not already registered
+            if (typeof gsap !== "undefined" && !gsap.plugins.ScrollTrigger) {
+                gsap.registerPlugin(ScrollTrigger, Flip, SplitText);
+            }
         });
     </script>
 
     <!-- Split Text Headings -->
     <script>
         document.addEventListener("DOMContentLoaded", () => {
+            // Register GSAP plugins first
+            if (typeof gsap !== "undefined" && !gsap.plugins.ScrollTrigger) {
+                gsap.registerPlugin(ScrollTrigger, SplitText);
+            }
+            
             ScrollTrigger.matchMedia({
                 "(prefers-reduced-motion: reduce)": () => {
+                    // Show all elements immediately for reduced motion
                     document.querySelectorAll("[data-word-reveal='true']").forEach(text => {
+                        text.classList.add('animation-ready');
                         text.style.visibility = "visible";
                         text.querySelectorAll(".word, .char").forEach(el => {
                             el.style.visibility = "visible";
@@ -4826,52 +4844,144 @@
                 },
 
                 "(prefers-reduced-motion: no-preference)": () => {
+                    // Animate elements for normal motion
                     document.querySelectorAll("[data-word-reveal='true']").forEach((text) => {
+                        // Skip if already processed
+                        if (text.dataset.wordRevealProcessed) return;
+                        text.dataset.wordRevealProcessed = "true";
+                        
                         const sticker = text.querySelectorAll("[data-sticker-reveal]");
 
-                        const split = SplitText.create(text, {
-                            type: "words, chars",
-                            wordsClass: "word",
-                            charsClass: "char",
-                        });
+                        try {
+                            const split = SplitText.create(text, {
+                                type: "words, chars",
+                                wordsClass: "word",
+                                charsClass: "char",
+                            });
 
-                        // ensure container is visible before animating
-                        gsap.set(text, {
-                            visibility: "visible"
-                        });
+                            // Add animation-ready class to make element visible
+                            text.classList.add('animation-ready');
+                            
+                            // Mark animation as started to override CSS
+                            text.classList.add('gsap-animation-started');
+                            
+                            // ensure container is visible before animating
+                            gsap.set(text, {
+                                visibility: "visible",
+                                opacity: 1
+                            });
+                            
+                            // Reset any split words to visible state initially
+                            gsap.set(split.words, {
+                                opacity: 1,
+                                yPercent: 0,
+                                scaleY: 1,
+                                rotate: 0
+                            });
 
-                        const tl = gsap.timeline({
-                            scrollTrigger: {
-                                trigger: text,
-                                start: "top bottom",
-                                end: "top 80%",
-                                toggleActions: "none play none reset",
-                            },
-                        });
-
-                        tl.from(split.words, {
-                            autoAlpha: 0,
-                            yPercent: 100,
-                            scaleY: 0,
-                            rotate: 10,
-                            delay: 0.2,
-                            duration: 1,
-                            ease: "elastic.out(0.75, 0.6)",
-                            stagger: {
-                                each: 0.035
-                            },
-                        });
-
-                        if (sticker) {
-                            tl.from(
-                                sticker, {
-                                    scale: 0,
-                                    duration: 0.4,
-                                    ease: "back.out(3)",
-                                    stagger: 0.2,
+                            let hasFadedOut = false;
+                            let isScrollingDown = false;
+                            let scrollTimeout;
+                            
+                            // Detect scroll direction and activity
+                            let lastScrollY = window.scrollY;
+                            window.addEventListener('scroll', () => {
+                                const currentScrollY = window.scrollY;
+                                isScrollingDown = currentScrollY > lastScrollY;
+                                lastScrollY = currentScrollY;
+                                
+                                // Clear existing timeout
+                                clearTimeout(scrollTimeout);
+                                
+                                // Set new timeout to detect when scrolling stops
+                                scrollTimeout = setTimeout(() => {
+                                    isScrollingDown = false;
+                                }, 150);
+                            });
+                            
+                            const tl = gsap.timeline({
+                                scrollTrigger: {
+                                    trigger: text,
+                                    start: "top 80%",
+                                    end: "top -20%",
+                                    toggleActions: "play none reverse none",
+                                    onUpdate: (self) => {
+                                        // Only handle fade-in (reverse direction)
+                                        if (self.direction === -1) {
+                                            // Scrolling up - always allow fade-in
+                                            tl.progress(self.progress);
+                                            hasFadedOut = false;
+                                        } else if (self.direction === 1 && isScrollingDown && !hasFadedOut) {
+                                            // Scrolling down and active - allow fade-out once
+                                            tl.progress(self.progress);
+                                            if (self.progress > 0.5) {
+                                                hasFadedOut = true;
+                                            }
+                                        }
+                                        // If not scrolling down or already faded out, don't progress
+                                    }
                                 },
-                                "<+35%"
-                            );
+                            });
+
+                            // Fade in animation (plays when scrolling down to reach the element)
+                            tl.from(split.words, {
+                                autoAlpha: 0,
+                                yPercent: 100,
+                                scaleY: 0,
+                                rotate: 10,
+                                delay: 0.2,
+                                duration: 1,
+                                ease: "elastic.out(0.75, 0.6)",
+                                stagger: {
+                                    each: 0.035
+                                },
+                            });
+
+                            if (sticker.length > 0) {
+                                tl.from(
+                                    sticker, {
+                                        scale: 0,
+                                        duration: 0.4,
+                                        ease: "back.out(3)",
+                                        stagger: 0.2,
+                                    },
+                                    "<+35%"
+                                );
+                            }
+                            
+                            // Fade out animation (plays when scrolling down past the element)
+                            tl.to(split.words, {
+                                autoAlpha: 0,
+                                yPercent: -30,
+                                scale: 0.9,
+                                duration: 0.6,
+                                ease: "power2.in",
+                                stagger: {
+                                    each: 0.02,
+                                    from: "start"
+                                }
+                            }, "+=0.3");
+                            
+                            if (sticker.length > 0) {
+                                tl.to(
+                                    sticker, {
+                                        scale: 0,
+                                        rotation: 180,
+                                        duration: 0.5,
+                                        ease: "power2.in",
+                                        stagger: 0.1
+                                    },
+                                    "-=0.2"
+                                );
+                            }
+                        } catch (error) {
+                            console.warn('SplitText animation failed:', error);
+                            // Fallback: show the element anyway
+                            text.classList.add('animation-ready');
+                            text.style.visibility = "visible";
+                            if (sticker.length > 0) {
+                                sticker.forEach(s => s.style.visibility = "visible");
+                            }
                         }
                     });
                 }
