@@ -4828,38 +4828,171 @@ SIGNATURE DISHES</div>
 
 /* Large desktop responsiveness (27-inch and above) */
 @media (min-width: 1920px) {
+  .ft_articles_wrap .u-container {
+    max-width: 1800px;
+  }
+  
+  .ft_articles_title {
+    font-size: 3.5rem;
+  }
+  
+  .ft_articles_text {
+    font-size: 1.4rem;
+    margin-bottom: 40px;
+  }
+  
   .lt-offer-grid {
-    max-width: 1400px;
-    gap: 40px;
+    max-width: 1600px;
+    gap: 60px;
+    padding: 0 40px;
   }
   
   .lt-offer-card {
-    width: 400px;
-    padding: 40px;
+    width: 420px;
+    padding: 48px;
+    border-radius: 24px;
+  }
+  
+  .lt-offer-heading {
+    font-size: 20px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+  
+  .lt-offer-highlight {
+    font-size: 70px;
+  }
+  
+  .lt-offer-normal {
+    font-size: 20px;
+  }
+  
+  .lt-offer-code {
+    font-size: 20px;
+  }
+  
+  .lt-offer-code-btn {
+    padding: 16px 24px;
+  }
+  
+  .lt-offer-disclaimer {
+    font-size: 12px;
   }
 }
 
 @media (min-width: 2560px) {
+  .ft_articles_wrap .u-container {
+    max-width: 2200px;
+  }
+  
+  .ft_articles_title {
+    font-size: 4rem;
+  }
+  
+  .ft_articles_text {
+    font-size: 1.6rem;
+    margin-bottom: 50px;
+  }
+  
   .lt-offer-grid {
-    max-width: 1600px;
-    gap: 48px;
+    max-width: 2000px;
+    gap: 80px;
+    padding: 0 60px;
   }
   
   .lt-offer-card {
-    width: 450px;
-    padding: 48px;
+    width: 480px;
+    padding: 56px;
+    border-radius: 28px;
   }
   
   .lt-offer-heading {
-    font-size: 1.5rem;
+    font-size: 22px;
+    padding-top: 20px;
+    padding-bottom: 20px;
   }
   
-  .lt-offer-value {
-    font-size: 2.2rem;
+  .lt-offer-highlight {
+    font-size: 80px;
+  }
+  
+  .lt-offer-normal {
+    font-size: 22px;
   }
   
   .lt-offer-code {
-    font-size: 1.2rem;
+    font-size: 22px;
+  }
+  
+  .lt-offer-code-btn {
+    padding: 18px 28px;
+  }
+  
+  .lt-offer-disclaimer {
+    font-size: 13px;
+  }
+  
+  .lt-offer-copy-icon {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+@media (min-width: 3840px) {
+  .ft_articles_wrap .u-container {
+    max-width: 3000px;
+  }
+  
+  .ft_articles_title {
+    font-size: 5rem;
+  }
+  
+  .ft_articles_text {
+    font-size: 1.8rem;
+    margin-bottom: 60px;
+  }
+  
+  .lt-offer-grid {
+    max-width: 2800px;
+    gap: 120px;
+    padding: 0 80px;
+  }
+  
+  .lt-offer-card {
+    width: 560px;
+    padding: 64px;
+    border-radius: 32px;
+  }
+  
+  .lt-offer-heading {
+    font-size: 26px;
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+  
+  .lt-offer-highlight {
+    font-size: 100px;
+  }
+  
+  .lt-offer-normal {
+    font-size: 26px;
+  }
+  
+  .lt-offer-code {
+    font-size: 26px;
+  }
+  
+  .lt-offer-code-btn {
+    padding: 22px 32px;
+  }
+  
+  .lt-offer-disclaimer {
+    font-size: 15px;
+  }
+  
+  .lt-offer-copy-icon {
+    width: 28px;
+    height: 28px;
   }
 }
 
@@ -5036,7 +5169,7 @@ SIGNATURE DISHES</div>
 
 /* ── Code button ── */
 .lt-offer-code-btn {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
@@ -5047,7 +5180,7 @@ SIGNATURE DISHES</div>
   cursor: pointer;
   transition: all 0.15s ease;
   margin-bottom: 8px;
-  width: auto;
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
 }
@@ -5074,11 +5207,12 @@ SIGNATURE DISHES</div>
 /* copy SVG icon via CSS */
 .lt-offer-copy-icon {
   display: inline-block;
-  width: 16px; height: 16px;
-  opacity: 0.8;
+  width: 20px; height: 20px;
+  opacity: 1;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23e8d5ff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='9' y='9' width='13' height='13' rx='2'/%3E%3Cpath d='M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-size: contain;
+  flex-shrink: 0;
 }
 
 /* ── Footnote ── */
@@ -5142,7 +5276,7 @@ crafted to delight and available only for a limited time.</p>
 <!-- HTML (your exact structure, unchanged) -->
 <div class="lt-offer-grid">
     <article class="lt-offer-card is-mint" data-lt-code="MINTCHOCOLATECHIP">
-        <h3 class="lt-offer-heading">Cool cravings, cooler savings.</h3>
+        <h3 class="lt-offer-heading">Cool cravings, Cooler savings.</h3>
         <div class="lt-offer-value">
             <span class="lt-offer-highlight">$5 OFF</span><br>
             <span class="lt-offer-normal">For Orders Above $25.00</span>
@@ -5155,7 +5289,7 @@ crafted to delight and available only for a limited time.</p>
         <p class="lt-offer-disclaimer">This coupon is valid for one-time use only.</p>
     </article>
     <article class="lt-offer-card is-cookie" data-lt-code="COOKIEDOUGH">
-        <h3 class="lt-offer-heading">Sweet cravings, sweeter savings</h3>
+        <h3 class="lt-offer-heading">Sweet cravings, Sweeter savings.</h3>
         <div class="lt-offer-value">
             <span class="lt-offer-highlight">10% OFF</span><br>
             <span class="lt-offer-normal">For Orders Above $25.00</span>
