@@ -1468,6 +1468,93 @@
                             height: 2px !important;
                         }
                     }
+
+                    /* Menu Button Hovers */
+
+                    .menu_btn,
+                    .cart_icon_wrap,
+                    .mobile_menu_btn,
+                    .main_link {
+                        --elastic-ease-out: linear( 0, 0.5737 7.6%, 0.8382 11.87%, 0.9463 14.19%, 1.0292 16.54%, 1.0886 18.97%, 1.1258 21.53%, 1.137 22.97%, 1.1424 24.48%, 1.1423 26.1%, 1.1366 27.86%, 1.1165 31.01%, 1.0507 38.62%, 1.0219 42.57%, 0.9995 46.99%, 0.9872 51.63%, 0.9842 58.77%, 1.0011 81.26%, 1);
+                        --color-ease: cubic-bezier(.216, .62, .356, 1);
+                        transition: transform 0.65s var(--elastic-ease-out), background-color 0.4s var(--color-ease), gap 0.65s var(--elastic-ease-out);
+                        -webkit-tap-highlight-color: transparent;
+                    }
+
+                    .menu_btn:active,
+                    .mobile_menu_btn:active,
+                    .cart_icon_wrap:active {
+                        transform: scale(0.955, 0.954);
+                    }
+
+                    .cart_icon {
+                        transition: transform 0.8s var(--elastic-ease-out);
+                    }
+
+                    .main_link,
+                    .secondary_link {
+                        transition: opacity 0.3s;
+                    }
+
+                    .main_link_icon {
+                        width: 0em;
+                        transform: scale(0) rotate(45deg);
+                        transition: width 0.8s var(--elastic-ease-out), transform 0.8s var(--elastic-ease-out), padding-right 0.8s ease;
+                    }
+
+                    .secondary_link_line_fill {
+                        transform: scaleX(0);
+                        transition: transform 0.3s ease;
+                    }
+
+                    .nav_component {
+                        transition: transform 1s ease, padding 1s ease;
+                        transform: translateY(0%) rotate(0.001deg);
+                    }
+
+                    @media (hover: hover) and (pointer: fine) {
+                        .menu_btn:hover,
+                        .menu_btn:focus-visible {
+                            gap: 0.325rem;
+                            background-color: var(--_theme---button--background);
+                        }
+                        .menu_btn:hover .menu_btn_dot,
+                        .menu_btn:focus-visible .menu_btn_dot {
+                            background-color: var(--_theme---button--text);
+                        }
+                    }
+
+                    @media (hover: hover) and (pointer: fine) {
+                        .mobile_menu_btn:hover,
+                        .mobile_menu_btn:focus-visible {
+                            gap: 0.25rem;
+                            background-color: var(--_theme---button--background);
+                        }
+                        .mobile_menu_btn:hover .mobile_menu_btn_line,
+                        .mobile_menu_btn:focus-visible .mobile_menu_btn_line {
+                            background-color: var(--_theme---button--text);
+                        }
+                    }
+
+                    @media (hover: hover) and (pointer: fine) {
+                        .main_link:hover .main_link_icon,
+                        .main_link:focus-visible .main_link_icon {
+                            width: 0.6em;
+                            padding-right: 0.25rem;
+                            transform: scale(1) rotate(0deg);
+                        }
+                        .main_link:hover:not(:active),
+                        .main_link:focus-visible:not(:active) {
+                            opacity: 0.8;
+                        }
+                    }
+
+                    @media (hover: hover) and (pointer: fine) {
+                        .secondary_link:hover .secondary_link_line_fill,
+                        .secondary_link:focus-visible .secondary_link_line_fill {
+                            transform: scaleX(1);
+                        }
+                    }
                 </style>
             </div>
             <div data-transition-hero="" class="nav_wrap">
@@ -1837,41 +1924,56 @@
                         </li>
                     </ul>
                     </div>
-                    <div data-menu-wrap="" style="display:none" class="nav_menu_wrap">
-                        <div data-menu-base="" class="nav_menu_base u-theme-dark"></div>
-                        <div class="nav_menu_contain u-container">
-                            <button data-menu-close="" data-menu-btn="" class="nav_menu_close"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 20 20" fill="none" class="g_svg"><path d="M2.99939 3.00867L16.9905 16.9998" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path><path d="M3.00891 16.999L17 3.00791" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg></button>
-                            <ul data-menu-link-list="" role="list" class="main_link_list">
-                                <li class="main_link">
-                                    <div class="main_link_icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 18 18" fill="none" class="g_svg"><path d="M15.8867 9.52849C16.5735 9.18188 16.5735 8.2013 15.8867 7.85465L3.70591 1.70624C2.88419 1.29146 2.01917 2.18569 2.46104 2.99317L5.57902 8.69163L2.46105 14.39C2.01918 15.1975 2.88415 16.0917 3.70589 15.6769L15.8867 9.52849Z" fill="currentColor"></path></svg></div>
-                                    <div aria-hidden="true" class="main_link_text u-text-style-h2">Home</div>
-                                    <div class="g_clickable_wrap"><a class='g_clickable_link w-inline-block' data-gtm data-wf-ao-click-engagement-tracking='true' href='/' target><span class="g_clickable_text u-sr-only">Home</span></a>
-                                    <link rel="prefetch" href="index.html" /><button type="button" tracking="play" class="g_clickable_btn"><span class="g_clickable_text u-sr-only">Home</span></button></div>
-                                </li>
-                                <li class="main_link">
-                                    <div class="main_link_icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 18 18" fill="none" class="g_svg"><path d="M15.8867 9.52849C16.5735 9.18188 16.5735 8.2013 15.8867 7.85465L3.70591 1.70624C2.88419 1.29146 2.01917 2.18569 2.46104 2.99317L5.57902 8.69163L2.46105 14.39C2.01918 15.1975 2.88415 16.0917 3.70589 15.6769L15.8867 9.52849Z" fill="currentColor"></path></svg></div>
-                                    <div aria-hidden="true" class="main_link_text u-text-style-h2">Menu</div>
-                                    <div class="g_clickable_wrap"><a class='g_clickable_link w-inline-block' data-gtm data-wf-ao-click-engagement-tracking='true' href='menu.html' target><span class="g_clickable_text u-sr-only">Menu</span></a>
-                                    <link rel="prefetch" href="menu.html" /><button type="button" tracking="play" class="g_clickable_btn"><span class="g_clickable_text u-sr-only">Menu</span></button></div>
-                                </li>
-                                <li class="main_link">
-                                    <div class="main_link_icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 18 18" fill="none" class="g_svg"><path d="M15.8867 9.52849C16.5735 9.18188 16.5735 8.2013 15.8867 7.85465L3.70591 1.70624C2.88419 1.29146 2.01917 2.18569 2.46104 2.99317L5.57902 8.69163L2.46105 14.39C2.01918 15.1975 2.88415 16.0917 3.70589 15.6769L15.8867 9.52849Z" fill="currentColor"></path></svg></div>
-                                    <div aria-hidden="true" class="main_link_text u-text-style-h2">Sample</div>
-                                    <div class="g_clickable_wrap"><a class='g_clickable_link w-inline-block' data-gtm data-wf-ao-click-engagement-tracking='true' href='sample.html' target><span class="g_clickable_text u-sr-only">Sample</span></a>
-                                    <link rel="prefetch" href="sample.html" /><button type="button" tracking="play" class="g_clickable_btn"><span class="g_clickable_text u-sr-only">Sample</span></button></div>
-                                </li>
-                                <li class="main_link">
-                                    <div class="main_link_icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 18 18" fill="none" class="g_svg"><path d="M15.8867 9.52849C16.5735 9.18188 16.5735 8.2013 15.8867 7.85465L3.70591 1.70624C2.88419 1.29146 2.01917 2.18569 2.46104 2.99317L5.57902 8.69163L2.46105 14.39C2.01918 15.1975 2.88415 16.0917 3.70589 15.6769L15.8867 9.52849Z" fill="currentColor"></path></svg></div>
-                                    <div aria-hidden="true" class="main_link_text u-text-style-h2">Recipe</div>
-                                    <div class="g_clickable_wrap"><a class='g_clickable_link w-inline-block' data-gtm data-wf-ao-click-engagement-tracking='true' href='recipe.html' target><span class="g_clickable_text u-sr-only">Recipe</span></a>
-                                    <link rel="prefetch" href="recipe.html" /><button type="button" tracking="play" class="g_clickable_btn"><span class="g_clickable_text u-sr-only">Recipe</span></button></div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div data-menu-overlay="" class="nav_menu_overlay u-cover-absolute"></div>
-                </nav>
+                                    </nav>
             </div>
+    <div data-menu-wrap="" class="nav_menu_wrap">
+        <div data-lenis-prevent="" data-menu-base="" class="nav_menu_base"><button data-menu-close="" class="menu_btn_close"><div class="menu_btn_close_icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 20 20" fill="none" class="g_svg"><path d="M2.99939 3.00867L16.9905 16.9998" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path><path d="M3.00891 16.999L17 3.00791" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg></div></button>
+            <div
+                class="menu_content">
+                <ul data-menu-link-list="" role="list" class="main_link_list">
+                    <li class="main_link">
+                        <div class="main_link_icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 18 18" fill="none" class="g_svg"><path d="M15.8867 9.52849C16.5735 9.18188 16.5735 8.2013 15.8867 7.85465L3.70591 1.70624C2.88419 1.29146 2.01917 2.18569 2.46104 2.99317L5.57902 8.69163L2.46105 14.39C2.01918 15.1975 2.88415 16.0917 3.70589 15.6769L15.8867 9.52849Z" fill="currentColor"></path></svg></div>
+                        <div
+                            aria-hidden="true" class="main_link_text u-text-style-h2">Home</div>
+        <div class="g_clickable_wrap"><a class="g_clickable_link w-inline-block" data-wf-component-context="%5B%7B%22componentId%22%3A%22d04fa513-8b01-405d-31bb-c0c0e574c1f0%22%2C%22instanceId%22%3A%22d04fa513-8b01-405d-31bb-c0c0e574c29a%22%7D%2C%7B%22componentId%22%3A%220254e612-9509-0757-3332-f6be61ca6889%22%2C%22instanceId%22%3A%22d04fa513-8b01-405d-31bb-c0c0e574c26c%22%7D%5D"
+                data-wf-element-id="0254e612-9509-0757-3332-f6be61ca688a" data-wf-event-ids="" href="/" target="" data-wf-native-id-path="d04fa513-8b01-405d-31bb-c0c0e574c29a:d04fa513-8b01-405d-31bb-c0c0e574c26c:0254e612-9509-0757-3332-f6be61ca688a"
+                data-wf-ao-click-engagement-tracking="true" data-gtm=""><span class="g_clickable_text u-sr-only">Home</span></a>
+            <link rel="prefetch" href="/" /><button type="button" tracking="play" class="g_clickable_btn"><span class="g_clickable_text u-sr-only">Home</span></button></div>
+        </li>
+        <li class="main_link">
+            <div class="main_link_icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 18 18" fill="none" class="g_svg"><path d="M15.8867 9.52849C16.5735 9.18188 16.5735 8.2013 15.8867 7.85465L3.70591 1.70624C2.88419 1.29146 2.01917 2.18569 2.46104 2.99317L5.57902 8.69163L2.46105 14.39C2.01918 15.1975 2.88415 16.0917 3.70589 15.6769L15.8867 9.52849Z" fill="currentColor"></path></svg></div>
+            <div
+                aria-hidden="true" class="main_link_text u-text-style-h2">Menu</div>
+    <div class="g_clickable_wrap"><a class="g_clickable_link w-inline-block" data-wf-component-context="%5B%7B%22componentId%22%3A%22d04fa513-8b01-405d-31bb-c0c0e574c1f0%22%2C%22instanceId%22%3A%22d04fa513-8b01-405d-31bb-c0c0e574c29a%22%7D%2C%7B%22componentId%22%3A%220254e612-9509-0757-3332-f6be61ca6889%22%2C%22instanceId%22%3A%229a01c88a-973b-ddca-1cb4-db50b2055c1d%22%7D%5D"
+            data-wf-element-id="0254e612-9509-0757-3332-f6be61ca688a" data-wf-event-ids="" href="menu.html" target="" data-wf-native-id-path="d04fa513-8b01-405d-31bb-c0c0e574c29a:9a01c88a-973b-ddca-1cb4-db50b2055c1d:0254e612-9509-0757-3332-f6be61ca688a" data-wf-ao-click-engagement-tracking="true"
+            data-gtm=""><span class="g_clickable_text u-sr-only">Menu</span></a>
+        <link rel="prefetch" href="menu.html" /><button type="button" tracking="play" class="g_clickable_btn"><span class="g_clickable_text u-sr-only">Menu</span></button></div>
+    </li>
+    <li class="main_link">
+        <div class="main_link_icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 18 18" fill="none" class="g_svg"><path d="M15.8867 9.52849C16.5735 9.18188 16.5735 8.2013 15.8867 7.85465L3.70591 1.70624C2.88419 1.29146 2.01917 2.18569 2.46104 2.99317L5.57902 8.69163L2.46105 14.39C2.01918 15.1975 2.88415 16.0917 3.70589 15.6769L15.8867 9.52849Z" fill="currentColor"></path></svg></div>
+        <div
+            aria-hidden="true" class="main_link_text u-text-style-h2">SAMPLE</div>
+            <div class="g_clickable_wrap"><a class="g_clickable_link w-inline-block" data-wf-component-context="%5B%7B%22componentId%22%3A%22d04fa513-8b01-405d-31bb-c0c0e574c1f0%22%2C%22instanceId%22%3A%22d04fa513-8b01-405d-31bb-c0c0e574c29a%22%7D%2C%7B%22componentId%22%3A%220254e612-9509-0757-3332-f6be61ca6889%22%2C%22instanceId%22%3A%22444d1b9d-664d-ce1b-5d37-65256d53f34c%22%7D%5D"
+                    data-wf-element-id="0254e612-9509-0757-3332-f6be61ca688a" data-wf-event-ids="" href="sample.html" target="" data-wf-native-id-path="d04fa513-8b01-405d-31bb-c0c0e574c29a:444d1b9d-664d-ce1b-5d37-65256d53f34c:0254e612-9509-0757-3332-f6be61ca688a"
+                    data-wf-ao-click-engagement-tracking="true" data-gtm=""><span class="g_clickable_text u-sr-only">SAMPLE</span></a>
+                <link rel="prefetch" href="sample.html" /><button type="button" tracking="play" class="g_clickable_btn"><span class="g_clickable_text u-sr-only">SAMPLE</span></button></div>
+    </li>
+    <li class="main_link">
+        <div class="main_link_icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 18 18" fill="none" class="g_svg"><path d="M15.8867 9.52849C16.5735 9.18188 16.5735 8.2013 15.8867 7.85465L3.70591 1.70624C2.88419 1.29146 2.01917 2.18569 2.46104 2.99317L5.57902 8.69163L2.46105 14.39C2.01918 15.1975 2.88415 16.0917 3.70589 15.6769L15.8867 9.52849Z" fill="currentColor"></path></svg></div>
+        <div aria-hidden="true" class="main_link_text u-text-style-h2">Recipe</div>
+        <div class="g_clickable_wrap">
+            <a class="g_clickable_link w-inline-block" data-wf-component-context="%5B%7B%22componentId%22%3A%22d04fa513-8b01-405d-31bb-c0c0e574c1f0%22%2C%22instanceId%22%3A%22d04fa513-8b01-405d-31bb-c0c0e574c29a%22%7D%2C%7B%22componentId%22%3A%220254e612-9509-0757-3332-f6be61ca6889%22%2C%22instanceId%22%3A%22d04fa513-8b01-405d-31bb-c0c0e574c272%22%7D%5D"
+               data-wf-element-id="0254e612-9509-0757-3332-f6be61ca688a" data-wf-event-ids="" href="recipe.html" target="" data-wf-native-id-path="d04fa513-8b01-405d-31bb-c0c0e574c29a:d04fa513-8b01-405d-31bb-c0c0e574c272:0254e612-9509-0757-3332-f6be61ca688a"
+               data-wf-ao-click-engagement-tracking="true" data-gtm=""><span class="g_clickable_text u-sr-only">Recipe</span></a>
+            <link rel="prefetch" href="recipe.html" />
+            <button type="button" tracking="play" class="g_clickable_btn"><span class="g_clickable_text u-sr-only">Recipe</span></button>
+        </div>
+    </li>
+    <li class="main_link is-cart"><button data-cg-cart-open-button="1" id="cg-cart-icon-wrapper" class="cart_btn_mobile"><div aria-hidden="true" class="main_link_text u-text-style-h2">Cart</div><div data-cg-hidden="1" data-cg-cart-quantity-container="1" class="cart_icon_counter is-mobile"><div data-cg-cart-quantity="1" class="cart_icon_counter_text u-text-style-h5">0</div></div></button></li>
+    </div>
+    </div>
+    <div data-menu-overlay="" class="nav_menu_overlay u-cover-absolute"></div>
+    </div>
     <div data-popup-wrap="" class="notification_wrap">
         <div class="notification_list_wrap w-dyn-list">
             <div role="list" class="notification_list w-dyn-items">
@@ -3833,8 +3935,7 @@
     <footer class="footer_wrap u-theme-dark">
         <div class="footer_css u-embed-css w-embed">
             <style>
-                /* Menu Button Hovers */
-
+                
                 .footer_link_main {
                     --elastic-ease-out: linear( 0, 0.5737 7.6%, 0.8382 11.87%, 0.9463 14.19%, 1.0292 16.54%, 1.0886 18.97%, 1.1258 21.53%, 1.137 22.97%, 1.1424 24.48%, 1.1423 26.1%, 1.1366 27.86%, 1.1165 31.01%, 1.0507 38.62%, 1.0219 42.57%, 0.9995 46.99%, 0.9872 51.63%, 0.9842 58.77%, 1.0011 81.26%, 1);
                     --color-ease: cubic-bezier(.216, .62, .356, 1);
