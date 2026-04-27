@@ -207,7 +207,7 @@ body::before {
     justify-content: space-between !important;
     align-items: center !important;
     width: 100% !important;
-    padding: 1rem 0 !important;
+    position: relative !important;
 }
 .mobile_menu_btn {
     display: flex !important; flex-direction: column !important;
@@ -219,11 +219,20 @@ body::before {
 }
 .mobile_menu_btn_line {
     width: 24px !important; height: 2px !important;
-    background-color: #333 !important; margin: 2px 0 !important;
+    background-color: var(--_theme---button--background, #f1f0ec) !important; margin: 2px 0 !important;
     transition: all 0.3s ease !important; border-radius: 2px !important;
 }
-.mobile_menu_btn:hover .mobile_menu_btn_line { background-color: #000 !important; }
-.mobile_menu_btn:active { transform: scale(0.95) !important; }
+
+@media (hover: hover) and (pointer: fine) {
+    .mobile_menu_btn:hover,
+    .mobile_menu_btn:focus-visible {
+        gap: 0.25rem;
+        background-color: var(--_theme---button--background);
+    }
+    .mobile_menu_btn:is(:hover, :focus-visible) .mobile_menu_btn_line {
+        background-color: var(--_theme---button--text);
+    }
+}
 
 /* Mobile logo centering */
 @media (max-width: 767px) {
@@ -265,49 +274,9 @@ body::before {
         gap: 0.325rem; background-color: var(--_theme---button--background);
     }
     .menu_btn:is(:hover, :focus-visible) .menu_btn_dot { background-color: var(--_theme---button--text); }
-    .mobile_menu_btn:hover, .mobile_menu_btn:focus-visible {
-        gap: 0.25rem; background-color: var(--_theme---button--background);
-    }
-    .mobile_menu_btn:is(:hover, :focus-visible) .mobile_menu_btn_line { background-color: var(--_theme---button--text); }
-    [data-menu-link-list]:has(> :hover) > :not(:hover) { opacity: 0.3; }
+        [data-menu-link-list]:has(> :hover) > :not(:hover) { opacity: 0.3; }
     .main_link:is(:hover, :focus-visible) .main_link_icon { width: 0.6em; padding-right: 0.25rem; transform: scale(1) rotate(0deg); }
     .secondary_link:is(:hover, :focus-visible) .secondary_link_line_fill { transform: scaleX(1); }
-}
-
-/* Mobile fullscreen menu */
-.nav_menu_wrap {
-    display: none; position: fixed; inset: 0; z-index: 300;
-    flex-direction: column; align-items: center; justify-content: center;
-}
-.nav_menu_wrap[style*="display: flex"], .nav_menu_wrap[data-open] { display: flex; }
-.nav_menu_overlay { position: absolute; inset: 0; }
-.nav_menu_base {
-    position: absolute; inset: 20px;
-    border-radius: 28px; z-index: 1;
-}
-.menu_btn_close {
-    position: absolute; top: 26px; right: 26px; z-index: 3;
-    width: 44px; height: 44px; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    cursor: pointer; border: none; background: transparent;
-}
-.menu_content {
-    position: relative; z-index: 2;
-    text-align: center; padding: 40px;
-    display: flex; flex-direction: column; align-items: center;
-}
-.main_link_list { list-style: none; display: flex; flex-direction: column; gap: 4px; width: 100%; }
-.main_link {
-    display: flex; align-items: center; gap: 10px; padding: 8px 0;
-    transition: gap .65s var(--elastic-ease-out); cursor: pointer; justify-content: center;
-}
-.main_link:hover { gap: 16px; }
-.main_link_text {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 2.6rem; letter-spacing: 1px; line-height: 1; transition: color .3s;
-}
-@media (hover: hover) and (pointer: fine) {
-    .main_link:is(:hover, :focus-visible) .main_link_icon { width: 0.6em; padding-right: 0.25rem; transform: scale(1) rotate(0deg); }
 }
 
 /* ════════════════════════════════════════
@@ -601,9 +570,6 @@ body::before {
         display: none !important;
     }
 </style>
-<script src="https://cdn.prod.website-files.com/gsap/3.14.2/gsap.min.js"></script>
-<script src="https://cdn.prod.website-files.com/gsap/3.14.2/ScrollTrigger.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js" defer></script>
 <style id="responsive-hardening-all-pages">
   html, body { max-width:100%; overflow-x:clip; }
   img, svg, video, canvas, iframe { max-width:100%; height:auto; }
@@ -761,45 +727,12 @@ body::before {
     .nav_link_list{display:flex!important;justify-content:center!important;align-items:center!important;position:absolute!important;left:50%!important;transform:translateX(-50%)!important;margin:0!important;padding:0!important;list-style:none!important;gap:2rem!important;order:2!important;}
     .nav_logo_link{display:flex!important;justify-content:flex-start!important;align-items:center!important;width:auto!important;text-align:left!important;z-index:10!important;}
     .nav_logo_link img{display:block!important;margin:0!important;max-height:90px!important;width:auto!important;object-fit:contain!important;}
-    .nav_logo_wrap{display:flex!important;justify-content:flex-start!important;align-items:center!important;width:auto!important;order:1!important;margin-right:auto!important;}
-    .nav_btn_list{display:flex!important;justify-content:flex-end!important;align-items:center!important;list-style:none!important;padding:0!important;margin:0!important;margin-left:auto!important;gap:0.5rem!important;order:3!important;}
-    /* Mobile nav */
-    .nav_mobile_contain{display:flex!important;align-items:center!important;justify-content:space-between!important;width:100%!important;position:relative!important;}
-    .mobile_menu_btn{display:flex!important;flex-direction:column!important;justify-content:center!important;align-items:center!important;width:40px!important;height:40px!important;padding:8px!important;border:none!important;background:transparent!important;cursor:pointer!important;z-index:1000!important;transition:all 0.3s ease!important;}
-    .mobile_menu_btn_line{width:24px!important;height:2px!important;background-color:var(--_theme---button--background,#f1f0ec)!important;margin:2px 0!important;transition:all 0.3s ease!important;border-radius:2px!important;}
-    @media(max-width:767px){
-      .nav_mobile_contain{position:relative!important;}
-      .nav_logo_wrap{position:absolute!important;left:50%!important;top:50%!important;transform:translate(-50%,-50%)!important;width:auto!important;}
-      .nav_logo_link img{max-height:70px!important;width:auto!important;}
-    }
-    @media(max-width:479px){
-      .nav_logo_link img{max-height:60px!important;}
-      .mobile_menu_btn{width:35px!important;height:35px!important;}
-      .mobile_menu_btn_line{width:20px!important;height:2px!important;}
-    }
-    /* Sticker image styles */
+        /* Sticker image styles */
     .sticker-image{width:100%!important;height:auto!important;display:block!important;object-fit:contain!important;}
     /* Frosted bg fades in on scroll */
     .nav_base{transition:opacity 1s ease;opacity:0;}
     [data-scrolling-started="true"] .nav_base{opacity:1;}
-    /* Menu button hovers */
-    .menu_btn,.cart_icon_wrap,.mobile_menu_btn,.main_link{
-      --elastic-ease-out:linear(0,0.5737 7.6%,0.8382 11.87%,0.9463 14.19%,1.0292 16.54%,1.0886 18.97%,1.1258 21.53%,1.137 22.97%,1.1424 24.48%,1.1423 26.1%,1.1366 27.86%,1.1165 31.01%,1.0507 38.62%,1.0219 42.57%,0.9995 46.99%,0.9872 51.63%,0.9842 58.77%,1.0011 81.26%,1);
-      --color-ease:cubic-bezier(.216,.62,.356,1);
-      transition:transform 0.65s var(--elastic-ease-out),background-color 0.4s var(--color-ease),gap 0.65s var(--elastic-ease-out);
-      -webkit-tap-highlight-color:transparent;
-    }
-    .menu_btn:active,.mobile_menu_btn:active,.cart_icon_wrap:active{transform:scale(0.955,0.954);}
-    .main_link,.secondary_link{transition:opacity 0.3s;}
-    .main_link_icon{width:0em;transform:scale(0) rotate(45deg);transition:width 0.8s var(--elastic-ease-out),transform 0.8s var(--elastic-ease-out),padding-right 0.8s ease;}
-    .secondary_link_line_fill{transform:scaleX(0);transition:transform 0.3s ease;}
-    .nav_component{transition:transform 1s ease,padding 1s ease;transform:translateY(0%) rotate(0.001deg);}
-    @media(hover:hover) and (pointer:fine){
-            [data-menu-link-list]:has(>:hover)>:not(:hover){opacity:0.3;}
-      .main_link:is(:hover,:focus-visible) .main_link_icon{width:0.6em;padding-right:0.25rem;transform:scale(1) rotate(0deg);}
-      .secondary_link:is(:hover,:focus-visible) .secondary_link_line_fill{transform:scaleX(1);}
-    }
-  </style></div>
+      </style></div>
 
   <!-- Nav wrap: desktop + mobile bars -->
   <div data-transition-hero="" class="nav_wrap">
@@ -1042,15 +975,80 @@ body::before {
         <div class="nav_logo_wrap">
           <div class="nav_logo_link">
             <img src="sweet/LVsnn3r.png" alt="Sweet Treat Logo" style="height:clamp(52px,8vw,90px);width:auto;object-fit:contain;" />
-            <div class="g_clickable_wrap"><a class="g_clickable_link w-inline-block" href="/"><span class="g_clickable_text u-sr-only">homepage</span></a><button type="button" class="g_clickable_btn"><span class="g_clickable_text u-sr-only">homepage</span></button></div>
+            <div class="g_clickable_wrap"><a class="g_clickable_link w-inline-block w--current" data-wf-component-context="%5B%7B%22componentId%22%3A%22d04fa513-8b01-405d-31bb-c0c0e574c1f0%22%2C%22instanceId%22%3A%22d04fa513-8b01-405d-31bb-c0c0e574c29a%22%7D%2C%7B%22componentId%22%3A%220254e612-9509-0757-3332-f6be61ca6889%22%2C%22instanceId%22%3A%22d04fa513-8b01-405d-31bb-c0c0e574c24f%22%7D%5D"
+                                        data-wf-element-id="0254e612-9509-0757-3332-f6be61ca688a" data-wf-event-ids="" href="menu.html" target="" aria-current="page" data-wf-native-id-path="d04fa513-8b01-405d-31bb-c0c0e574c29a:d04fa513-8b01-405d-31bb-c0c0e574c24f:0254e612-9509-0757-3332-f6be61ca688a"
+                                        data-wf-ao-click-engagement-tracking="true" data-gtm=""><span class="g_clickable_text u-sr-only">homepage</span></a>
+                                    <link rel="prefetch" href="menu.html" /><button type="button" tracking="play" class="g_clickable_btn"><span class="g_clickable_text u-sr-only">homepage</span></button></div>
           </div>
         </div>
         <ul role="list" class="nav_btn_list">
                         <li class="nav_btn is-tickets">
                             <div data-goal="" data-game-start="true" data-wf--btn-secondary--variant="small" class="btn_secondary_wrap">
-                                <div class="u-embed-css w-embed"><style>.btn_secondary_wrap{--elastic-ease-out:linear( 0, 0.5737 7.6%, 0.8382 11.87%, 0.9463 14.19%, 1.0292 16.54%, 1.0886 18.97%, 1.1258 21.53%, 1.137 22.97%, 1.1424 24.48%, 1.1423 26.1%, 1.1366 27.86%, 1.1165 31.01%, 1.0507 38.62%, 1.0219 42.57%, 0.9995 46.99%, 0.9872 51.63%, 0.9842 58.77%, 1.0011 81.26%, 1);--smooth-ease:cubic-bezier(.32,.72,0,1);--color-ease:cubic-bezier(.216,.62,.356,1);transition:transform .45s var(--elastic-ease-out);-webkit-tap-highlight-color:transparent;}.btn_secondary_wrap:active{transform:scaleX(0.955) scaleY(0.954);}.btn_secondary_bg{transition:background-color .2s var(--color-ease);}.btn_secondary_front{transition:translate .85s var(--elastic-ease-out),rotate .75s var(--elastic-ease-out),opacity .15s ease-out;}.btn_secondary_text{transition:translate .75s var(--elastic-ease-out);}.btn_secondary_back{transition:translate .85s var(--elastic-ease-out),rotate .75s var(--elastic-ease-out),opacity .15s ease-out;opacity:0;}@media(hover:hover) and (pointer:fine){.btn_secondary_wrap:is(:hover,:focus-visible) .btn_secondary_front{translate:0 -2rem -6rem;rotate:1 0 0 85deg;opacity:0;}.btn_secondary_wrap:is(:hover,:focus-visible) .btn_secondary_text{translate:0 -.75rem 0;transition-delay:0s;}.btn_secondary_wrap:is(:hover,:focus-visible) .btn_secondary_back{transition:translate .85s var(--elastic-ease-out),rotate .75s var(--elastic-ease-out),opacity .075s ease-in;rotate:0;translate:0;opacity:1;}}@media(hover:none) or (pointer:coarse){.btn_secondary_wrap:active .btn_secondary_bg{background-color:var(--_theme---button--background);transition-duration:0s;}}</style></div>
-                                <span class="btn_secondary_inner"><span data-text="Color-Flip" class="btn_secondary_back"><span aria-hidden="true" class="btn_secondary_back_text u-text-style-h5">Home</span></span><span class="btn_secondary_front w-variant-d50181c7-cf85-5262-59e7-708c27826030"><span class="btn_secondary_bg"></span><span aria-hidden="true" class="btn_secondary_front_text u-text-style-h5 w-variant-d50181c7-cf85-5262-59e7-708c27826030">Home</span></span></span>
-                                <div class="g_clickable_wrap"><a class="g_clickable_link w-inline-block" href="/" target=""><span class="g_clickable_text u-sr-only">Home</span></a><button type="button" tracking="play" class="g_clickable_btn"><span class="g_clickable_text u-sr-only">Home</span></button></div>
+                                <div class="u-embed-css w-embed">
+                                    <style>
+                                        .btn_secondary_wrap {
+                                            --elastic-ease-out: linear( 0, 0.5737 7.6%, 0.8382 11.87%, 0.9463 14.19%, 1.0292 16.54%, 1.0886 18.97%, 1.1258 21.53%, 1.137 22.97%, 1.1424 24.48%, 1.1423 26.1%, 1.1366 27.86%, 1.1165 31.01%, 1.0507 38.62%, 1.0219 42.57%, 0.9995 46.99%, 0.9872 51.63%, 0.9842 58.77%, 1.0011 81.26%, 1);
+                                            --smooth-ease: cubic-bezier(.32, .72, 0, 1);
+                                            --color-ease: cubic-bezier(.216, .62, .356, 1);
+                                            transition: transform .45s var(--elastic-ease-out);
+                                            -webkit-tap-highlight-color: transparent;
+                                        }
+
+                                        .btn_secondary_wrap:active {
+                                            transform: scaleX(0.955) scaleY(0.954);
+                                        }
+
+                                        .btn_secondary_bg {
+                                            transition: background-color .2s var(--color-ease);
+                                        }
+
+                                        .btn_secondary_front {
+                                            transition: translate .85s var(--elastic-ease-out), rotate .75s var(--elastic-ease-out), opacity .15s ease-out;
+                                        }
+
+                                        .btn_secondary_text {
+                                            transition: translate .75s var(--elastic-ease-out);
+                                        }
+
+                                        .btn_secondary_back {
+                                            transition: translate .85s var(--elastic-ease-out), rotate .75s var(--elastic-ease-out), opacity .15s ease-out;
+                                            opacity: 0;
+                                        }
+
+                                        @media (hover: hover) and (pointer: fine) {
+                                            .btn_secondary_wrap:is(:hover, :focus-visible) .btn_secondary_front {
+                                                translate: 0 -2rem -6rem;
+                                                rotate: 1 0 0 85deg;
+                                                opacity: 0;
+                                            }
+                                            .btn_secondary_wrap:is(:hover, :focus-visible) .btn_secondary_text {
+                                                translate: 0 -.75rem 0;
+                                                transition-delay: 0s;
+                                            }
+                                            .btn_secondary_wrap:is(:hover, :focus-visible) .btn_secondary_back {
+                                                transition: translate .85s var(--elastic-ease-out), rotate .75s var(--elastic-ease-out), opacity .075s ease-in;
+                                                /* bring it into place without arrow */
+                                                rotate: 0;
+                                                translate: 0;
+                                                opacity: 1;
+                                            }
+                                        }
+
+                                        @media (hover: none) or (pointer: coarse) {
+                                            .btn_secondary_wrap:active .btn_secondary_bg {
+                                                background-color: var(--_theme---button--background);
+                                                transition-duration: 0s;
+                                            }
+                                        }
+                                    </style>
+                                </div><span class="btn_secondary_inner"><span data-text="Color-Flip" class="btn_secondary_back"><span aria-hidden="true" class="btn_secondary_back_text u-text-style-h5">Home</span></span><span class="btn_secondary_front w-variant-d50181c7-cf85-5262-59e7-708c27826030"><span class="btn_secondary_bg"></span>
+                                <span
+                                    aria-hidden="true" class="btn_secondary_front_text u-text-style-h5 w-variant-d50181c7-cf85-5262-59e7-708c27826030">Home</span>
+                                    </span>
+                                    </span>
+                                    <div class="g_clickable_wrap"><a class="g_clickable_link w-inline-block" data-wf-component-context="%5B%7B%22componentId%22%3A%22d04fa513-8b01-405d-31bb-c0c0e574c1f0%22%2C%22instanceId%22%3A%22d04fa513-8b01-405d-31bb-c0c0e574c29a%22%7D%2C%7B%22componentId%22%3A%2267d7bae6-e3df-d160-b97e-ce5e5d9de87c%22%2C%22instanceId%22%3A%22d04fa513-8b01-405d-31bb-c0c0e574c253%22%7D%2C%7B%22componentId%22%3A%220254e612-9509-0757-3332-f6be61ca6889%22%2C%22instanceId%22%3A%2267d7bae6-e3df-d160-b97e-ce5e5d9de87d%22%7D%5D"
+                                            data-wf-element-id="0254e612-9509-0757-3332-f6be61ca688a" data-wf-event-ids="157071040" href="#" target="" data-wf-native-id-path="d04fa513-8b01-405d-31bb-c0c0e574c29a:d04fa513-8b01-405d-31bb-c0c0e574c253:67d7bae6-e3df-d160-b97e-ce5e5d9de87d:0254e612-9509-0757-3332-f6be61ca688a"
+                                            data-wf-ao-click-engagement-tracking="true" data-gtm="play_game"><span class="g_clickable_text u-sr-only">Home</span></a><button type="button" tracking="play" class="g_clickable_btn"><span class="g_clickable_text u-sr-only">Home</span></button></div>
                             </div>
                         </li>
                     </ul>
@@ -1065,26 +1063,44 @@ body::before {
       <button data-menu-close="" class="menu_btn_close"><div class="menu_btn_close_icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 20 20" fill="none"><path d="M2.99939 3.00867L16.9905 16.9998" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path><path d="M3.00891 16.999L17 3.00791" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg></div></button>
       <div class="menu_content">
         <ul data-menu-link-list="" role="list" class="main_link_list">
-          <li class="main_link">
-            <div class="main_link_icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 18 18" fill="none"><path d="M15.8867 9.52849C16.5735 9.18188 16.5735 8.2013 15.8867 7.85465L3.70591 1.70624C2.88419 1.29146 2.01917 2.18569 2.46104 2.99317L5.57902 8.69163L2.46105 14.39C2.01918 15.1975 2.88415 16.0917 3.70589 15.6769L15.8867 9.52849Z" fill="currentColor"></path></svg></div>
-            <div aria-hidden="true" class="main_link_text u-text-style-h2">Home</div>
-            <div class="g_clickable_wrap"><a class="g_clickable_link w-inline-block" href="/"><span class="g_clickable_text u-sr-only">Home</span></a><button type="button" class="g_clickable_btn"><span class="g_clickable_text u-sr-only">Home</span></button></div>
-          </li>
-          <li class="main_link">
-            <div class="main_link_icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 18 18" fill="none"><path d="M15.8867 9.52849C16.5735 9.18188 16.5735 8.2013 15.8867 7.85465L3.70591 1.70624C2.88419 1.29146 2.01917 2.18569 2.46104 2.99317L5.57902 8.69163L2.46105 14.39C2.01918 15.1975 2.88415 16.0917 3.70589 15.6769L15.8867 9.52849Z" fill="currentColor"></path></svg></div>
-            <div aria-hidden="true" class="main_link_text u-text-style-h2">Menu</div>
-            <div class="g_clickable_wrap"><a class="g_clickable_link w-inline-block" href="menu.html"><span class="g_clickable_text u-sr-only">Menu</span></a><button type="button" class="g_clickable_btn"><span class="g_clickable_text u-sr-only">Menu</span></button></div>
-          </li>
-          <li class="main_link">
-            <div class="main_link_icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 18 18" fill="none"><path d="M15.8867 9.52849C16.5735 9.18188 16.5735 8.2013 15.8867 7.85465L3.70591 1.70624C2.88419 1.29146 2.01917 2.18569 2.46104 2.99317L5.57902 8.69163L2.46105 14.39C2.01918 15.1975 2.88415 16.0917 3.70589 15.6769L15.8867 9.52849Z" fill="currentColor"></path></svg></div>
-            <div aria-hidden="true" class="main_link_text u-text-style-h2">SAMPLE</div>
-            <div class="g_clickable_wrap"><a class="g_clickable_link w-inline-block" href="sample.html"><span class="g_clickable_text u-sr-only">SAMPLE</span></a><button type="button" class="g_clickable_btn"><span class="g_clickable_text u-sr-only">SAMPLE</span></button></div>
-          </li>
-          <li class="main_link">
-            <div class="main_link_icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 18 18" fill="none"><path d="M15.8867 9.52849C16.5735 9.18188 16.5735 8.2013 15.8867 7.85465L3.70591 1.70624C2.88419 1.29146 2.01917 2.18569 2.46104 2.99317L5.57902 8.69163L2.46105 14.39C2.01918 15.1975 2.88415 16.0917 3.70589 15.6769L15.8867 9.52849Z" fill="currentColor"></path></svg></div>
-            <div aria-hidden="true" class="main_link_text u-text-style-h2">Recipe</div>
-            <div class="g_clickable_wrap"><a class="g_clickable_link w-inline-block" href="recipe.html"><span class="g_clickable_text u-sr-only">Recipe</span></a><button type="button" class="g_clickable_btn"><span class="g_clickable_text u-sr-only">Recipe</span></button></div>
-          </li>
+                    <li class="main_link">
+                        <div class="main_link_icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 18 18" fill="none" class="g_svg"><path d="M15.8867 9.52849C16.5735 9.18188 16.5735 8.2013 15.8867 7.85465L3.70591 1.70624C2.88419 1.29146 2.01917 2.18569 2.46104 2.99317L5.57902 8.69163L2.46105 14.39C2.01918 15.1975 2.88415 16.0917 3.70589 15.6769L15.8867 9.52849Z" fill="currentColor"></path></svg></div>
+                        <div
+                            aria-hidden="true" class="main_link_text u-text-style-h2">Home</div>
+        <div class="g_clickable_wrap"><a class="g_clickable_link w-inline-block" data-wf-component-context="%5B%7B%22componentId%22%3A%22d04fa513-8b01-405d-31bb-c0c0e574c1f0%22%2C%22instanceId%22%3A%22d04fa513-8b01-405d-31bb-c0c0e574c29a%22%7D%2C%7B%22componentId%22%3A%220254e612-9509-0757-3332-f6be61ca6889%22%2C%22instanceId%22%3A%22d04fa513-8b01-405d-31bb-c0c0e574c26c%22%7D%5D"
+                data-wf-element-id="0254e612-9509-0757-3332-f6be61ca688a" data-wf-event-ids="" href="/" target="" data-wf-native-id-path="d04fa513-8b01-405d-31bb-c0c0e574c29a:d04fa513-8b01-405d-31bb-c0c0e574c26c:0254e612-9509-0757-3332-f6be61ca688a"
+                data-wf-ao-click-engagement-tracking="true" data-gtm=""><span class="g_clickable_text u-sr-only">Home</span></a>
+            <link rel="prefetch" href="/" /><button type="button" tracking="play" class="g_clickable_btn"><span class="g_clickable_text u-sr-only">Home</span></button></div>
+        </li>
+        <li class="main_link">
+            <div class="main_link_icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 18 18" fill="none" class="g_svg"><path d="M15.8867 9.52849C16.5735 9.18188 16.5735 8.2013 15.8867 7.85465L3.70591 1.70624C2.88419 1.29146 2.01917 2.18569 2.46104 2.99317L5.57902 8.69163L2.46105 14.39C2.01918 15.1975 2.88415 16.0917 3.70589 15.6769L15.8867 9.52849Z" fill="currentColor"></path></svg></div>
+            <div
+                aria-hidden="true" class="main_link_text u-text-style-h2">Menu</div>
+    <div class="g_clickable_wrap"><a class="g_clickable_link w-inline-block" data-wf-component-context="%5B%7B%22componentId%22%3A%22d04fa513-8b01-405d-31bb-c0c0e574c1f0%22%2C%22instanceId%22%3A%22d04fa513-8b01-405d-31bb-c0c0e574c29a%22%7D%2C%7B%22componentId%22%3A%220254e612-9509-0757-3332-f6be61ca6889%22%2C%22instanceId%22%3A%229a01c88a-973b-ddca-1cb4-db50b2055c1d%22%7D%5D"
+            data-wf-element-id="0254e612-9509-0757-3332-f6be61ca688a" data-wf-event-ids="" href="menu.html" target="" data-wf-native-id-path="d04fa513-8b01-405d-31bb-c0c0e574c29a:9a01c88a-973b-ddca-1cb4-db50b2055c1d:0254e612-9509-0757-3332-f6be61ca688a" data-wf-ao-click-engagement-tracking="true"
+            data-gtm=""><span class="g_clickable_text u-sr-only">Menu</span></a>
+        <link rel="prefetch" href="menu.html" /><button type="button" tracking="play" class="g_clickable_btn"><span class="g_clickable_text u-sr-only">Menu</span></button></div>
+    </li>
+    <li class="main_link">
+        <div class="main_link_icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 18 18" fill="none" class="g_svg"><path d="M15.8867 9.52849C16.5735 9.18188 16.5735 8.2013 15.8867 7.85465L3.70591 1.70624C2.88419 1.29146 2.01917 2.18569 2.46104 2.99317L5.57902 8.69163L2.46105 14.39C2.01918 15.1975 2.88415 16.0917 3.70589 15.6769L15.8867 9.52849Z" fill="currentColor"></path></svg></div>
+        <div
+            aria-hidden="true" class="main_link_text u-text-style-h2">SAMPLE</div>
+            <div class="g_clickable_wrap"><a class="g_clickable_link w-inline-block" data-wf-component-context="%5B%7B%22componentId%22%3A%22d04fa513-8b01-405d-31bb-c0c0e574c1f0%22%2C%22instanceId%22%3A%22d04fa513-8b01-405d-31bb-c0c0e574c29a%22%7D%2C%7B%22componentId%22%3A%220254e612-9509-0757-3332-f6be61ca6889%22%2C%22instanceId%22%3A%22444d1b9d-664d-ce1b-5d37-65256d53f34c%22%7D%5D"
+                    data-wf-element-id="0254e612-9509-0757-3332-f6be61ca688a" data-wf-event-ids="" href="sample.html" target="" data-wf-native-id-path="d04fa513-8b01-405d-31bb-c0c0e574c29a:444d1b9d-664d-ce1b-5d37-65256d53f34c:0254e612-9509-0757-3332-f6be61ca688a"
+                    data-wf-ao-click-engagement-tracking="true" data-gtm=""><span class="g_clickable_text u-sr-only">SAMPLE</span></a>
+                <link rel="prefetch" href="sample.html" /><button type="button" tracking="play" class="g_clickable_btn"><span class="g_clickable_text u-sr-only">SAMPLE</span></button></div>
+    </li>
+    <li class="main_link">
+        <div class="main_link_icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 18 18" fill="none" class="g_svg"><path d="M15.8867 9.52849C16.5735 9.18188 16.5735 8.2013 15.8867 7.85465L3.70591 1.70624C2.88419 1.29146 2.01917 2.18569 2.46104 2.99317L5.57902 8.69163L2.46105 14.39C2.01918 15.1975 2.88415 16.0917 3.70589 15.6769L15.8867 9.52849Z" fill="currentColor"></path></svg></div>
+        <div aria-hidden="true" class="main_link_text u-text-style-h2">Recipe</div>
+        <div class="g_clickable_wrap">
+            <a class="g_clickable_link w-inline-block" data-wf-component-context="%5B%7B%22componentId%22%3A%22d04fa513-8b01-405d-31bb-c0c0e574c1f0%22%2C%22instanceId%22%3A%22d04fa513-8b01-405d-31bb-c0c0e574c29a%22%7D%2C%7B%22componentId%22%3A%220254e612-9509-0757-3332-f6be61ca6889%22%2C%22instanceId%22%3A%22d04fa513-8b01-405d-31bb-c0c0e574c272%22%7D%5D"
+               data-wf-element-id="0254e612-9509-0757-3332-f6be61ca688a" data-wf-event-ids="" href="recipe.html" target="" data-wf-native-id-path="d04fa513-8b01-405d-31bb-c0c0e574c29a:d04fa513-8b01-405d-31bb-c0c0e574c272:0254e612-9509-0757-3332-f6be61ca688a"
+               data-wf-ao-click-engagement-tracking="true" data-gtm=""><span class="g_clickable_text u-sr-only">Recipe</span></a>
+            <link rel="prefetch" href="recipe.html" />
+            <button type="button" tracking="play" class="g_clickable_btn"><span class="g_clickable_text u-sr-only">Recipe</span></button>
+        </div>
+    </li>
         </ul>
       </div>
     </div>
@@ -1338,7 +1354,7 @@ body::before {
                         border-top-color: var(--_theme---border);
                     }
                     .newsletter_text.u-text-style-large {
-                        max-width: 56ch !important;
+                        max-width: 100% !important;
                     }
                 }
             </style>
@@ -1562,92 +1578,43 @@ body::before {
 
                 // Function to setup Matter.js and ScrollTrigger
                 function setupMatterJSWithScrollTrigger() {
-                    // Always initialize the canvas physics. (Some systems enable "Reduce motion"
-                    // which would otherwise prevent the coins from ever rendering.)
-                    cleanupMatterJS();
-
-                    const triggerSmileys = initFalling2DMatterJS();
-                    if (!triggerSmileys) return;
-
-                    const target = document.querySelector("#canvas-target");
-                    let hasTriggered = false;
-                    const triggerOnce = () => {
-                        if (hasTriggered) return;
-                        hasTriggered = true;
-                        triggerSmileys();
-                    };
-                    const isInViewport = (el) => {
-                        if (!el) return false;
-                        const r = el.getBoundingClientRect();
-                        return r.bottom > 0 && r.top < (window.innerHeight || document.documentElement.clientHeight);
-                    };
-
-                    // Most reliable trigger: IntersectionObserver when footer becomes visible.
-                    if (target && 'IntersectionObserver' in window) {
-                        const io = new IntersectionObserver((entries) => {
-                            for (const entry of entries) {
-                                if (entry.isIntersecting && entry.intersectionRatio > 0) {
-                                    io.disconnect();
-                                    triggerOnce();
-                                    break;
-                                }
-                            }
-                        }, { root: null, threshold: 0.05 });
-                        io.observe(target);
+                    // Check if GSAP and ScrollTrigger are available
+                    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+                        console.error('GSAP and ScrollTrigger must be loaded before this script');
+                        return;
                     }
+                    // Register ScrollTrigger plugin
+                    gsap.registerPlugin(ScrollTrigger);
 
-                    // If GSAP/ScrollTrigger is available, use it; otherwise fall back to a simple "visible" check.
-                    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-                        gsap.registerPlugin(ScrollTrigger);
-                        currentScrollTrigger = ScrollTrigger.create({
-                            trigger: "#canvas-target",
-                            start: "top 90%",
-                            end: "bottom 10%",
-                            onEnter: () => triggerOnce(),
-                            onEnterBack: () => triggerOnce(),
-                            once: true
-                        });
+                    // Only run the animation if user doesn't have reduced motion enabled
+                    gsap.matchMedia().add("(prefers-reduced-motion: no-preference)", () => {
+                        // Clean up any existing setup
+                        cleanupMatterJS();
 
-                        // Safety: if the footer is already visible on load, trigger immediately.
-                        requestAnimationFrame(() => {
-                            if (isInViewport(target)) triggerOnce();
-                        });
-                    } else {
-                        // No GSAP/ScrollTrigger: trigger once the footer becomes visible.
-                        const tryTrigger = () => {
-                            if (!target) return;
-                            if (isInViewport(target)) {
-                                window.removeEventListener('scroll', tryTrigger);
-                                triggerOnce();
-                            }
-                        };
-                        window.addEventListener('scroll', tryTrigger, { passive: true });
-                        tryTrigger();
-                    }
+                        // Initialize the Matter.js setup and get the trigger function
+                        const triggerSmileys = initFalling2DMatterJS();
+
+                        if (triggerSmileys) {
+                            // Create ScrollTrigger and store reference
+                            currentScrollTrigger = ScrollTrigger.create({
+                                trigger: "#canvas-target",
+                                start: "top 10%",
+                                end: "bottom 90%",
+                                onEnter: () => {
+                                    triggerSmileys();
+                                },
+                                once: true
+                            });
+                        }
+                    });
+
+                    // For users with reduced motion - do nothing
+                    // The canvas will remain empty and no physics will run
                 }
 
-                // Initialize (robust): wait until libs + canvas are ready.
+                // Initialize with GSAP ScrollTrigger
                 document.addEventListener('DOMContentLoaded', function() {
-                    let tries = 0;
-                    const maxTries = 80; // ~8s
-                    const tick = () => {
-                        tries++;
-                        const target = document.querySelector("#canvas-target");
-                        const ready =
-                            typeof window.Matter !== 'undefined' &&
-                            target &&
-                            target.clientWidth > 0 &&
-                            target.clientHeight > 0;
-
-                        if (ready) {
-                            setupMatterJSWithScrollTrigger();
-                            return;
-                        }
-                        if (tries < maxTries) {
-                            setTimeout(tick, 100);
-                        }
-                    };
-                    tick();
+                    setupMatterJSWithScrollTrigger();
                 });
 
                 // Handle window resize with mobile optimization
@@ -1679,31 +1646,16 @@ body::before {
                 }
                 
                 .g_clickable_link {
-                    display: none !important;
-                    pointer-events: none;
+                    display: block !important;
+                    pointer-events: auto;
+                    cursor: pointer;
+                    position: relative;
+                    z-index: 1;
                 }
                 
                 .g_clickable_btn {
-                    display: block;
-                    background: none;
-                    border: none;
-                    padding: 0;
-                    margin: 0;
-                    cursor: pointer;
-                    width: 100%;
-                    text-align: left;
-                    font: inherit;
-                    color: inherit;
-                }
-                
-                .g_clickable_btn:hover {
-                    opacity: 0.8;
-                    transition: opacity 0.2s ease;
-                }
-                
-                .g_clickable_btn:focus-visible {
-                    outline: 2px solid currentColor;
-                    outline-offset: 2px;
+                    display: none !important;
+                    pointer-events: none;
                 }
                 
                 .footer_link_main_icon {
@@ -2245,7 +2197,6 @@ body::before {
             </div>
             </div>
             </div>
-            </div>
             <div data-wf--global-section-space--section-space="page-top" class="g_section_space w-variant-e359d2da-de19-6775-b122-3e06f925f39e"></div>
             <div class="canvas-matter">
                 <div id="canvas-target" class="canvas-matter__target"></div>
@@ -2255,14 +2206,27 @@ body::before {
 <!-- ══════════════════════════════════════
      SCRIPTS
 ══════════════════════════════════════ -->
+<!-- GSAP and Plugins -->
+<script src="https://cdn.prod.website-files.com/gsap/3.14.2/gsap.min.js"></script>
 <script src="https://cdn.prod.website-files.com/gsap/3.14.2/Flip.min.js" type="text/javascript"></script>
+<script src="https://cdn.prod.website-files.com/gsap/3.14.2/ScrollTrigger.min.js" type="text/javascript"></script>
 <script src="https://cdn.prod.website-files.com/gsap/3.14.2/SplitText.min.js" type="text/javascript"></script>
 <script src="https://cdn.prod.website-files.com/gsap/3.14.2/Draggable.min.js" type="text/javascript"></script>
 <script src="https://cdn.prod.website-files.com/gsap/3.14.2/InertiaPlugin.min.js" type="text/javascript"></script>
 <script src="https://cdn.prod.website-files.com/gsap/3.14.2/Observer.min.js" type="text/javascript"></script>
+<script src="https://cdn.prod.website-files.com/gsap/3.14.2/Physics2DPlugin.min.js" type="text/javascript"></script>
 <script src="https://cdn.prod.website-files.com/gsap/3.14.2/CustomEase.min.js" type="text/javascript"></script>
+<script src="https://cdn.prod.website-files.com/gsap/3.14.2/TextPlugin.min.js" type="text/javascript"></script>
+
+<!-- Other Libraries -->
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.2.3/dist/lenis.min.js"></script>
 <script>const lenis=new Lenis({autoRaf:true});</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js" defer></script>
+
+<!-- GSAP Plugin Registration -->
+<script>
+    gsap.registerPlugin(Flip, ScrollTrigger, SplitText, Draggable, InertiaPlugin, Observer, Physics2DPlugin, CustomEase, TextPlugin);
+</script>
 
 <script>
 // Scroll progress bar
