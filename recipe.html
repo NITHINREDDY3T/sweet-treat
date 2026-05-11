@@ -1012,42 +1012,18 @@
         </div>
         <div class="u-embed-css w-embed">
             <style>
-                /* Footer clickable elements spacing fix */
-                .g_clickable_wrap {
-                    display: block;
-                    width: 100%;
-                    margin: 0;
-                    padding: 0;
-                }
-                
                 .g_clickable_link {
-                    display: none !important;
-                    pointer-events: none;
-                }
-                
-                .g_clickable_btn {
-                    display: block;
-                    background: none;
-                    border: none;
-                    padding: 0;
-                    margin: 0;
-                    cursor: pointer;
-                    width: 100%;
-                    text-align: left;
-                    font: inherit;
-                    color: inherit;
-                }
-                
-                .g_clickable_btn:hover {
-                    opacity: 0.8;
-                    transition: opacity 0.2s ease;
-                }
-                
-                .g_clickable_btn:focus-visible {
-                    outline: 2px solid currentColor;
-                    outline-offset: 2px;
-                }
-                
+    display: block !important;
+    pointer-events: auto;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+}
+
+.g_clickable_btn {
+    display: none !important;
+    pointer-events: none;
+}    
                 .footer_link_main_icon {
                     display: inline-flex;
                     align-items: center;
@@ -1062,40 +1038,50 @@
                     display: inline-block;
                     margin: 0;
                     padding: 0;
-                    margin-bottom: 0;
-                    line-height: 1.2;
+                    margin-bottom: -1px;
+                    line-height: 1.05;
                 }
                 
                 .footer_link_secondary_text {
                     display: block;
-                    margin: 0 0 12px 0;
+                    margin: 0 0 4px 0;
                     padding: 0;
                     line-height: 1.2;
                 }
                 
                 .footer_link_tertiary_text {
                     display: block;
-                    margin: 4px 0 0 0;
+                    margin: 2px 0 0 0;
                     padding: 0;
                     line-height: 1.2;
                 }
                 
                 .footer_link_main {
-                    margin: 0 0 12px 0;
+                    margin: 0 0 1px 0;
                     padding: 0;
                     list-style: none;
                 }
                 
                 .footer_link_secondary {
-                    margin: 0 0 24px 0;
+                    margin: 0 0 8px 0;
                     padding: 0;
                     list-style: none;
                 }
                 
                 .footer_link_secondary_item {
-                    margin: 0 0 8px 0;
+                    margin: 0 0 2px 0;
                     padding: 0;
                     list-style: none;
+                }
+                
+                .footer_link_main_list {
+                    grid-column-gap: var(--_spacing---space--0-75rem);
+                    grid-row-gap: 0px;
+                    flex-flow: column;
+                    justify-content: flex-start;
+                    align-items: flex-start;
+                    list-style-type: none;
+                    display: flex;
                 }
             </style>
         </div>
@@ -1105,7 +1091,7 @@
                 <div class="footer_link_main_wrap u-column-custom">
                     <ul data-footer-link-list="" role="list" class="footer_link_main_list">
                         <li class="footer_link_main">
-                            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                            <div style="display: flex; align-items: center; gap: 8px;">
                                 <div class="footer_link_main_icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 18 18" fill="none" class="g_svg"><path d="M15.8867 9.52849C16.5735 9.18188 16.5735 8.2013 15.8867 7.85465L3.70591 1.70624C2.88419 1.29146 2.01917 2.18569 2.46104 2.99317L5.57902 8.69163L2.46105 14.39C2.01918 15.1975 2.88415 16.0917 3.70589 15.6769L15.8867 9.52849Z" fill="currentColor"></path></svg></div>
                                 <div aria-hidden="true" class="footer_link_main_text u-text-style-h2">Home</div>
                             </div>
@@ -1115,7 +1101,7 @@
                                 <link rel="prefetch" href="index.html" /><button type="button" tracking="play" class="g_clickable_btn"><span class="g_clickable_text u-sr-only">Home</span></button></div>
                         </li>
                         <li class="footer_link_main">
-                            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                            <div style="display: flex; align-items: center; gap: 8px;">
                                 <div class="footer_link_main_icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 18 18" fill="none" class="g_svg"><path d="M15.8867 9.52849C16.5735 9.18188 16.5735 8.2013 15.8867 7.85465L3.70591 1.70624C2.88419 1.29146 2.01917 2.18569 2.46104 2.99317L5.57902 8.69163L2.46105 14.39C2.01918 15.1975 2.88415 16.0917 3.70589 15.6769L15.8867 9.52849Z" fill="currentColor"></path></svg></div>
                                 <div aria-hidden="true" class="footer_link_main_text u-text-style-h2">Menu</div>
                             </div>
@@ -1125,7 +1111,7 @@
                                 <link rel="prefetch" href="menu.html" /><button type="button" tracking="play" class="g_clickable_btn"><span class="g_clickable_text u-sr-only">Menu</span></button></div>
                         </li>
                         <li class="footer_link_main">
-                            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                            <div style="display: flex; align-items: center; gap: 8px;">
                                 <div class="footer_link_main_icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 18 18" fill="none" class="g_svg"><path d="M15.8867 9.52849C16.5735 9.18188 16.5735 8.2013 15.8867 7.85465L3.70591 1.70624C2.88419 1.29146 2.01917 2.18569 2.46104 2.99317L5.57902 8.69163L2.46105 14.39C2.01918 15.1975 2.88415 16.0917 3.70589 15.6769L15.8867 9.52849Z" fill="currentColor"></path></svg></div>
                                 <div aria-hidden="true" class="footer_link_main_text u-text-style-h2">Sample</div>
                             </div>
@@ -1135,7 +1121,7 @@
                                 <link rel="prefetch" href="sample.html" /><button type="button" tracking="play" class="g_clickable_btn"><span class="g_clickable_text u-sr-only">Sample</span></button></div>
                         </li>
                         <li class="footer_link_main">
-                            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                            <div style="display: flex; align-items: center; gap: 8px;">
                                 <div class="footer_link_main_icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 18 18" fill="none" class="g_svg"><path d="M15.8867 9.52849C16.5735 9.18188 16.5735 8.2013 15.8867 7.85465L3.70591 1.70624C2.88419 1.29146 2.01917 2.18569 2.46104 2.99317L5.57902 8.69163L2.46105 14.39C2.01918 15.1975 2.88415 16.0917 3.70589 15.6769L15.8867 9.52849Z" fill="currentColor"></path></svg></div>
                                 <div aria-hidden="true" class="footer_link_main_text u-text-style-h2">Recipe</div>
                             </div>
