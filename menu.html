@@ -261,6 +261,12 @@ body::before {
     -webkit-tap-highlight-color: transparent;
 }
 .menu_btn:active, .mobile_menu_btn:active, .cart_icon_wrap:active { transform: scale(0.955, 0.954); }
+.menu_btn_close { position: relative !important; z-index: 9999 !important; display: flex !important; align-items: center !important; justify-content: center !important; visibility: visible !important; opacity: 1 !important; }
+    .menu_btn_close_icon { width: 24px; height: 24px; }
+    .nav_logo_link, .logo_tagline_svg { transform: none !important; transition: none !important; }
+    .nav_menu_wrap { z-index: 1000; }
+    .nav_menu_wrap[style*="display: flex"] ~ .nav_mobile .nav_logo_wrap { display: none !important; }
+    .nav_menu_wrap:not([style*="display: flex"]) ~ .nav_mobile .nav_logo_wrap { display: block !important; }
 .main_link, .secondary_link { transition: opacity 0.3s; }
 .main_link_icon {
     width: 0em; transform: scale(0) rotate(45deg);
@@ -679,8 +685,7 @@ body::before {
         }));
         closeTriggers.forEach(btn=>btn.addEventListener("click",()=>{
           if(!tl||!isActive)return;
-          tl.timeScale(1.5).reverse();
-          isActive=false;
+          tl.timeScale(1.5).reverse();isActive=false;
         }));
         const setLenisResume=()=>{if(typeof lenis!=='undefined')lenis.start();};
         (function waitForTl(){if(tl){tl.eventCallback("onReverseComplete",setLenisResume);}else{requestAnimationFrame(waitForTl);}})();
@@ -726,10 +731,7 @@ body::before {
     /* Desktop layout: LEFT nav_link_list | CENTER logo (absolute) | RIGHT nav_btn_list */
     .nav_desktop_contain{display:flex!important;justify-content:space-between!important;align-items:center!important;width:100%!important;position:relative!important;}
     .nav_link_list{display:flex!important;justify-content:center!important;align-items:center!important;position:absolute!important;left:50%!important;transform:translateX(-50%)!important;margin:0!important;padding:0!important;list-style:none!important;gap:2rem!important;order:2!important;}
-    .nav_logo_link{display:none!important;}
-    [data-menu-open="true"] .menu_btn_close{display:flex!important;z-index:1000!important;pointer-events:auto!important;cursor:pointer!important;}
-    .menu_btn_close{position:relative!important;z-index:1001!important;pointer-events:auto!important;cursor:pointer!important;background:transparent!important;border:none!important;}
-    .nav_menu_overlay{pointer-events:none!important;}
+    .nav_logo_link{display:flex!important;justify-content:flex-start!important;align-items:center!important;width:auto!important;text-align:left!important;z-index:10!important;}
     .nav_logo_link img{display:block!important;margin:0!important;max-height:90px!important;width:auto!important;object-fit:contain!important;}
         /* Sticker image styles */
     .sticker-image{width:100%!important;height:auto!important;display:block!important;object-fit:contain!important;}
@@ -1364,281 +1366,282 @@ body::before {
             </style>
         </div>
         <div class="footer_js u-embed-js w-embed w-script">
-            <script>
-                function initFalling2DMatterJS() {
-                    const canvas = document.querySelector("#canvas-target");
-                    // Check if canvas is on page
-                    if (!canvas) {
-                        return;
-                    }
-                    const canvasWidth = canvas.clientWidth + 2;
-                    const canvasHeight = canvas.clientHeight + 2;
-                    const canvasWallDepth = canvasWidth / 4;
-                    const smileyAmount = 15; // Amount of objects added to the canvas
-                    const smileySize = canvasWidth / 9; // Size of objects
-                    const smileySizeTexture = 256; // Size of object texture in pixels
-                    const smileySizeScale = smileySize / smileySizeTexture;
-                    const smileyRestitution = 0.75; // Bounciness
-                    const worldGravity = 2; // Gravity
-                    // Modules
-                    let {
-                        Engine,
-                        Render,
-                        Runner,
-                        Bodies,
-                        Composite,
-                        Mouse,
-                        MouseConstraint
-                    } = Matter;
-                    // Create an engine
-                    let engine = Engine.create();
-                    engine.world.gravity.y = worldGravity;
+  <script>
+    function initFalling2DMatterJS() {
+      const canvas = document.querySelector("#canvas-target");
+      // Check if canvas is on page
+      if (!canvas) {
+        return;
+      }
+      const canvasWidth = canvas.clientWidth + 2;
+      const canvasHeight = canvas.clientHeight + 2;
+      const canvasWallDepth = canvasWidth / 4;
+      const smileyAmount = 15; // Amount of objects added to the canvas
+      const smileySize = canvasWidth / 9; // Size of objects
+      const smileySizeTexture = 256; // Size of object texture in pixels
+      const smileySizeScale = smileySize / smileySizeTexture;
+      const smileyRestitution = 0.75; // Bounciness
+      const worldGravity = 2; // Gravity
+      // Modules
+      let {
+        Engine,
+        Render,
+        Runner,
+        Bodies,
+        Composite,
+        Mouse,
+        MouseConstraint
+      } = Matter;
+      // Create an engine
+      let engine = Engine.create();
+      engine.world.gravity.y = worldGravity;
 
-                    // Create a renderer
-                    currentRender = Render.create({
-                        element: canvas,
-                        engine: engine,
-                        options: {
-                            background: "transparent",
-                            wireframes: false,
-                            width: canvasWidth,
-                            height: canvasHeight,
-                            pixelRatio: 2,
-                            border: "none",
-                        }
-                    });
-                    // Store references globally for cleanup
-                    currentEngine = engine;
-                    // Generate a random number between min (inclusive) and max (exclusive)
-                    function getRandomNumber(min, max) {
-                        return Math.random() * (max - min) + min;
-                    }
-                    let min = smileySize / 2; // min value
-                    let max = canvasWidth - (smileySize / 2); // max value
-                    // Textures
-                    let textureArray = [
-                        'https://cdn.prod.website-files.com/684433cbdb896cfecac10c42/68500b015e489278a1f453e8_6660302437fad51a15047774144cb0eb_Coin-1.svg',
-                        'https://cdn.prod.website-files.com/684433cbdb896cfecac10c42/68500b01d5b32e70dba1c344_c120bb012f9e846b6e19d89c22ece11d_Coin-2.svg',
-                        'https://cdn.prod.website-files.com/684433cbdb896cfecac10c42/68500b012e8d4edeb4ddf056_dff61cf24b235c84e776e3d634c93644_Coin-3.svg',
-                        'https://cdn.prod.website-files.com/684433cbdb896cfecac10c42/68500b0189f1de7b422274fe_e4ed11d1f4c46ea54339301f139ea046_Coin-4.svg',
-                        'https://cdn.prod.website-files.com/684433cbdb896cfecac10c42/68500b01c890b45085fa31f1_69ed5c45f0a9b5eb1d84d9ca06d31ba0_Coin-5.svg',
-                        'https://cdn.prod.website-files.com/684433cbdb896cfecac10c42/68500b01a0e5270554093e49_d6de64f5633563d0c54f3129b0f41f06_Coin-6.svg'
-                    ];
+      // Create a renderer
+      currentRender = Render.create({
+        element: canvas,
+        engine: engine,
+        options: {
+          background: "transparent",
+          wireframes: false,
+          width: canvasWidth,
+          height: canvasHeight,
+          pixelRatio: 2,
+          border: "none",
+        }
+      });
+      // Store references globally for cleanup
+      currentEngine = engine;
+      // Generate a random number between min (inclusive) and max (exclusive)
+      function getRandomNumber(min, max) {
+        return Math.random() * (max - min) + min;
+      }
+      let min = smileySize / 2; // min value
+      let max = canvasWidth - (smileySize / 2); // max value
+      // Textures
+      let textureArray = [
+        'https://cdn.prod.website-files.com/684433cbdb896cfecac10c42/68500b015e489278a1f453e8_6660302437fad51a15047774144cb0eb_Coin-1.svg',
+        'https://cdn.prod.website-files.com/684433cbdb896cfecac10c42/68500b01d5b32e70dba1c344_c120bb012f9e846b6e19d89c22ece11d_Coin-2.svg',
+        'https://cdn.prod.website-files.com/684433cbdb896cfecac10c42/68500b012e8d4edeb4ddf056_dff61cf24b235c84e776e3d634c93644_Coin-3.svg',
+        'https://cdn.prod.website-files.com/684433cbdb896cfecac10c42/68500b0189f1de7b422274fe_e4ed11d1f4c46ea54339301f139ea046_Coin-4.svg',
+        'https://cdn.prod.website-files.com/684433cbdb896cfecac10c42/68500b01c890b45085fa31f1_69ed5c45f0a9b5eb1d84d9ca06d31ba0_Coin-5.svg',
+        'https://cdn.prod.website-files.com/684433cbdb896cfecac10c42/68500b01a0e5270554093e49_d6de64f5633563d0c54f3129b0f41f06_Coin-6.svg'
+      ];
 
-                    // Function to loop trough all textures
-                    let textureIndex = 0;
+      // Function to loop trough all textures
+      let textureIndex = 0;
 
-                    function getNextTexture() {
-                        const texture = textureArray[textureIndex];
-                        textureIndex = (textureIndex + 1) % textureArray.length;
-                        return texture;
-                    }
-                    // Function to get a random texture
-                    function getRandomTexture() {
-                        const randomIndex = Math.floor(Math.random() * textureArray.length);
-                        return textureArray[randomIndex];
-                    }
-                    // Create smiley
-                    const smileyCreate = () => {
-                        let smiley = Bodies.rectangle(getRandomNumber(min, max), smileySize, smileySize,
-                            smileySize, {
-                                chamfer: {
-                                    radius: smileySize / 2
-                                },
-                                restitution: smileyRestitution,
-                                render: {
-                                    sprite: {
-                                        texture: getNextTexture(), // Replace with "getRandomTexture()" to get random textures
-                                        xScale: smileySizeScale,
-                                        yScale: smileySizeScale
-                                    }
-                                }
-                            });
-                        Composite.add(engine.world, smiley);
-                    };
-                    // Create a box with rectangle(x, y, width, height)
-                    let boxTop = Bodies.rectangle(canvasWidth / 2 + (canvasWallDepth * 2), canvasHeight +
-                        canvasWallDepth, canvasWidth + (canvasWallDepth * 4), (canvasWallDepth * 2), {
-                            isStatic: true
-                        });
-                    let boxLeft = Bodies.rectangle((canvasWallDepth * -1), canvasHeight / 2, (canvasWallDepth * 2),
-                        canvasHeight, {
-                            isStatic: true
-                        });
-                    let boxRight = Bodies.rectangle(canvasWidth + canvasWallDepth, canvasHeight / 2, (
-                        canvasWallDepth * 2), canvasHeight, {
-                        isStatic: true
-                    });
-                    let boxBottom = Bodies.rectangle(canvasWidth / 2 + (canvasWallDepth * 2), (canvasWallDepth * -1),
-                        canvasWidth + (canvasWallDepth * 4), (canvasWallDepth * 2), {
-                            isStatic: true
-                        });
-                    // Add all of the bodies to the world
-                    Composite.add(engine.world, [boxTop, boxLeft, boxRight, boxBottom]);
-                    // Run the renderer
-                    Render.run(currentRender);
-                    // Create runner
-                    currentRunner = Runner.create();
-                    // Run the engine
-                    Matter.Runner.run(currentRunner, engine);
-                    // Create mouse
-                    let mouse = Mouse.create(currentRender.canvas);
-                    let mouseConstraint = MouseConstraint.create(engine, {
-                        mouse: mouse,
-                        constraint: {
-                            stiffness: 0.2,
-                            render: {
-                                visible: false
-                            }
-                        }
-                    });
-                    Composite.add(engine.world, mouseConstraint);
-                    // Custom Function: 
-                    // To run the function X amount of times
-                    function repeatedFunction(count, maxCount) {
-                        if (count < maxCount) {
-                            smileyCreate();
-                            setTimeout(() => {
-                                repeatedFunction(count + 1, maxCount);
-                            }, 100); // Delay in milliseconds
-                        }
-                    }
-                    // Return the function to trigger smiley creation
-                    return () => {
-                        repeatedFunction(0, 15);
-                    };
-                }
+      function getNextTexture() {
+        const texture = textureArray[textureIndex];
+        textureIndex = (textureIndex + 1) % textureArray.length;
+        return texture;
+      }
+      // Function to get a random texture
+      function getRandomTexture() {
+        const randomIndex = Math.floor(Math.random() * textureArray.length);
+        return textureArray[randomIndex];
+      }
+      // Create smiley
+      const smileyCreate = () => {
+        let smiley = Bodies.rectangle(getRandomNumber(min, max), smileySize, smileySize,
+          smileySize, {
+            chamfer: {
+              radius: smileySize / 2
+            },
+            restitution: smileyRestitution,
+            render: {
+              sprite: {
+                texture: getNextTexture(), // Replace with "getRandomTexture()" to get random textures
+                xScale: smileySizeScale,
+                yScale: smileySizeScale
+              }
+            }
+          });
+        Composite.add(engine.world, smiley);
+      };
+      // Create a box with rectangle(x, y, width, height)
+      let boxTop = Bodies.rectangle(canvasWidth / 2 + (canvasWallDepth * 2), canvasHeight +
+        canvasWallDepth, canvasWidth + (canvasWallDepth * 4), (canvasWallDepth * 2), {
+        isStatic: true
+      });
+      let boxLeft = Bodies.rectangle((canvasWallDepth * -1), canvasHeight / 2, (canvasWallDepth * 2),
+        canvasHeight, {
+        isStatic: true
+      });
+      let boxRight = Bodies.rectangle(canvasWidth + canvasWallDepth, canvasHeight / 2, (
+        canvasWallDepth * 2), canvasHeight, {
+        isStatic: true
+      });
+      let boxBottom = Bodies.rectangle(canvasWidth / 2 + (canvasWallDepth * 2), (canvasWallDepth * -1),
+        canvasWidth + (canvasWallDepth * 4), (canvasWallDepth * 2), {
+        isStatic: true
+      });
+      // Add all of the bodies to the world
+      Composite.add(engine.world, [boxTop, boxLeft, boxRight, boxBottom]);
+      // Run renderer
+      Render.run(currentRender);
+      // Create runner
+      currentRunner = Runner.create();
+      // Run engine
+      Matter.Runner.run(currentRunner, engine);
+      // Create mouse
+      let mouse = Mouse.create(currentRender.canvas);
+      let mouseConstraint = MouseConstraint.create(engine, {
+        mouse: mouse,
+        constraint: {
+          stiffness: 0.2,
+          render: {
+            visible: false
+          }
+        }
+      });
+      Composite.add(engine.world, mouseConstraint);
+      // Custom Function: 
+      // To run function X amount of times
+      function repeatedFunction(count, maxCount) {
+        if (count < maxCount) {
+          smileyCreate();
+          setTimeout(() => {
+            repeatedFunction(count + 1, maxCount);
+          }, 100); // Delay in milliseconds
+        }
+      }
+      // Return function to trigger smiley creation
+      return () => {
+        repeatedFunction(0, 15);
+      };
+    }
 
-                // Global variables to track the current setup
-                let currentEngine = null;
-                let currentRender = null;
-                let currentRunner = null;
-                let currentScrollTrigger = null;
-                // Mobile resize detection variables
-                let lastWidth = window.innerWidth;
-                let lastHeight = window.innerHeight;
-                let isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    // Global variables to track current setup
+    let currentEngine = null;
+    let currentRender = null;
+    let currentRunner = null;
+    let currentScrollTrigger = null;
+    // Mobile resize detection variables
+    let lastWidth = window.innerWidth;
+    let lastHeight = window.innerHeight;
+    let isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
-                // Function to clean up existing Matter.js setup
-                function cleanupMatterJS() {
-                    if (currentEngine) {
-                        // Stop the runner
-                        if (currentRunner) {
-                            Matter.Runner.stop(currentRunner);
-                            currentRunner = null;
-                        }
+    // Function to clean up existing Matter.js setup
+    function cleanupMatterJS() {
+      if (currentEngine) {
+        // Stop the runner
+        if (currentRunner) {
+          Matter.Runner.stop(currentRunner);
+          currentRunner = null;
+        }
 
-                        // Stop the render
-                        if (currentRender) {
-                            Matter.Render.stop(currentRender);
-                            // Remove the canvas element
-                            if (currentRender.canvas && currentRender.canvas.parentNode) {
-                                currentRender.canvas.parentNode.removeChild(currentRender.canvas);
-                            }
-                            currentRender = null;
-                        }
+        // Stop render
+        if (currentRender) {
+          Matter.Render.stop(currentRender);
+          // Remove the canvas element
+          if (currentRender.canvas && currentRender.canvas.parentNode) {
+            currentRender.canvas.parentNode.removeChild(currentRender.canvas);
+          }
+          currentRender = null;
+        }
 
-                        // Clear the world
-                        Matter.World.clear(currentEngine.world);
-                        Matter.Engine.clear(currentEngine);
-                        currentEngine = null;
-                    }
+        // Clear the world
+        Matter.World.clear(currentEngine.world);
+        Matter.Engine.clear(currentEngine);
+        currentEngine = null;
+      }
 
-                    // Kill existing ScrollTrigger
-                    if (currentScrollTrigger) {
-                        currentScrollTrigger.kill();
-                        currentScrollTrigger = null;
-                    }
-                }
+      // Kill existing ScrollTrigger
+      if (currentScrollTrigger) {
+        currentScrollTrigger.kill();
+        currentScrollTrigger = null;
+      }
+    }
 
-                // Function to determine if resize should trigger refresh
-                function shouldRefreshOnResize() {
-                    const currentWidth = window.innerWidth;
-                    const currentHeight = window.innerHeight;
+    // Function to determine if resize should trigger refresh
+    function shouldRefreshOnResize() {
+      const currentWidth = window.innerWidth;
+      const currentHeight = window.innerHeight;
 
-                    if (isMobile) {
-                        // On mobile, only refresh if width changes significantly (orientation change)
-                        // or if height changes by more than 100px (keyboard show/hide)
-                        const widthChanged = Math.abs(currentWidth - lastWidth) > 50;
-                        const significantHeightChange = Math.abs(currentHeight - lastHeight) > 100;
+      if (isMobile) {
+        // On mobile, only refresh if width changes significantly (orientation change)
+        // or if height changes by more than 100px (keyboard show/hide)
+        const widthChanged = Math.abs(currentWidth - lastWidth) > 50;
+        const significantHeightChange = Math.abs(currentHeight - lastHeight) > 100;
 
-                        // Update stored dimensions
-                        lastWidth = currentWidth;
-                        lastHeight = currentHeight;
+        // Update stored dimensions
+        lastWidth = currentWidth;
+        lastHeight = currentHeight;
 
-                        return widthChanged || significantHeightChange;
-                    } else {
-                        // On desktop, refresh on any significant size change
-                        const widthChanged = Math.abs(currentWidth - lastWidth) > 20;
-                        const heightChanged = Math.abs(currentHeight - lastHeight) > 20;
+        return widthChanged || significantHeightChange;
+      } else {
+        // On desktop, refresh on any significant size change
+        const widthChanged = Math.abs(currentWidth - lastWidth) > 20;
+        const heightChanged = Math.abs(currentHeight - lastHeight) > 20;
 
-                        // Update stored dimensions
-                        lastWidth = currentWidth;
-                        lastHeight = currentHeight;
+        // Update stored dimensions
+        lastWidth = currentWidth;
+        lastHeight = currentHeight;
 
-                        return widthChanged || heightChanged;
-                    }
-                }
+        return widthChanged || heightChanged;
+      }
+    }
 
-                // Function to setup Matter.js and ScrollTrigger
-                function setupMatterJSWithScrollTrigger() {
-                    // Check if GSAP and ScrollTrigger are available
-                    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
-                        console.error('GSAP and ScrollTrigger must be loaded before this script');
-                        return;
-                    }
-                    // Register ScrollTrigger plugin
-                    gsap.registerPlugin(ScrollTrigger);
+    // Function to setup Matter.js and ScrollTrigger
+    function setupMatterJSWithScrollTrigger() {
+      // Check if GSAP and ScrollTrigger are available
+      if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+        console.error('GSAP and ScrollTrigger must be loaded before this script');
+        return;
+      }
+      // Register ScrollTrigger plugin
+      gsap.registerPlugin(ScrollTrigger);
 
-                    // Only run the animation if user doesn't have reduced motion enabled
-                    gsap.matchMedia().add("(prefers-reduced-motion: no-preference)", () => {
-                        // Clean up any existing setup
-                        cleanupMatterJS();
+      // Only run animation if user doesn't have reduced motion enabled
+      gsap.matchMedia().add("(prefers-reduced-motion: no-preference)", () => {
+        // Clean up any existing setup
+        cleanupMatterJS();
 
-                        // Initialize the Matter.js setup and get the trigger function
-                        const triggerSmileys = initFalling2DMatterJS();
+        // Initialize the Matter.js setup and get the trigger function
+        const triggerSmileys = initFalling2DMatterJS();
 
-                        if (triggerSmileys) {
-                            // Create ScrollTrigger and store reference
-                            currentScrollTrigger = ScrollTrigger.create({
-                                trigger: "#canvas-target",
-                                start: "top 10%",
-                                end: "bottom 90%",
-                                onEnter: () => {
-                                    triggerSmileys();
-                                },
-                                once: true
-                            });
-                        }
-                    });
+        if (triggerSmileys) {
+          // Create ScrollTrigger and store reference
+          currentScrollTrigger = ScrollTrigger.create({
+            trigger: "#canvas-target",
+            start: "top 10%",
+            end: "bottom 90%",
+            onEnter: () => {
+              triggerSmileys();
+            },
+            once: true
+          });
+        }
+      });
 
-                    // For users with reduced motion - do nothing
-                    // The canvas will remain empty and no physics will run
-                }
+      // For users with reduced motion - do nothing
+      // The canvas will remain empty and no physics will run
+    }
 
-                // Initialize with GSAP ScrollTrigger
-                document.addEventListener('DOMContentLoaded', function() {
-                    setupMatterJSWithScrollTrigger();
-                });
+    // Initialize with GSAP ScrollTrigger
+    document.addEventListener('DOMContentLoaded', function() {
+      setupMatterJSWithScrollTrigger();
+    });
 
-                // Handle window resize with mobile optimization
-                window.addEventListener('resize', function() {
-                    // Only proceed if this is a significant resize
-                    if (!shouldRefreshOnResize()) {
-                        return;
-                    }
+    // Handle window resize with mobile optimization
+    window.addEventListener('resize', function() {
+      // Only proceed if this is a significant resize
+      if (!shouldRefreshOnResize()) {
+        return;
+      }
 
-                    // Debounce the resize event to avoid excessive calls
-                    clearTimeout(window.resizeTimeout);
-                    window.resizeTimeout = setTimeout(() => {
-                        setupMatterJSWithScrollTrigger();
+      // Debounce the resize event to avoid excessive calls
+      clearTimeout(window.resizeTimeout);
+      window.resizeTimeout = setTimeout(() => {
+        setupMatterJSWithScrollTrigger();
 
-                        // Refresh ScrollTrigger to recalculate positions
-                        ScrollTrigger.refresh();
-                    }, isMobile ? 500 : 250); // Longer debounce on mobile
-                });
-            </script>
-        </div>
+        // Refresh ScrollTrigger to recalculate positions
+        ScrollTrigger.refresh();
+
+      }, 250);
+    });
+  </script>
+</div>
         <div class="u-embed-css w-embed">
             <style>
                 /* Footer clickable elements spacing fix */
@@ -2227,7 +2230,7 @@ body::before {
 <script src="https://cdn.prod.website-files.com/gsap/3.14.2/SplitText.min.js" type="text/javascript"></script>
 <script src="https://cdn.prod.website-files.com/gsap/3.14.2/Draggable.min.js" type="text/javascript"></script>
 <script src="https://cdn.prod.website-files.com/gsap/3.14.2/InertiaPlugin.min.js" type="text/javascript"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
 <script src="https://cdn.prod.website-files.com/gsap/3.14.2/Observer.min.js" type="text/javascript"></script>
 <script src="https://cdn.prod.website-files.com/gsap/3.14.2/Physics2DPlugin.min.js" type="text/javascript"></script>
 <script src="https://cdn.prod.website-files.com/gsap/3.14.2/CustomEase.min.js" type="text/javascript"></script>
@@ -2236,7 +2239,6 @@ body::before {
 <!-- Other Libraries -->
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.2.3/dist/lenis.min.js"></script>
 <script>const lenis=new Lenis({autoRaf:true});</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js" defer></script>
 
 <!-- GSAP Plugin Registration -->
 <script>
