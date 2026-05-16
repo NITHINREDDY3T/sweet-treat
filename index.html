@@ -323,6 +323,137 @@
         .u-container, .w-container {
             width: min(100%, 1200px);
         }
+
+        /* Large desktop responsiveness (24-inch and above) */
+        @media (min-width: 1440px) {
+            .ft_articles_wrap .u-container,
+            .ft_articles_contain.u-container {
+                width: min(100%, 1920px) !important;
+                max-width: 1920px !important;
+                padding-left: 40px !important;
+                padding-right: 40px !important;
+            }
+
+            .ft_articles_title,
+            .ft_articles_title.u-text-style-h1 {
+                font-size: 5.5rem !important;
+            }
+
+            .ft_articles_text {
+                font-size: 1.25rem !important;
+            }
+
+            .mini-game_intro_bg {
+                width: 80vw !important;
+                max-width: 80vw !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+                left: 50% !important;
+                transform: translateX(-50%) !important;
+            }
+        }
+
+        /* Large desktop responsiveness (27-inch and above) */
+        @media (min-width: 1920px) {
+            .ft_articles_wrap .u-container,
+            .ft_articles_contain.u-container {
+                width: min(100%, 2200px) !important;
+                max-width: 2200px !important;
+            }
+
+            .ft_articles_title,
+            .ft_articles_title.u-text-style-h1 {
+                font-size: 11rem !important;
+            }
+
+            .mini-game_intro_bg {
+                width: 80vw !important;
+                max-width: 80vw !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+                left: 50% !important;
+                transform: translateX(-50%) !important;
+            }
+
+            .mini-game_canvas {
+                width: 80vw !important;
+                max-width: 80vw !important;
+                margin: 0 auto !important;
+            }
+
+            .mini-game_contain.u-container {
+                width: 90vw !important;
+                max-width: 90vw !important;
+            }
+        }
+
+        /* Large desktop responsiveness (32-inch and above) */
+        @media (min-width: 2560px) {
+            .ft_articles_wrap .u-container,
+            .ft_articles_contain.u-container {
+                width: min(100%, 2600px) !important;
+                max-width: 2600px !important;
+            }
+
+            .ft_articles_title,
+            .ft_articles_title.u-text-style-h1 {
+                font-size: 13rem !important;
+            }
+
+            .mini-game_intro_bg {
+                width: 80vw !important;
+                max-width: 80vw !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+                left: 50% !important;
+                transform: translateX(-50%) !important;
+            }
+
+            .mini-game_canvas {
+                width: 80vw !important;
+                max-width: 80vw !important;
+                margin: 0 auto !important;
+            }
+
+            .mini-game_contain.u-container {
+                width: 90vw !important;
+                max-width: 90vw !important;
+            }
+        }
+
+        /* Large desktop responsiveness (4K and above) */
+        @media (min-width: 3840px) {
+            .ft_articles_wrap .u-container,
+            .ft_articles_contain.u-container {
+                width: min(100%, 3400px) !important;
+                max-width: 3400px !important;
+            }
+
+            .ft_articles_title,
+            .ft_articles_title.u-text-style-h1 {
+                font-size: 16rem !important;
+            }
+
+            .mini-game_intro_bg {
+                width: 80vw !important;
+                max-width: 80vw !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+                left: 50% !important;
+                transform: translateX(-50%) !important;
+            }
+
+            .mini-game_canvas {
+                width: 80vw !important;
+                max-width: 80vw !important;
+                margin: 0 auto !important;
+            }
+
+            .mini-game_contain.u-container {
+                width: 90vw !important;
+                max-width: 90vw !important;
+            }
+        }
         .nav_logo_link img {
             height: auto !important;
             max-height: clamp(52px, 8vw, 90px) !important;
@@ -832,6 +963,10 @@
                     .g_clickable_wrap a[href="menu.html"]~button {
                         display: none !important;
                     }
+
+                    /* FIX: Navigation link clickable area sizes */
+                    .btn_secondary_wrap, .btn_main_wrap, .nav_logo_link, .main_link { position: relative !important; }
+                    .main_link .g_clickable_wrap { display: block !important; }
 
                     /* Responsive Above */
 
@@ -4826,173 +4961,117 @@ SIGNATURE DISHES</div>
   margin: 0 auto;
 }
 
-/* Large desktop responsiveness (27-inch and above) */
-@media (min-width: 1920px) {
-  .ft_articles_wrap .u-container {
-    max-width: 1800px;
-  }
-  
-  .ft_articles_title {
-    font-size: 4.5rem;
-  }
-  
+/* Large desktop responsiveness (24-inch and above) */
+@media (min-width: 1440px) {
   .ft_articles_text {
-    font-size: 1.4rem;
-    margin-bottom: 40px;
+    font-size: 1.25rem;
+    margin-bottom: 36px;
   }
-  
+
   .lt-offer-grid {
-    max-width: 1600px;
-    gap: 60px;
-    padding: 0 40px;
+    max-width: 1400px;
+    gap: 48px;
+    padding: 0 32px;
   }
-  
+
   .lt-offer-card {
-    width: 420px;
-    padding: 48px;
-    border-radius: 24px;
+    width: 400px;
+    padding: 40px;
+    border-radius: 22px;
   }
-  
+
   .lt-offer-heading {
-    font-size: 20px;
-    padding-top: 16px;
-    padding-bottom: 16px;
+    font-size: 18px;
+    padding-top: 14px;
+    padding-bottom: 14px;
   }
-  
+
   .lt-offer-highlight {
-    font-size: 70px;
+    font-size: 60px;
   }
-  
+
   .lt-offer-normal {
-    font-size: 20px;
+    font-size: 18px;
   }
-  
+
   .lt-offer-code {
-    font-size: 20px;
+    font-size: 18px;
   }
-  
+
   .lt-offer-code-btn {
-    padding: 16px 24px;
+    padding: 14px 22px;
   }
-  
+
   .lt-offer-disclaimer {
-    font-size: 12px;
+    font-size: 11px;
   }
 }
 
-@media (min-width: 2560px) {
-  .ft_articles_wrap .u-container {
-    max-width: 2200px;
-  }
-  
-  .ft_articles_title {
-    font-size: 5.5rem;
-  }
-  
+/* Large desktop responsiveness (27-inch and above) */
+@media (min-width: 1920px) {
   .ft_articles_text {
     font-size: 1.6rem;
     margin-bottom: 50px;
   }
-  
+
   .lt-offer-grid {
-    max-width: 2000px;
-    gap: 80px;
-    padding: 0 60px;
+    width: 50vw !important;
+    max-width: 50vw !important;
+    gap: 1.87vw;
+    padding: 0;
   }
   
   .lt-offer-card {
-    width: 480px;
-    padding: 56px;
-    border-radius: 28px;
+    width: 24.06vw;
+    padding: 2.14vw;
+    border-radius: 1.34vw;
   }
   
   .lt-offer-heading {
-    font-size: 22px;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    font-size: 1.2vw;
+    padding-top: 0.94vw;
+    padding-bottom: 0.94vw;
   }
   
   .lt-offer-highlight {
-    font-size: 80px;
+    font-size: 4.01vw;
   }
   
   .lt-offer-normal {
-    font-size: 22px;
+    font-size: 1.2vw;
   }
   
   .lt-offer-code {
-    font-size: 22px;
+    font-size: 1.2vw;
   }
   
   .lt-offer-code-btn {
-    padding: 18px 28px;
+    padding: 0.94vw 1.47vw;
   }
   
   .lt-offer-disclaimer {
-    font-size: 13px;
+    font-size: 0.74vw;
   }
-  
+
   .lt-offer-copy-icon {
-    width: 24px;
-    height: 24px;
+    width: 1.6vw;
+    height: 1.6vw;
   }
 }
 
-@media (min-width: 3840px) {
-  .ft_articles_wrap .u-container {
-    max-width: 3000px;
-  }
-  
-  .ft_articles_title {
-    font-size: 6.5rem;
-  }
-  
+/* Large desktop responsiveness (32-inch and above) */
+@media (min-width: 2560px) {
   .ft_articles_text {
     font-size: 1.8rem;
     margin-bottom: 60px;
   }
-  
-  .lt-offer-grid {
-    max-width: 2800px;
-    gap: 120px;
-    padding: 0 80px;
-  }
-  
-  .lt-offer-card {
-    width: 560px;
-    padding: 64px;
-    border-radius: 32px;
-  }
-  
-  .lt-offer-heading {
-    font-size: 26px;
-    padding-top: 24px;
-    padding-bottom: 24px;
-  }
-  
-  .lt-offer-highlight {
-    font-size: 100px;
-  }
-  
-  .lt-offer-normal {
-    font-size: 26px;
-  }
-  
-  .lt-offer-code {
-    font-size: 26px;
-  }
-  
-  .lt-offer-code-btn {
-    padding: 22px 32px;
-  }
-  
-  .lt-offer-disclaimer {
-    font-size: 15px;
-  }
-  
-  .lt-offer-copy-icon {
-    width: 28px;
-    height: 28px;
+}
+
+/* Large desktop responsiveness (4K and above) */
+@media (min-width: 3840px) {
+  .ft_articles_text {
+    font-size: 2.2rem;
+    margin-bottom: 80px;
   }
 }
 
@@ -5046,7 +5125,7 @@ SIGNATURE DISHES</div>
     position: absolute !important;
     top: -25% !important;
     right: -15% !important;
-    width: clamp(85px, 6.8vw, 135px) !important;
+    width: clamp(56px, 4.5vw, 90px) !important;
     z-index: 1 !important;
   }
 }
@@ -5086,7 +5165,7 @@ SIGNATURE DISHES</div>
   .ft_articles_title_wrap .title_sticker.is-ft_articles {
     top: -30% !important;
     right: -20% !important;
-    width: clamp(105px, 8vw, 165px) !important;
+    width: clamp(70px, 5.3vw, 110px) !important;
   }
 }
 
@@ -5125,7 +5204,7 @@ SIGNATURE DISHES</div>
   .ft_articles_title_wrap .title_sticker.is-ft_articles {
     top: -35% !important;
     right: -25% !important;
-    width: clamp(135px, 9.2vw, 215px) !important;
+    width: clamp(90px, 6.1vw, 143px) !important;
   }
 }
 
@@ -7179,6 +7258,86 @@ document.querySelectorAll('.lt-offer-card').forEach(card => {
                     button.style.borderColor = '';
                 }, 2000);
             });
+        }
+    </script>
+    <script>
+        // Force inline styles for large screens - overrides all CSS
+        function applyLargeScreenStyles() {
+            const viewportWidth = window.innerWidth;
+            console.log('Viewport width:', viewportWidth);
+
+            let containerWidth, titleFontSize;
+
+            if (viewportWidth >= 3840) {
+                containerWidth = 'min(100%, 3400px)';
+                titleFontSize = '16rem';
+            } else if (viewportWidth >= 2560) {
+                containerWidth = 'min(100%, 2600px)';
+                titleFontSize = '13rem';
+            } else if (viewportWidth >= 1920) {
+                containerWidth = 'min(100%, 2200px)';
+                titleFontSize = '11rem';
+            } else if (viewportWidth >= 1440) {
+                containerWidth = 'min(100%, 1920px)';
+                titleFontSize = '5.5rem';
+            } else {
+                console.log('Not a large screen, skipping');
+                return; // Not a large screen
+            }
+
+            console.log('Applying styles - Container width:', containerWidth, 'Font size:', titleFontSize);
+
+            // Apply container styles
+            const containers = document.querySelectorAll('.ft_articles_wrap .u-container, .ft_articles_contain.u-container');
+            console.log('Found containers:', containers.length);
+            containers.forEach(el => {
+                el.style.setProperty('width', containerWidth, 'important');
+                el.style.setProperty('max-width', containerWidth.replace('min(100%, ', '').replace(')', ''), 'important');
+                console.log('Applied container styles');
+            });
+
+            // Apply title font size
+            const titles = document.querySelectorAll('.ft_articles_title');
+            console.log('Found titles:', titles.length);
+            titles.forEach(el => {
+                el.style.setProperty('font-size', titleFontSize, 'important');
+                console.log('Applied title font size');
+            });
+
+            // Apply mini-game intro bg width (80% of viewport width)
+            const miniGameBg = document.querySelector('.mini-game_intro_bg');
+            if (miniGameBg) {
+                miniGameBg.style.setProperty('width', '80vw', 'important');
+                miniGameBg.style.setProperty('max-width', '80vw', 'important');
+                miniGameBg.style.setProperty('left', '50%', 'important');
+                miniGameBg.style.setProperty('transform', 'translateX(-50%)', 'important');
+            }
+
+            // Apply mini-game contain 90%
+            const miniGameContain = document.querySelector('.mini-game_contain.u-container');
+            if (miniGameContain) {
+                miniGameContain.style.setProperty('width', '90vw', 'important');
+                miniGameContain.style.setProperty('max-width', '90vw', 'important');
+            }
+
+            // Continuously force font size to fix GSAP resetting it
+            const observer = new MutationObserver(() => {
+                titles.forEach(el => {
+                    if (el.style.fontSize !== titleFontSize) {
+                        el.style.setProperty('font-size', titleFontSize, 'important');
+                    }
+                });
+            });
+            titles.forEach(el => observer.observe(el, { attributes: true, attributeFilter: ['style'] }));
+        }
+
+        // Apply on load
+        window.addEventListener('load', applyLargeScreenStyles);
+        // Apply on resize
+        window.addEventListener('resize', applyLargeScreenStyles);
+        // Also apply immediately in case DOM is already loaded
+        if (document.readyState === 'complete') {
+            applyLargeScreenStyles();
         }
     </script>
 </body>
