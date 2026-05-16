@@ -78,6 +78,10 @@
         .g_clickable_btn { position: absolute; inset: 0; background: none; border: none; width: 100%; }
         .g_clickable_wrap a[href="menu.html"], .g_clickable_wrap a[href="sample.html"], .g_clickable_wrap a[href="recipe.html"], .g_clickable_wrap a[href="contact.html"], .g_clickable_wrap a[href="index.html"], .g_clickable_wrap a[href="/"] { display: block !important; pointer-events: auto !important; cursor: pointer !important; z-index: 1 !important; }
         .g_clickable_wrap a[href="menu.html"]~button, .g_clickable_wrap a[href="sample.html"]~button, .g_clickable_wrap a[href="recipe.html"]~button, .g_clickable_wrap a[href="contact.html"]~button, .g_clickable_wrap a[href="index.html"]~button, .g_clickable_wrap a[href="/"]~button { display: none !important; }
+        
+        /* FIX: Navigation link clickable area sizes */
+        .btn_secondary_wrap, .btn_main_wrap, .nav_logo_link, .main_link { position: relative !important; }
+        .main_link .g_clickable_wrap { display: block !important; }
 
         /* ─── NAV CSS: uses the exact nav styles from menu.html via the nav_component block below. No overrides here to keep behavior identical. */
 
